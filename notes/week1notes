@@ -1,0 +1,27 @@
+Boolean Algebra
+	and == &&
+	or == ||
+	not == !
+	true=1 false = 0
+	truth tables
+	De morgan law, !(A&&A)=!A||!b and vice versa
+	xor vs or
+	xor, first or second not both, or is a xor b xor both
+	xor is self inverting, ID element is 0, xor 1=!A
+	In c, logical exprs have type int,
+	use #include stdbool.h to build in boolean values
+	if(condition){
+		action;
+	}else{
+		other action;
+	}
+	nested if
+	if else if else if...
+	c evals booleans from left to right, and stops eval
+	switch, like a multi case if
+	add break statements to case
+	goto is succ don't do it for the purposes of clarity how did I get here?
+	looooops
+	
+
+
