@@ -22,6 +22,36 @@ Boolean Algebra
 	add break statements to case
 	goto is succ don't do it for the purposes of clarity how did I get here?
 	looooops
-	
-
+	Wile is a top test loop, so is for
+	can write anything as while statement
+	do while, bottom test loop
+	infinite loop while(1) do while(1)
+	for(;;)
+	break with break
+	No factorial on asgn2
+	factorial takes long and its gross
+	WHEN CAN I GOTO
+		non-local error handling
+		if this thing sucks, go to, ie. escape exception
+		
+	== vs = dont get it mixed
+	continue statement, skip rest of loop, use it sparingly
+	Let's compute root(2)
+		no library routine
+		The subfield of writing numerial programs is numerical analysis
+		sqrt(2)= x^2-2=0
+		We don't know newton method
+		we know it between 0 and 2
+		look for it
+		
+	BINARY SEARCH
+	have middle, lower bound, upper bound
+	long double h=(x<1) ? 1 : x
+		if x less than one make x one
+	m = (l+h)/2
+	if(m*m < x){
+		l=m;
+	}else(
+		h = m;
+ 
 
