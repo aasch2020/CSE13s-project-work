@@ -4,11 +4,11 @@
 #include "names.h"
 int main(){
     printf("%s", "How many players? ");
-    int input;
-    scanf("%d", &input);
-    if((input<2)||(input>10)){
+    int playercount;
+    scanf("%d", &playercount);
+    if((playercount<2)||(playercount>10)){
 	    fprintf(stderr,"Invalid number of players. Using 2 instead.\n");
-	    input = 2;
+	    playercount = 2;
     
     }
     printf("%s","Random Seed: ");
@@ -19,6 +19,19 @@ int main(){
 	    seed = 2021;
     }
     srandom(seed);
-
-
+    int currentnum = -1;
+    // int scores[10]={0};
+    int turnscore=0;
+    while(turnscore<100){
+        if(currentnum==playercount-1){
+	    currentnum = 0;
+	}else{
+	    currentnum++;
+	}
+	turnscore += (random() % 20);
+	printf("%s rolls the pig...", names[currentnum]);
+    }	
 }
+
+
+
