@@ -78,6 +78,7 @@ Swap values
 		return;
 	The asterisc says this is a pointer
 	This is call by val with pointer thus call by ref
+	Short circuit eval, if first is false in an and wont go second if first true in or same thing
 Function protorype
 	Says what the parameters, the return type and the function names
 	return type function_name(parameters);
@@ -145,4 +146,63 @@ Functions let you repeat code
 	Actual params passed to function
 	C only uses call by val
 	Prior to function call please def protorype
-
+LANGUAGE TRANSLATORS
+	Code needs to go from C to binary
+	computers dont get C
+	they understand machine lang
+	input lagn to out lang p
+	machine code yucky'
+	Old computer box
+	you get assembly from the code
+	PHASE 1:
+		The source code to the preprocessorm makes hello.i
+		pre-processor:
+			handles #include #ifndef etc
+			inlcude header files from other libraries
+			remove comments
+			Macroprocessor: replaces macro with corresponding def
+		You get an intermediate file hello.i
+	Phase 2:
+		Compiler hello.i to assembly code hello.o
+		7 steps
+		Lexical Phase:
+			uses FLEX
+			takes text files and group into lexemes sks tokens
+				Examples are keyword, operators, vars
+		Syntax phase:
+			Parses expressions and makes a parse tree to a syntax tree
+			Parses steps by order
+			Parser generator
+				A representation of tkens generated from statements and expressions
+				represented as a heirarchical tree
+				Ex. breaks if into many parts
+	Phase 3:
+		Assmbler: assmbly code to object code
+		Converts assembly instructions into binary
+		ONE PASS:
+			traverses throguth once, symbols used before defined must include errata
+		TWO PASS:
+			This is what's used
+			Create a mapping of symbols to values, then replace symbols with their defs upon second pass
+	Phase 4:
+		Linker: add libraries to object code, makes executable
+		Links hello.o with other object files an libraries
+		merges into one executable
+	Loader:
+		lives in OS
+		./
+		Takes programs and stuff and puts into memory
+		allocates memory
+		Relocate fix all dependent locations and reallocate
+		Loading: put machine code and data into processor
+Memory:
+	Each processor gets its own memory
+	Text
+	Init data
+	Unit data
+	Heap
+	Stack
+	If stack and heap hit its a RIP
+Basically C->assembly->binary
+	Links stuff too
+	
