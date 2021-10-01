@@ -53,5 +53,96 @@ Boolean Algebra
 		l=m;
 	}else(
 		h = m;
- 
+Functions
+	:Formal parameters
+		This is the name of the param as it is used inside of the function body
+	:Actual params
+		This is the name of the value that is passed to the fuction, the vale can be copied to the formal param
+		Or a reference to the actual parameter may be bound to the formal parameter
+			In C we do this by passing a pointer using call be value
+	Call by value
+		Copy of actual param is placed in the formal param
+		This is the only method in c
+	Call by reference
+		Used the pointer in funct, actually changes the value.
+		Use the pointer not the value to funct as input
+Ternary op
+	in for statement
+	h = (x < 1) ? 1:x, if less than one has to be one
+BINARY SEARCH IS A WAY TO SPLIT HALF EVERY SEARCH
+Swap values
+	void swap(int *a, int *b){
+		int temp = *a
+		*a = * b;
+		*b=temp;
+		return;
+	The asterisc says this is a pointer
+	This is call by val with pointer thus call by ref
+Function protorype
+	Says what the parameters, the return type and the function names
+	return type function_name(parameters);
+	they an either bet used in header files or declared at the beginning
+	This is a preprocessor directive
+	Before compilation c soruce files are proccsed by preprocessor
+	It is a macro processor to transform programs
+	MAcros in C do text replacement
+	Past code of given file into current file
+	Used to include functions defined into other libraries
+	Header file is info of how to link with code
+#define
+	A preprocessor directive that defines a macro for the program
+	The preprocessor does text replacement
+	#define PI
+	all PI is replaced
+Conditional directives
+	Preprocessor directives that use ocnditional statments
+	ex
+	#define MACRO
+		#ifndef Macro
+			controlled text
+		#endif
+	If macro is defined do the stuff
+HEADER FILE
+	for stuff shared by source files
+	Function delare
+	Macro definition
+	Data structure
+	enum def
+	Global vars
+	and # include req for compilations
+	Uses extension/h
+	Used for modules or abstract types
+	use #ifnef or #pragma to make sure we not doing it twice
+#pragma	what is pragma?
+	every modern compiler supports #pragma once
+	same as ifndef
+#pragma once is cleaner
+#ifndef is more portable
+extern
+	This extends visibility of variables and fucntions such that they can be called by any fil
+	Functions are implicit extern
+static
+	can be declared inside and outside a function
+	persists across function calls
+	Declared inside function if the value need to persist across function calls
+	Declared outside a function if the value of the variable needs to be accessed by multiple functions
+	Static is only local
+utility function
+	defined as a static function in header file
+	Only exists in file
+	inline tells complir to replace funcction call with code
+	use for short little functions
+Recursion
+	Funct call self
+	SyntaX JUST LKE ANY other function
+	ALWAYS HAVE EXIT CONDITONS TO PREVENT INFINITE
+	Recursive is more compact
+Functions let you repeat code
+	Can return void scalars or pointer and structs
+	no return array
+	Snake case
+	Formal param used insde body
+	Actual params passed to function
+	C only uses call by val
+	Prior to function call please def protorype
 
