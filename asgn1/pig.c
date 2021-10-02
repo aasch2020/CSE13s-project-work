@@ -59,11 +59,11 @@ int main() {
         } else {
             currentnum++;
         }
-        printf("\n");
+        
         printf("%s rolls the pig...", names[currentnum]);
-        scores[currentnum] = turn(scores[currentnum]);
-
+	scores[currentnum] = turn(scores[currentnum]);
+        printf("\n");
     } while (scores[currentnum] < 100);
-    printf("\n%s wins with %d points!\n", names[currentnum], scores[currentnum]);
+    printf("%s wins with %d points!\n", names[currentnum], scores[currentnum]);
     return 0;
 }
