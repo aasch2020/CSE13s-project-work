@@ -27,7 +27,7 @@ int turn(int currentscore) {
             currentscore += 15;
             break;
         case JOWLER:
-            printf(" pig lands on ears");
+            printf(" pig lands on ear");
             currentscore += 5;
             break;
         default: printf("This shouldn't happen, ever."); break;
@@ -51,18 +51,19 @@ int main() {
         seed = 2021;
     }
     srandom(seed);
-    int currentnum = 0;
+    int currentnum = -1;
     int scores[10] = { 0 };
     do {
-        printf("%s rolls the pig...", names[currentnum]);
-        scores[currentnum] = turn(scores[currentnum]);
         if (currentnum == playercount - 1) {
             currentnum = 0;
         } else {
             currentnum++;
         }
         printf("\n");
+        printf("%s rolls the pig...", names[currentnum]);
+        scores[currentnum] = turn(scores[currentnum]);
+
     } while (scores[currentnum] < 100);
-    printf("%s wins with %d points\n", names[currentnum], scores[currentnum]);
+    printf("\n%s wins with %d points!\n", names[currentnum], scores[currentnum]);
     return 0;
 }
