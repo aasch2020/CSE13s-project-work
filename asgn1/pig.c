@@ -43,7 +43,7 @@ int main() {
         fprintf(stderr, "Invalid number of players. Using 2 instead.\n");
         playercount = 2;
     }
-    printf("%s", "Random Seed: ");
+    printf("%s", "Random seed: ");
     long int seed = -1;
     scanf("%ld", &seed);
     if ((seed < 0) || (seed > UINT_MAX)) {
