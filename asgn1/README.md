@@ -7,12 +7,12 @@ The die is passed through the players in a cyclic fashion until a player reaches
 
 ## Run the following to build the 'hello' program:
 
-'''
+```
 $ make pig
-'''
+```
 
 ## Running
 
-'''
+```
 ./pig
-'''
+```
