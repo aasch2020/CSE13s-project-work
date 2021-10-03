@@ -1,4 +1,5 @@
 #include "names.h"
+
 #include <limits.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -11,12 +12,12 @@ int turn(int current_score) {
     typedef enum { SIDE, RAZORBACK, TROTTER, SNOUTER, JOWLER } Position;
     const Position pig[7] = { SIDE, SIDE, RAZORBACK, TROTTER, SNOUTER, JOWLER, JOWLER };
     bool turn_end = false;
-    //This while loop will run the switch statement inside until the current_score hits 100 or 
+    //This while loop will run the switch statement inside until the current_score hits 100 or
     //the end of turn is true. This controls the end of the player turn.
     while (current_score < 100 && !(turn_end)) {
-	//This switch statement will dictate roll the pig using random()%7, which will provide a value
-	//from the pig enum created above. This controls the amount of points added based on side rolled
-	//and also sets turn_end to true if side is rolled.
+        //This switch statement will dictate roll the pig using random()%7, which will provide a value
+        //from the pig enum created above. This controls the amount of points added based on side rolled
+        //and also sets turn_end to true if side is rolled.
         switch (pig[random() % 7]) {
         case SIDE:
             printf(" pig lands on side");
@@ -38,9 +39,7 @@ int turn(int current_score) {
             printf(" pig lands on ear");
             current_score += 5;
             break;
-        default:
-	    printf("This shouldn't happen, ever.");
-	    break;
+        default: printf("This shouldn't happen, ever."); break;
         }
     }
     return current_score;
@@ -59,7 +58,7 @@ int main() {
         fprintf(stderr, "Invalid number of players. Using 2 instead.\n");
         player_count = 2;
     }
-    
+
     //This takes the input for seed and check if it is between 0 and UINT_MAX, which are the range of
     //valid inputs for the srandom function. If invalid value given, seed is set to 2021.
     printf("%s", "Random seed: ");
@@ -78,9 +77,9 @@ int main() {
     int scores[10] = { 0 };
 
     //the below do-while loop iterates through the players infinitely until a player reached the
-    //winning score of 100. It uses current_num to track the current player. 
+    //winning score of 100. It uses current_num to track the current player.
     do {
-	//This increments current_num in a way that stays within player_count.
+        //This increments current_num in a way that stays within player_count.
         if (current_num == player_count - 1) {
             current_num = 0;
         } else {
