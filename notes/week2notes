@@ -1,0 +1,260 @@
+Is got a mathemetician
+	Plato- only numbers exist
+	Plato believed that there are abstract mathematical obj who is indep of us
+	Numberse exist indep of how we repr them
+	Math is language of science
+	Georg Cantor
+We think of numbers as things we learned in elementary
+	We are familiar with base 10 bc 10 fingers
+	Numbs don't depend on repr 
+	Babylonians used based 60(Hour/min/day)
+Kinds of num
+	N=natural nums
+	Z=integers (add zero and negative
+	Q=Rational numbers, a/b if a and b are ints
+	R=irrational numbers aka real numbers
+	c are imaginary numbers a+sqrt(-1)b
+	Z=integers
+	Z+ is positive ints
+	Z- is negative ints
+	Z is neither positive or negative
+	Natural nums are 0 u Z+
+Computers can represent none of these sets
+	They do arithmetic in finite fields
+	They have certain num of bits to repr
+	Unsigned go bigger.
+We call numbers digits bc te
+	Computers have two digits
+	bit is about smalllest number of info
+	Boolean logic can make arithmetic by any and or and not
+	akb^k + ak-1bK-1
+	ex. 1962 = 1*10^3+9x10^2....=0x7AA=3652(base eight)=11110101010base 2
+	License plates written in base 36
+Specifying an int
+	char/unsigned 8 bit
+	short/unsigned 16 bit
+	int/unsigned at least 16 bit
+	long/unsigned at least 32 bit
+	long long/unsigned prolly 64 bit
+	#include <stdint.h> lets you tell the limits the scope
+		ie. uint8_t
+		uint16_t=16 bit
+		uint32_t=32 bit
+		uint 64_t=64 bit
+	
+Figure out how long it is on machine
+printf("%d", sizeof(data type));
+this letse you know number of bits in each type
+
+Binary Arithmetic
+	0+0=0
+	1+0=1
+	1+1=10
+	0*0=0
+	1*0=0
+	1*1=1
+	101+11=1000
+	101*101=11001
+
+Arithmetic in a finite field
+	Fixed width integers
+	Different way to implement negatives
+	In a finite field, we define for every number its additive inverse
+		If i is number in a finite field, and i is its additice inverse, then i+inv(i)=0
+		If we have k bits then we can have every positive int range from 0 to 2^k-1
+		or we use half to do negative to make from -2^(k-1) 2^(k-1)-1
+
+
+2SC arithmetic
+	to get an inv of number m
+	FLip the bits in m and then add one to result
+	0000=0
+	0001=1, 1111=-1
+	0010=2, 1110=-2
+	5=0101, -5=1101
+	Drop bits in finite field so add will become 0.
+
+Real numbs
+	Continous
+	Uncountably infinite
+	Includes all fo the ints rational numbs and irrationalk numberes
+	Just as many between two numbs as there are in all of real numbers
+
+
+FLoating point numbers
+	They are a proper subet of real numbers
+	Are a proper subset of rational numbers
+	Are a proper subset of ints
+	They are not real or rational
+	They are an approximation
+	float= single percision 32 bit
+	double= double precision 64 bit
+	long double= 128 bit
+	
+
+Decimal and Binary fractions
+	How do we write them
+	2/5=4/10=0.4=4*10^-1
+	1/3=0.33333333333 which repeatse
+	There is no power of 10 that divides evenly by 3
+	Fundamental theorem of arithmetic states every n in N has a unique prime factorization
+	10^k=2^k5^k
+	can we write 1/10 with binary fractions
+	2^k=2*2*2*2* none of which is 5 
+	so 0.1 cam't be repr in digital computer with float
+
+Single precision floating point has a sign bit, and exponent(2^8 range), 23 bits of precision for fraction
+	Quad precision
+	128 bits of precision
+Limits to floating point precision
+
+
+ENDIANNESS
+	When we have an intger with multiple bytes, what is address of byte holding lsb
+	Little endian means low address
+	Big endian means highst address
+	It depends on who built computer
+	
+
+Random numbers
+	True random numbers can't be created using computers
+	Why?
+		Programs are inherently deterministic
+	It has advantage of repeatability
+	Disadvantage of predictability
+	
+Arithmetic operator
+	Mult, div, mod, add subtract
+	Operators follow pemdas
+	
+
+Type promotion
+	Assigning smaller type to larger type make it bigger
+	int to float
+	int to long
+	float to double
+
+Operator precedence 
+	multiplicative first
+	then additive
+	then shift
+	then comparative of <= > <
+	then equality
+	Then bitwise and
+	Then bitwise exclusive or
+	then bit wise and
+	then and or
+	ternary
+	assigment
+
+
+Assignment time
+	Numerical computation	
+	Machine learning is all floating point arithmetic
+	Computers don't do integrals
+	e^ipi + 1 =0
+	pi = 2log(1sqrt(i))=2
+	x^k/k!=x^(k-1)/(k-1)*x^k
+	As k gets larger, it go to zero
+Calculating pi
+	WRITE FOR LOOPS FOR SUMMATIONS
+	The wallis series
+	Use for loops to make summations
+	Chudnoxsky brothers
+
+Computermath:
+	Computers can only do basic operations
+	Multiplication is shift and add
+	Division is shift and sub
+	Add is xor
+	What about trig functions
+		Microcode
+		Run a program for the basic operations
+	Integrals transforms etc
+		Numerical methods
+	
+Absolute value
+	abs(x) = if x < 0 : -x ? x;
+	Do I write
+		Depends, sometimes built in is faster
+
+CHECK THE MAN PAGE
+	In general, use the library
+	SHOULD be designed to be careful with numerical precsion, fast and portable
+	UNDERSTAND HOW IT WORKS
+	NO MAGIC
+	
+TAYLOR SERIES
+	Summation things
+	e^x 
+
+Computing sine
+	Periodic -2pi to 2 pi
+	meaning sin(9pi) = sin(pi)
+	floating point modulus
+	Center at zero
+	Taylor series for sine
+	CAN INIT MULTIPLE VALUES AT START OF FOR LOOP FOR USE
+		WHOOOOOOOOOOOOOOOO
+Taylor Series for log
+	x- x^2/2+x^3/3
+	COnverges gigaslow
+	Unless x is very close to zero
+	Algebra
+	log(x)=-log(1/x)
+	IT still converge too slow
+	Also true x = log*(e^x)=e^log(x)
+	INVERT THE EXPONENTIAL FUNCTION
+	
+HOw to invert a function
+	Cant compute taylor series for sqrt since its only one term of the taylor series
+	So what do?
+	Search for with bin search:Icky
+	Can we do better?
+	Yes sqrt(x^2)=x
+Bin search for sqrt
+	make x divide by four while greator than one
+	for each 4 add to at the end
+	Do a binary search for that m^2 is high/low
+	Basically do bin search for m^2=x
+Newton Iterate
+	USe slope of tangent line to guide the direction of search
+	
+NO EQUALITY TEST WITH FLOATING POINT NUMBER
+NORMAL MATH
+	REal nums are exact
+CPU arithmetic
+	Numbers are approc
+Floating point arithmetic make round error and truncatin error
+	Need to fit into finite
+Round off error
+	Calc without a floating point
+	Rouding to fit vals into a finite repr
+	5 standard moded
+		ROund nearest val with even sig digit
+		Round nniers ties rounded to value further from zero
+		round up cieling
+		round down floor
+		round 0 ttruncate
+COMPARING FLOATES
+	NO EQUALY DONT DO EQUALITY round off errors
+	CAn check if absolute error is a small value
+	The small difference is epsilon
+	
+RELATIVE ERROR
+	unlike absolute error is calculated considering x itself
+	Ratio of error
+	meaning because shows relative side of error
+	
+Floating point nums are not real nums
+	Limited precisoin
+	NOt even set of fraction
+	sparce subste
+	Think about what your doing do best algo
+	
+
+WAHT SHOULD WE DO
+	Use a good library when you can
+	Undesrtand the difference between flot and real nums
+	Understand special functions are all approx
+
