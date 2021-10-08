@@ -257,4 +257,95 @@ WAHT SHOULD WE DO
 	Use a good library when you can
 	Undesrtand the difference between flot and real nums
 	Understand special functions are all approx
+ARRAYS
+	We write a vector as a=<a1...an>
+In C array starts at zero 
+	Its easier sinec a is base address
+a[i] comes before a[i+1] in memory
+	a[n] is past end of array
+	a[i] comes after a[i-1]
+	No negative
+Arrays are contiguous in memory
+C doesn't protect you from falling out of array
+	segfault, or change something not in array
+	
+Declare an array
+	int a[] = {1,2,3,4,5,6,7,8,9,10}; first ten positive ints
+	itn b[10]; 10 empty slots
+	float c[] = {3.1416, 2.7183}; four important constants
+How it look in memory?
+	cont in memoery
+MAtrices
+	type m[3][3];
+	elements are m[0][0] to m[2][2]
+	Row major order, which means one row in mem then next rom then next
+	kinda 2d array?
+	memory is 1d so the array puts it into line row by row
+Matrix multiplication
+Arrays are exception to call by values
+	This is because arrays are passed by pointers
+	array can be biggie
+	memory is all slow as nuts
+	Array and pointer is intimently related
+	name of array is pointer to the 0 of array
+	printf the unsigned ints of 
+	sizeof operator
+		tells us the number of bytes used in a variable
+		works on arrays structs unions when the compiler can know how much memory is used
+	align memory go faster
+	compiler may add padding t align nicely with natural address boundaries
+	sizeof when applied to an array gives size of the array
+	sizeof when pointer gives size of the pointer.
+for a cingle dimensional array
+	a[i] == *(a+i)
+	a[i] is the array slot that is at a+ i * sizeof(a[0]) 
+	pointers automatically do the multiplication
+	if you say a pointer equal to aray, y and x reference the same memory
+		YOU have two things pointing to the same thing, not two clones
+ARRAYS AND POINTERSE ARE EQUIVALENT
+	dynamically sized array time
+		make a constructer that is a pointer to an int, use calloc, which does number of elements time size of thing
+		array pointer wocky slush
+	AFTER DYNAMIC ALLOCATION MUST FREE THE MEMORY
+Searchin in array happpen a lot
+	Run thru da whole list if not ordered?
+	can do da loop look for biggest
+	return first index for key if it exists
+Ordering the array
+	Bubble sort
+	sort thru all
+	swap until one bubbel upto the top
+	re sort array one shorter
+	if ordered you know the min and max in constant time
+BINARY SEARCHHHHHHHHHHHHHHHHHHHHH
+	check middle
+	if found yay
+	if bigger, go to the big
+	if smalller go to smaller
+	cut in half
+	 go gagin
+String
+	array of chars
+	ends in \0
+	can be written as 
+		char s[]= "ye"
+		char *s = "gooby crul worl"
+		char[s] = {l, e, g, a, 1, 0}
+		can make em
+	if you try to make a string equal to other string is will be a point and pointer
+function to copy string
+	if both chars aren't zero subtract
+	- is s<t
+	+ s>t
+	= 0 means s==t
+	s[i]&&t[i]
+		means when both and and t
+	length
+	whle char is not zero do ++1 to counter
+	how to copy
+		iterate over and copy
+		add null at end
+buffer overflow
+	C does not check the end of your array.
+	you need to check that as long as not end by giving length of other copy
 
