@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 #include "mathlib.h"
-static int counter = 0;
+static int counter = 1;
 double e()
 {
     double eout = 0.0;
