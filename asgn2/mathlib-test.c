@@ -3,7 +3,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <unistd.h>
-#define OPTIONS "aemr : "
+#define OPTIONS "aebmr : "
 
 int main(int argc, char **argv) {
     int opt = 0;
@@ -21,6 +21,10 @@ int main(int argc, char **argv) {
         case 'r':
             printf("euler pi %16.15lf \n", pi_euler());
             printf("in %d \n", pi_euler_terms());
+            break;
+        case 'b':
+            printf("bbp pi %16.15lf \n", pi_bbp());
+            printf("in %d \n", pi_bbp_terms());
             break;
         default: printf("really?");
         }
