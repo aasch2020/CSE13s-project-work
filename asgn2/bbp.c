@@ -17,7 +17,7 @@ double pi_bbp() {
                       + 15.0)
                    / ((counter - 1.0) * (120.0 * (counter - 1.0) + 151.0) + 47.0));
         counter++;
-	sum += term;
+        sum += term;
     }
     return sum;
 }

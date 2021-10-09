@@ -2,9 +2,7 @@
 
 #define EPSILON 1e-14
 
-static inline double absolute(double x) {
-    return x < 0.0 ? -x : x;
-}
+static inline double absolute(double x) { return x < 0.0 ? -x : x; }
 
 double e(void);
 

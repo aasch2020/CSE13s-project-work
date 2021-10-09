@@ -3,7 +3,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <unistd.h>
-#define OPTIONS "aebmr : "
+#define OPTIONS "aebmrv : "
 
 int main(int argc, char **argv) {
     int opt = 0;
@@ -25,6 +25,10 @@ int main(int argc, char **argv) {
         case 'b':
             printf("bbp pi %16.15lf \n", pi_bbp());
             printf("in %d \n", pi_bbp_terms());
+            break;
+	case 'v':
+            printf("v pi %16.15lf \n", pi_viete());
+            printf("in %d \n", pi_viete_factors());
             break;
         default: printf("really?");
         }
