@@ -10,7 +10,7 @@
 int main(int argc, char **argv) {
     int opt = 0;
     bool eul = false, b = false, m = false, r = false, v = false, n = false, s = false, h = false;
-    //This usage of while, getopt, and a switch statement to parse command line args is based on the 
+    //This usage of while, getopt, and a switch statement to parse command line args is based on the
     //implementation shown in the assignment document (Professor Long 2021)
     while ((opt = getopt(argc, argv, OPTIONS)) != -1) {
         //Loop through all of the command line args and check if they are any of the important values
