@@ -1,7 +1,7 @@
 CC = clang
 CFLAGS = -Wall -Werror -Wpedantic -Wextra
 LFLAGS = -lm
-all: pig
+all: mathlib-test
 mathlib-test: mathlib-test.o e.o newton.o madhava.o euler.o bbp.o viete.o
 	$(CC) -o mathlib-test mathlib-test.o e.o newton.o madhava.o euler.o bbp.o viete.o $(LFLAGS)
 mathlib-test.o: mathlib-test.c
@@ -21,4 +21,4 @@ viete.o: viete.c
 clean:
 	rm mathlib-test *.o
 format:
-	clang-format -i -style=file *.[c]
+	clang-format -i -style=file *.[ch]
