@@ -21,7 +21,7 @@ double pi_madhava() {
     }
     //the sum is multiplied by square root of 12, since pi is equal to the summation times 12
     sum *= sqrt_newton(12);
-    
+
     return sum;
 }
 //This function return the number of terms of the madhava series calculation.

@@ -12,8 +12,8 @@ double pi_bbp() {
     counter = 1;
     while (term > EPSILON) {
         //This below calcuation for term multiplies the term by 16, then divides by the non exponential
-	//portion of the previous term, and then multiplies by the non exponential portion of the current term
-	//This is in horner normal form.
+        //portion of the previous term, and then multiplies by the non exponential portion of the current term
+        //This is in horner normal form.
         term = term * (1 / 16.0)
                * ((counter * (120.0 * counter + 151.0) + 47.0)
                    / (counter * (counter * (counter * (512.0 * counter + 1024.0) + 712.0) + 194.0)
