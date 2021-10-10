@@ -1,3 +1,4 @@
+
 #include "mathlib.h"
 
 #include <math.h>
@@ -10,7 +11,7 @@ int main(int argc, char **argv) {
     int opt = 0;
     bool eul = false, b = false, m = false, r = false, v = false, n = false, s = false, h = false;
     while ((opt = getopt(argc, argv, OPTIONS)) != -1) {
-
+        //Loop through all of the command line args and check if they are any of the important values
         switch (opt) {
         case 'a': eul = b = m = r = v = n = true; break;
         case 'e': eul = true; break;
@@ -24,6 +25,8 @@ int main(int argc, char **argv) {
         default: break;
         }
     }
+    //The below if statements call appropriate functions and print values from the switch cases above
+    //the s bool is for the term count and is thus evaluated on a case by case basis
     if (h) {
         eul = b = m = r = v = n = false;
     }
