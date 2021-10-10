@@ -20,7 +20,7 @@ double e() {
 
     return sum;
 }
-
+//This returns the number of terms used to calculate e. It takes no input, and needs e() to be run first.
 int e_terms() {
     return counter;
 }
