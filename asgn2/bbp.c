@@ -5,6 +5,7 @@ static int counter = 1;
 double pi_bbp() {
     double sum = 47.0 / 15;
     double term = 47.0 / 15;
+    counter = 1;
     while (term > EPSILON) {
         term = term * (1 / 16.0)
                * ((counter * (120.0 * counter + 151.0) + 47.0)

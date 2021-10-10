@@ -6,6 +6,7 @@ static int counter = 0;
 double sqrt_newton(double input) {
     double previous = 0.0;
     double guess = 1.0;
+    counter = 0;
     while (absolute(guess - previous) > EPSILON) {
         counter++;
         previous = guess;
