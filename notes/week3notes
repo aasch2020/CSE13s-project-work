@@ -1,0 +1,70 @@
+Sorting
+	Sorting is the act of putting things in defined order
+	Lexicographical order
+	Numbers can be sorted in order
+	Why?
+		We can add info to our data
+		We can now make assertions of before after and etc
+		We can search merge and dupe detect more efficiently
+	Bogosort
+		Enum all possiblities of orderings
+		Pick the one that is in order
+		This sucks
+	Second idea
+		Find smallest
+		Swap with first object
+		Cut array size dwn by one
+		Do again
+		And again
+		And again
+	
+	Fourth idea
+		First two elemetns
+		If first greater than second swap
+		Move on to second and third
+		Continue on until last pair
+		What do we know?
+			Last elemetn of the array is largest
+			ignore it
+			Repeat this proceducre on the first n-1
+		But wait what happened if we make no swap
+			it's sorted
+		in the best case we can only examine n-1 pairs
+		better bubble sort
+		ONe pass order the array tells us if the array is sorted
+		We can still do better/
+			Prove with math that we can sort in time proportional to n log n
+		Thought experiment
+			Array with disjoint pairs
+			we have n/2 pairs but look at both so call it n
+			If we put the elements of every pair in order that is a run of length two
+			Nowe we take a pair of runs and merge into runs of length 4
+			How many times can we double 1 before we exceed n log n
+			Our sort finished in time proportional to n log n
+			This is merge sort
+	Shell sort
+		Organizes data on a course scale(large gap) first 
+		Then goes to the small scale
+	Quisk sort
+		Cut array in half and stuff
+		I need to firgure this out
+		Computational complexity
+		Cut array in half each time
+		nlogn
+		There exists for any choice of pivot element that is an adversarial array that makes complexity n^2
+	Heaps
+		Lot's of types of heaps
+		A max heap
+			a single node is a heap
+			It is a heap if the parent is a heep and the trees rooted at both childs are heaps
+			A parent's value (key) is greater than that of either child
+			There is no order among the children
+			Take the biggest child to the top and a nother child up
+	Using comparisons the answer is no
+	If we use assumptions about the encoding we can do radix sort
+	Summary
+		Sorting is fundamental
+		Analysis of algorithm complexity is imprtant
+		Better algorithm
+		you will need to sort a lot in ur career
+
