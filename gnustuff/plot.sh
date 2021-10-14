@@ -6,7 +6,7 @@ make clean && make
 # Then extract x, the computed value, and the library value from each line.
 # Output to `sine()` results to `/tmp/computed.dat`.
 # Output to `sin()` results to `/tmp/library.dat`.
-./mathlib-test -n | awk -F, '{
+./mathlib-test -r | awk -F, '{
     split($1, computed, " ");
     split(computed[1], x, "[()]")
     split($2, library, " ");
@@ -20,9 +20,9 @@ set terminal pdf
 set key outside
 set zeroaxis
 
-set output "comparison.pdf"
-set title "sqrt_newton() vs. sqrt()"
-plot "/tmp/computed.dat" with linespoints title "sqrt_newton()", \
-    "/tmp/library.dat" with linespoints title "sqrt()"
+set output "eulerpi3.pdf"
+set title "Euler vs. M PI"
+plot "/tmp/computed.dat" with linespoints title "Euler", \
+    "/tmp/library.dat" with linespoints title "M PI"
 EOF
 echo "done."

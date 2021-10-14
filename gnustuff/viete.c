@@ -1,5 +1,6 @@
 #include "mathlib.h"
 
+#include <math.h>
 #include <stdio.h>
 static int counter = 0;
 //This function estimates pi using Viete's method of repeated multiplication, and takes no input.
@@ -9,9 +10,12 @@ double pi_viete() {
     counter = 0;
     //Since the function is multiplied by 2 over the guess to iterate, the condition compared to EPSILON
     //is 2/guess minus one, since the term 2/guess converges to one.
-    while (absolute(2 / guess - 1.0) > EPSILON) {
-       	 guess = sqrt_newton(2.0 + guess);
-	 result *= 2.0 / guess;
+    //while (absolute(2 / guess - 1.0) > EPSILON) {
+    for (int i = 0; i < 25; i++) {
+        printf("e() = %16.15lf, M_E = %16.15lf, why is this rand num\n", 2 * result, M_PI);
+
+        guess = sqrt_newton(2.0 + guess);
+        result *= 2.0 / guess;
 
         counter++;
     }

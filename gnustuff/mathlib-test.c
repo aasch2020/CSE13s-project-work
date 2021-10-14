@@ -31,49 +31,23 @@ int main(int argc, char **argv) {
         eul = b = m = r = v = n = false;
     }
     if (eul) {
-        printf("e() = %16.15lf, M_E = %16.15lf, diff = %16.15lf\n", e(), M_E, absolute(e() - M_E));
-        if (s) {
-            printf("e() terms = %d\n", e_terms());
-        }
+        e();
     }
     if (m) {
-        printf("pi_madhava() = %16.15lf, M_PI = %16.15lf, diff = %16.15lf\n", pi_madhava(), M_PI,
-            absolute(pi_madhava() - M_PI));
-        if (s) {
-            printf("pi_madhava() terms = %d\n", pi_madhava_terms());
-        }
+        pi_madhava();
     }
     if (r) {
-        printf("pi_euler() = %16.15lf, M_PI = %16.15lf, diff = %16.15lf\n", pi_euler(), M_PI,
-            absolute(pi_euler() - M_PI));
-        if (s) {
-            printf("pi_euler() terms = %d\n", pi_euler_terms());
-        }
+        pi_euler();
     }
     if (b) {
-        printf("pi_bbp = %16.15lf, M_PI = %16.15lf, diff = %16.15lf\n", pi_bbp(), M_PI,
-            absolute(pi_bbp() - M_PI));
-        if (s) {
-            printf("pi_bbp() terms = %d\n", pi_bbp_terms());
-        }
+        pi_bbp();
     }
     if (v) {
-        printf("pi_viete() = %16.15lf, M_PI = %16.15lf, diff = %16.15lf\n", pi_viete(), M_PI,
-            absolute(pi_viete() - M_PI));
-
-        if (s) {
-            printf("pi_viete() terms = %d\n", pi_viete_factors());
-        }
+        pi_viete();
     }
     if (n) {
-        for (double i = 0.0; i <= 10.0; i += 0.1) {
-            printf("sqrt_newton(%f) = %16.15lf, sqrt(%f) = %16.15lf, diff = %16.15lf\n", i,
-                sqrt_newton(i), i, sqrt(i), absolute(sqrt_newton(i) - sqrt(i)));
 
-            if (s) {
-                printf("sqrt_newton() terms = %d\n", sqrt_newton_iters());
-            }
-        }
+        sqrt_newton(10.00);
     }
     if (!(eul || b || m || r || v || n)) {
         printf("SYNOPSIS\n  A test harness for the small numerical library.\n"

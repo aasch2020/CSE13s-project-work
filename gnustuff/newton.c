@@ -3,6 +3,7 @@
 #include <stdio.h>
 static int counter = 0;
 //Calculates the square root using newton's method, takes a double, which is the variable to be calculated
+//This code is based on the python code in the assignment document (2021 Professor Long)
 double sqrt_newton(double input) {
     double previous = 0.0;
     double guess = 1.0;
