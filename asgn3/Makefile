@@ -1,23 +1,16 @@
 CC = clang
 CFLAGS = -Wall -Werror -Wpedantic -Wextra
+LFLAGS = -lm
 all: sorting
-mathlib-test: sorting.o insert.o stats.o shell.o heap.o quick.o
-	$(CC) -o sorting.o sorting.o insert.o stats.o shell.o heap.o quick.o 
-mathlib-test.o: mathlib-test.c
-	$(CC) $(CFLAGS) -c mathlib-test.c
-e.o: e.c
-	$(CC) $(CFLAGS) -c e.c
-newton.o: newton.c
-	$(CC) $(CFLAGS) -c newton.c
-madhava.o: madhava.c
-	$(CC) $(CFLAGS) -c madhava.c
-euler.o: euler.c
-	$(CC) $(CFLAGS) -c euler.c
-bbp.o: bbp.c
-	$(CC) $(CFLAGS) -c bbp.c
-viete.o: viete.c
-	$(CC) $(CFLAGS) -c viete.c
+sorting: sorting.o stats.o insert.o
+	$(CC) -o sorting sorting.o stats.o insert.o $(LFLAGS)
+sorting.o: sorting.c
+	$(CC) $(CFLAGS) -c sorting.c
+stats.o: stats.c
+	$(CC) $(CFLAGS) -c stats.c
+insert.o: insert.c
+	$(CC) $(CFLAGS) -c insert.c
 clean:
-	rm mathlib-test *.o
+	rm sorting *.o
 format:
 	clang-format -i -style=file *.[ch]
