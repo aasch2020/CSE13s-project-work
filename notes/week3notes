@@ -67,4 +67,90 @@ Sorting
 		Analysis of algorithm complexity is imprtant
 		Better algorithm
 		you will need to sort a lot in ur career
-
+WHAT IS A POINTER
+	Var that holds a mem address
+	Point to the location of an object in memoery
+	Not all ptrs contain an addresss
+	PTRS that don't coontain an address are set to null ptr
+	Value of the null pointer is 0
+	Null is a macro for either ((void*)0) 
+		0
+		0L
+		depends on the compiler
+	Mem addresses
+		Momory is in registers that can be accessed by a specifc number
+		Pointers are pointing at the address they are assigned
+		Can assign a pointer the address of a var using the address of operator
+		Many pointers can do same address, called aliases.
+	doing &something gives address of ptr
+		int foo = 0
+		print %p &foo is address of foo
+De refferencing a pointer
+	The object a ptr points to can be accessed through deference
+	A pointer can be derefed using the deref operator
+	Useful for manipulating things by call be reference
+	& gets the addy of the thing
+	How to fake call by reference'
+You can say *bar = &foo;
+	addy ofbar.
+Passing by reference.
+	Allows returning multiple values
+	Passing large amounts of data quickly
+Pointer arthmetic
+	Pointers are just numbers
+	++ increments to next addy (4bits) assuming 32 bit ints
+	-- decrements to previous addy
+	+ add a numeric value to a pointer (no ptr and ptr addition)
+	CANT ADD PTR TO PTR
+	- if a ptr is subtracted from another pointer, the distance between addy is calculated
+	CAn be comared with relational ops.
+	Cant sum divide or mult two pointers
+	str are arrays
+Array and pointer arith
+	arr[i] == *(a+i)
+	If start at 1000 then arr[i] is 100(i*4)
+		an int is for bytes
+	if arr was of uint 64_t then arr[i] would be *4 not *8
+DOes is make sense?
+	Adding int to ptr makes sense
+	Subtracting two pointers makes sense
+	Adding two pointers is dumb asf
+	Multiply or dividing is also dumb asf
+*(fib_ptr)++ derefe then increment
+fib_ptr++; increment the pointer
+Array subs can be don with pointerse
+	pointer arithmetic in general is faster but harder to understand
+	int arr[10]
+		arr[i] is eq to *(arr+1), 0<= i <10
+	Arrays can always be done with ptrs
+	Declaring an array in a function allocates it on the stack
+	A global array is in the data area
+	Dynamically declaring an array to get a ptr allocates it on the heap
+2d array
+	get weord of dynamic alloc
+IN C str are arrays
+	A str is a ptr to an array of chars
+	Strings can eb indexed and passed by reference
+You can do pointers to pointers
+	char **argv is a pointer to a pointer of characters
+Multidimensional array
+	row major order
+	IT will be contiguous
+	3d array
+		plane->row-> column
+		These grow very very quickly
+Function pointers
+	Points to executable code in mem
+	Derefing a function ptr yields the referenced fuction.
+	Notice how there are paren around the function pointer
+		Without them the function pointer would be parsed as func declera
+	Function ptr things 
+		Can have a pointer to a function
+Summary
+	ptr contains a meme address
+	no addy ptr is null
+	the addy of a var is with &
+	the obj of a ptr ptrs to can be derefed by the ptr
+	Arby levels of pting pointer can point to pointer etc
+	pass big data structs
+	
