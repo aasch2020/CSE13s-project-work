@@ -153,4 +153,72 @@ Summary
 	the obj of a ptr ptrs to can be derefed by the ptr
 	Arby levels of pting pointer can point to pointer etc
 	pass big data structs
-	
+
+Computational Complexity
+	Size of the problem
+	We talk abt size of input
+	Some common functions
+	log(x) x x log(x) x^2 etc
+		speed of grow
+	factorial time is yucky
+Binary search
+	log(n) time
+Find minimum order n
+Sorts
+	nlog(n)
+	n^2 for bubble
+	n^3 for matrix mult
+	Enumerate permutations n!
+Formale math
+	f(n) is in the set O if O(g(n))
+ 	O = {f :  there exists n0 and c such that 0<=f(n) <= c*g(n) for all n>n0}
+Simple linear algorithm
+	search in an array for one element
+	Why is order n? Loop, loops through
+Quadratic alg
+	O(n^2) since loop inside loop
+A less simple algorithm
+	On avg nlong(n)
+	O(n^2)
+	Quicksort
+		If only take off one each time, then its n^2 since loop for every
+		Best case, cut in half
+			Then logn
+Estimate by looking at loops and recursion
+	We multiply the complexity of loops nested in loops
+	One lopp usualy adds O(n)
+	two loops are O(n^2)
+	three are O(n^3)
+	etc.
+Addition doesn't matter
+	So what about c
+	C is an overhead alg needs
+	But it is only constanst speed and a little better.
+	Do a better algorithm
+Consider x^2 - 10xlog(X)
+	Then sometimes x^2 is faster
+	Use buble sort of less than 50 item
+	depends on alg
+	Best case for bubble osrt is order n, but worst is n^2 dont do it for biggie things
+So what abt recursion	
+	order n?
+Fibonacci function
+	O(2^n)
+		why?
+		Each thing splits into tree, so approx is exponential to compute
+	fib n remember 
+		can be O(n)
+	time space stuff time taken vs space
+	WE can calculate analytically
+Sqrt
+	How to calculate?
+	Number between 0 and 1
+	while of cut in half loop + how mayn times divide by 2 for epsilon
+	For big number bad maybe?
+IF we go back 3000 years, Euclid has a mthod that each time it divides and gets faster
+We know that integer factorization is hard
+	Sometimes we don't know the best algorithms
+	if someone can factorise hella we have an issue
+	become conversant with computatonal complexity in space and time
+	time matters
+

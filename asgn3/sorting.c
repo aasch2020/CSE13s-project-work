@@ -90,11 +90,9 @@ int main(int argc, char **argv) {
                 printf("Heap Sort, %d elements, %lu moves, %lu compares\n", array_length,
                     stats.moves, stats.compares);
                 break;
-            
-		case HELP:
-	    printf("This shouldn't be happening. Like at all");
-break;
-	    }
+
+            case HELP: printf("This shouldn't be happening. Like at all"); break;
+            }
             for (int i = 0; i < print; i += 1) {
                 if (((i % 5) == 0) && (i > 0)) {
                     printf("\n");
