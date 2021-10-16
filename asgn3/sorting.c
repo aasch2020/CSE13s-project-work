@@ -19,24 +19,26 @@ int main(int argc, char **argv) {
     unsigned int SEED = 13371453;
     int print = 100;
     int array_length = 100;
+    char *endstroul;
     while ((opt = getopt(argc, argv, OPTIONS)) != -1) {
         //Loop thugh all of the command line args and check if they are any of the important values
-        switch (opt) {
+        
+	switch (opt) {
         case 'n':
-            array_length = atoi(optarg);
+            array_length = strtoul(optarg, &endstroul, 10);
             if (array_length <= 0) {
                 printf("Invalid array_length, using 100\n");
                 array_length = 100;
             }
             break;
         case 'p':
-            print = atoi(optarg);
+            print = strtoul(optarg, &endstroul, 10);
             if (print <= 0) {
                 printf("Invalid number of elements to print, using 100\n");
                 print = 100;
             }
             break;
-        case 'r': SEED = atoi(optarg); break;
+        case 'r': SEED = strtoul(optarg,&endstroul, 10); break;
         case 'h': input_args = insert_set(HELP, input_args); break;
         case 'i': input_args = insert_set(INSERT, input_args); break;
         case 'e': input_args = insert_set(HEAP, input_args); break;
@@ -51,7 +53,7 @@ int main(int argc, char **argv) {
         default: break;
         }
     }
-    void (*function_pointers[])() = { insertion_sort, /* heap_sort, shell_sort, quick_sort*/ };
+    void (*function_pointers[])() = { insertion_sort, /* heap_sort,*/ shell_sort,/* quick_sort*/ };
     print = print > array_length ? array_length : print;
     if (input_args == 0) {
         printf("do a sort\n");
@@ -100,6 +102,7 @@ int main(int argc, char **argv) {
                 printf("%13" PRIu32, A[i]);
             }
             printf("\n");
+	    free(A);
         }
     }
 }
