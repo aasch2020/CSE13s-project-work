@@ -12,13 +12,12 @@ void shell_sort(Stats *stats, uint32_t *A, uint32_t n){
 			j = i;
 			temp =  move(stats, A[i]);
 
-			while ((j >= (gap/2)) && (temp < A[j - (gap/2)])){
-				A[j] = A[j - (gap/2)];
+			while ((j >= (gap/2)) && ((cmp(stats, temp, A[j - (gap/2)]) == -1))){
+				A[j] = move(stats, A[j - (gap/2)]);
 				j = j - (gap/2);
 			}
-			A[j] = temp;
+			A[j] = move(stats, temp);
 		}
-		printf("%d\n", gap/2);
 		gap = (gap - 1)/3;
 	}
 }
