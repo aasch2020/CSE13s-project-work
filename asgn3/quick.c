@@ -1,5 +1,13 @@
 #include "stats.h"
 #include <math.h>
+uint32_t partition(Stats *stats, uint32_t *A, uint32_t low, unit32_t high){
+	i = lo - 1;
+	for (uint32_t j = low; j < high; j++){
+		if (cmp(A[j - 1], A[hi - 1]) == 
+	}
+}
+
+
 void quick_sort(Stats *stats, uint32_t *A, uint32_t n){
 	int start_gap_round_int = log(3 + (2 * n));
 	int starting_gap_calculation_value = start_gap_round_int/log(3);

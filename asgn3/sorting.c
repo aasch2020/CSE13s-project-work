@@ -53,7 +53,7 @@ int main(int argc, char **argv) {
         default: break;
         }
     }
-    void (*function_pointers[])() = { insertion_sort, /* heap_sort,*/ shell_sort,/* quick_sort*/ };
+    void (*function_pointers[])() = { insertion_sort, shell_sort, heap_sort, /* quick_sort*/ };
     print = print > array_length ? array_length : print;
     if (input_args == 0) {
         printf("do a sort\n");
@@ -70,10 +70,17 @@ int main(int argc, char **argv) {
             srandom(SEED);
             stats.moves = 0;
             stats.compares = 0;
-            for (int i = 0; i < array_length; i += 1) {
+           for (int i = 0; i < array_length; i += 1) {
                 A[i] = random() & 0x3FFFFFFF;
-            }
 
+            }
+	    for (int i = 0; i < print; i += 1) {
+                if (((i % 5) == 0) && (i > 0)) {
+                    printf("\n");
+                }
+                printf("%13" PRIu32, A[i]);
+            }
+	    printf("sorting this\n");
             function_pointers[k](&stats, A, array_length);
             switch (k) {
             case INSERT:
