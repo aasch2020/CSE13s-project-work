@@ -1,30 +1,26 @@
 #include "stats.h"
 #include <math.h>
-uint32_t partition(Stats *stats, uint32_t *A, uint32_t low, unit32_t high){
-	i = lo - 1;
+uint32_t partition(Stats *stats, uint32_t *A, uint32_t low, uint32_t high){
+	uint32_t i  = low - 1;
 	for (uint32_t j = low; j < high; j++){
-		if (cmp(A[j - 1], A[hi - 1]) == 
+		if (cmp(stats, A[j - 1], A[high - 1]) == -1){
+		i +=1;
+		swap(stats, &A[i - 1], &A[j - 1]);
+
+	}	
 	}
+	swap(stats, &A[i], &A[high - 1]);
+	return i + 1;
 }
 
-
-void quick_sort(Stats *stats, uint32_t *A, uint32_t n){
-	int start_gap_round_int = log(3 + (2 * n));
-	int starting_gap_calculation_value = start_gap_round_int/log(3);
-	int gap = ((pow(3, starting_gap_calculation_value) - 1));
-	for (int k = gap; k > 0; k--){
-		int j = 0;
-		uint32_t temp = 0;
-		for (uint32_t i = gap; i < n; i++){
-			j = i;
-			temp =  move(stats, A[i]);
-
-			while ((j >= gap) &&( temp < A[j - gap])){
-				A[j] = A[j - gap];
-				j -= gap;
-			}
-			A[j] -=gap;
-		}
-		gap = (gap - 1)/3;
+void quick_sorter(Stats *stats, uint32_t *A, uint32_t low, uint32_t high){
+	if (low < high){
+		uint32_t p = partition(stats, A, low, high);
+		quick_sorter(stats, A, low, p - 1);
+		quick_sorter(stats, A, p + 1, high);
+		
 	}
+}
+void quick_sort(Stats *stats, uint32_t *A, uint32_t n){
+	quick_sorter(stats, A, 1, n);
 }
