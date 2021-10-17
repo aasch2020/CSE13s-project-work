@@ -68,7 +68,7 @@ int main(int argc, char **argv) {
         if (member_set(k, input_args)) {
             uint32_t *A = (uint32_t *) calloc(array_length, sizeof(uint32_t));
             srandom(SEED);
-	    reset(&stats);
+            reset(&stats);
             //stats.moves = 0;
             //stats.compares = 0;
             for (int i = 0; i < array_length; i += 1) {
@@ -103,7 +103,7 @@ int main(int argc, char **argv) {
                 printf("%13" PRIu32, A[i]);
             }
             printf("\n");
-	    //reset(&stats);
+            //reset(&stats);
             free(A);
         }
     }
