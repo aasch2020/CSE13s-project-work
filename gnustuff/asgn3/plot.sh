@@ -10,8 +10,13 @@ make clean && make
     split($1, heap, " ");
     split(heap[1], x, "[()]")
     split($2, shell, " ");
-    print x[2], heap[3] > "/tmp/computed.dat"
-    print x[2], shell[3] > "/tmp/library.dat"
+    split($3, insert, " ");
+    split($4, quick, " ");
+
+    print x[2], heap[3] > "/tmp/heap.dat"
+    print x[2], shell[3] > "/tmp/shell.dat"
+    print x[2], insert[3] > "/tmp/insert.dat"
+    print x[2], quick[3] > "/tmp/quick.dat"
 }'
 
 echo -n "Plotting... "
@@ -22,7 +27,9 @@ set zeroaxis
 
 set output "comparison.pdf"
 set title "Insert vs. Shell vs. Heap vs. Quick"
-plot "/tmp/computed.dat" with lines title "Heap", \
-    "/tmp/library.dat" with lines title "Quick"
+plot "/tmp/heap.dat" with lines title "Heap", \
+    "/tmp/shell.dat" with lines title "Shell", \
+    "/tmp/insert.dat" with lines title "Insert", \
+    "/tmp/quick.dat" with lines title "Quick"
 EOF
 echo "done."
