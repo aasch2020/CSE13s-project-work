@@ -12,7 +12,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #define OPTIONS "haeisqn:p:r:"
-typedef enum { INSERT, SHELL, HEAP, QUICK, HELP } possible_args;
+typedef enum { HEAP, SHELL, INSERT, QUICK, HELP } possible_args;
 int main(int argc, char **argv) {
     Set input_args = 0;
     int opt = 0;
@@ -53,7 +53,7 @@ int main(int argc, char **argv) {
         default: break;
         }
     }
-    void (*function_pointers[])() = { insertion_sort, shell_sort, heap_sort, quick_sort };
+    void (*function_pointers[])() = { heap_sort, shell_sort, insertion_sort, quick_sort };
     print = print > array_length ? array_length : print;
     if (input_args == 0) {
         printf("do a sort\n");
@@ -64,7 +64,7 @@ int main(int argc, char **argv) {
     }
     Stats stats;
 
-    for (possible_args k = INSERT; k <= QUICK; k++) {
+    for (possible_args k = HEAP; k <= QUICK; k++) {
         if (member_set(k, input_args)) {
             uint32_t *A = (uint32_t *) calloc(array_length, sizeof(uint32_t));
             srandom(SEED);
