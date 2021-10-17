@@ -22,8 +22,8 @@ int main(int argc, char **argv) {
     char *endstroul;
     while ((opt = getopt(argc, argv, OPTIONS)) != -1) {
         //Loop thugh all of the command line args and check if they are any of the important values
-        
-	switch (opt) {
+
+        switch (opt) {
         case 'n':
             array_length = strtoul(optarg, &endstroul, 10);
             if (array_length <= 0) {
@@ -38,7 +38,7 @@ int main(int argc, char **argv) {
                 print = 100;
             }
             break;
-        case 'r': SEED = strtoul(optarg,&endstroul, 10); break;
+        case 'r': SEED = strtoul(optarg, &endstroul, 10); break;
         case 'h': input_args = insert_set(HELP, input_args); break;
         case 'i': input_args = insert_set(INSERT, input_args); break;
         case 'e': input_args = insert_set(HEAP, input_args); break;
@@ -53,7 +53,7 @@ int main(int argc, char **argv) {
         default: break;
         }
     }
-    void (*function_pointers[])() = { insertion_sort, shell_sort, heap_sort, quick_sort};
+    void (*function_pointers[])() = { insertion_sort, shell_sort, heap_sort, quick_sort };
     print = print > array_length ? array_length : print;
     if (input_args == 0) {
         printf("do a sort\n");
@@ -70,11 +70,10 @@ int main(int argc, char **argv) {
             srandom(SEED);
             stats.moves = 0;
             stats.compares = 0;
-           for (int i = 0; i < array_length; i += 1) {
+            for (int i = 0; i < array_length; i += 1) {
                 A[i] = random() & 0x3FFFFFFF;
-
             }
-	    
+
             function_pointers[k](&stats, A, array_length);
             switch (k) {
             case INSERT:
@@ -103,7 +102,7 @@ int main(int argc, char **argv) {
                 printf("%13" PRIu32, A[i]);
             }
             printf("\n");
-	    free(A);
+            free(A);
         }
     }
 }
