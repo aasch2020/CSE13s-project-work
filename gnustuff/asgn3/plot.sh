@@ -25,7 +25,7 @@ set terminal pdf
 set key outside
 set zeroaxis
 
-set output "comparison.pdf"
+set output "LessDomainMoves.pdf"
 set title "Insert vs. Shell vs. Heap vs. Quick"
 plot "/tmp/heap.dat" with lines title "Heap", \
     "/tmp/shell.dat" with lines title "Shell", \
