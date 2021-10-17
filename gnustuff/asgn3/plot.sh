@@ -7,11 +7,11 @@ make clean && make
 # Output to `sine()` results to `/tmp/computed.dat`.
 # Output to `sin()` results to `/tmp/library.dat`.
 ./sorting -a | awk -F, '{
-    split($1, computed, " ");
-    split(computed[1], x, "[()]")
-    split($2, library, " ");
-    print x[2], computed[3] > "/tmp/computed.dat"
-    print x[2], library[3] > "/tmp/library.dat"
+    split($1, heap, " ");
+    split(heap[1], x, "[()]")
+    split($2, shell, " ");
+    print x[2], heap[3] > "/tmp/computed.dat"
+    print x[2], shell[3] > "/tmp/library.dat"
 }'
 
 echo -n "Plotting... "
@@ -22,7 +22,7 @@ set zeroaxis
 
 set output "comparison.pdf"
 set title "Insert vs. Shell vs. Heap vs. Quick"
-plot "/tmp/computed.dat" with linespoints title "sine()", \
-    "/tmp/library.dat" with linespoints title "sin()"
+plot "/tmp/computed.dat" with lines title "Heap", \
+    "/tmp/library.dat" with lines title "Quick"
 EOF
 echo "done."
