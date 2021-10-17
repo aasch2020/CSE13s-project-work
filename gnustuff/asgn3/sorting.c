@@ -63,14 +63,13 @@ int main(int argc, char **argv) {
         input_args = empty_set();
     }
     Stats stats;
-
-    for (possible_args k = HEAP; k <= QUICK; k++) {
+    for (uint32_t i = 10; i <= 10000; i+=10){
+	array_length = i;
+	for (possible_args k = HEAP; k <= QUICK; k++) {
         if (member_set(k, input_args)) {
             uint32_t *A = (uint32_t *) calloc(array_length, sizeof(uint32_t));
             srandom(SEED);
-	    reset(&stats);
-            //stats.moves = 0;
-            //stats.compares = 0;
+            reset(&stats);
             for (int i = 0; i < array_length; i += 1) {
                 A[i] = random() & 0x3FFFFFFF;
             }
@@ -78,33 +77,30 @@ int main(int argc, char **argv) {
             function_pointers[k](&stats, A, array_length);
             switch (k) {
             case INSERT:
-                printf("Insertion Sort, %d elements, %lu moves, %lu compares\n", array_length,
-                    stats.moves, stats.compares);
+                printf("Insertion(%d) = %lu moves, ", array_length,
+                    stats.moves);
                 break;
             case HEAP:
-                printf("Heap Sort, %d elements, %lu moves, %lu compares\n", array_length,
-                    stats.moves, stats.compares);
+                printf("Heap(%d) = %lu moves, ", array_length,
+                    stats.moves);
                 break;
             case SHELL:
-                printf("Shell Sort, %d elements, %lu moves, %lu compares\n", array_length,
-                    stats.moves, stats.compares);
+                printf("Shell(%d) = %lu moves, ", array_length,
+                    stats.moves);
                 break;
             case QUICK:
-                printf("Quick Sort, %d elements, %lu moves, %lu compares\n", array_length,
-                    stats.moves, stats.compares);
+                printf("Quick(%d) elements, %lu moves\n", array_length,
+                    stats.moves);
                 break;
 
             case HELP: printf("This shouldn't be happening. Like at all"); break;
-            }
-            for (int i = 0; i < print; i += 1) {
-                if (((i % 5) == 0) && (i > 0)) {
-                    printf("\n");
-                }
-                printf("%13" PRIu32, A[i]);
-            }
-            printf("\n");
-	    //reset(&stats);
-            free(A);
+            
+	    }
+
+  	free(A);
+	
+          
         }
     }
+}
 }
