@@ -63,7 +63,7 @@ int main(int argc, char **argv) {
         input_args = empty_set();
     }
     Stats stats;
-    for (uint32_t i = 10; i <= 10000; i+=10){
+    for (uint32_t i = 10; i <= 1000; i+=10){
 	array_length = i;
 	for (possible_args k = HEAP; k <= QUICK; k++) {
         if (member_set(k, input_args)) {
@@ -89,7 +89,7 @@ int main(int argc, char **argv) {
                     stats.moves);
                 break;
             case QUICK:
-                printf("Quick(%d) elements, %lu moves\n", array_length,
+                printf("Quick(%d) =  elements %lu moves\n", array_length,
                     stats.moves);
                 break;
 
