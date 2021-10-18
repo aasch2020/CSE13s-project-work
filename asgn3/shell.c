@@ -35,4 +35,5 @@ void shell_sort(Stats *stats, uint32_t *A, uint32_t n) {
         gap = (gap - 1) / 3;
         //Decrement the gap value
     }
+    return;
 }
