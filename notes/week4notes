@@ -1,0 +1,84 @@
+Dynamic allocation
+	Allocatin gmemeory for vars during run time
+	Different from static allocation
+	Compile time allocation means memoery for named vars is allocated at compile time
+Why is it good
+	Stack space is limited.
+	Sometimes we want vars to last beyind the lifetime of current scope
+		Heap can be accessed outside of current scope
+	We don't always know how much memory is needed to run a prgrm
+	malloc or calloc
+malloc calloc realloc
+	dynamically allocate memory.
+	Make a dynamic allocate memeory on the heap and returns a pointer of the allocated memory
+	Allocated mem must be freed using free() Not freeing lead to depletion of resources. This is a memory leak
+Heap
+	A large region of unmanagedd anon memory
+	Only limitations are your computers physical limitations
+	Slower to read write bc pointers
+	Using heap mem can be accessed global with access to ptrs
+	Possible memeory fragmentation can occur as block of mem are allocated an deallocated
+malloc
+	void* malloc(size_t, size)
+	returns ptr of size bytes on of unitilialized memory
+	May contain junk data
+	Doesn't check for overflow of [size] if its the result of an arithmetic op
+calloc
+	return void ptr
+	calloc(zie_t, nmemmbm size_t size)
+	nmemb denotes the number of objects
+	Cleans memory for you
+	return null ptr if not work
+
+MAtrix thing
+	matrix create
+	int m does a ptr to a ptr, (int **)calloc(n, sizeof(n, (int*)))
+		(int**) at the beginning says what calloc return
+		This makes a ptr to an array of ptrs
+	THis makes an array of ptr of
+	delete matrix
+		Loop through d1 look for all the things clear those
+		then delete the first array
+	rows don't need to be the same length technically
+	
+realloc
+	want to make allocated memory bigger
+	Reallocated the ptr to a new point at size byutes of allocated memory on the heap
+	This is not srictly true
+	Basically, if theres enough room to make it bigger it will add more space to the end of the memory
+	If theres not enough memory contiguous there, it allocates a new one
+	If it is less than the size of og alloc block it make it short
+
+Dynamically growing stack
+
+free
+	We need to free allocated memory
+	we must be able to dealloc or free memory
+	Deallocates the memory space pointed to by ptr
+	memory leaks occur if alloc memeory isnt freed
+	Seg fault occurs if it tries to access memory location that it isnt allowed to access
+	Pointesr that have been reed should be set to null to mitigate use after free vars
+	Free then set ptr to null so you dont use after free
+	
+Detectin memory leak and seg fault
+	gdb/lldb
+	debuggers
+	valgrind
+	they should be used for debug
+	infer from facebook
+		static analyzer go over code and deduce whats wrong
+	A collection of dynamic analysis
+	Usualy used for memcheck
+		Checks use  of uninit memory
+		Reading/writing of memoery after it has been freed
+		R/W off end of allocated blocks
+		R/W inappropriate areas on the stack
+		Mem leaks where ptrs to malloc's blocks are lost forever
+	checks for unfreed stuff
+Static analyzers vs dynamic analyzeres
+	Static analyzers like infer operate by analyzing source code for prgrm pre run
+	Compared against a set of coding rules
+	Only surface level
+	Dynamic analyzers 
+		operate by tracking down error durin prgrm execution
+	PUt infer on system
