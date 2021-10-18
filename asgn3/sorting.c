@@ -62,13 +62,19 @@ int main(int argc, char **argv) {
     print = print > array_length ? array_length : print;
     //a ternary oprator that sets the value of numbers to print equal to the length of the array, if it is greater than the length of the array
     if (input_args == 0) {
-	input_args = insert_set(HELP, input_args);
-	printf("Select at least one sort to perform.\n");
+        input_args = insert_set(HELP, input_args);
+        printf("Select at least one sort to perform.\n");
     }
     //The program shows an error message if there are no input arguments
     if (member_set(HELP, input_args)) {
-        printf("SYNOPSIS\n   A collection of comparison-based sorting algorithms.\n\nUSAGE\n   ./sorting [-haeisqn:p:r:] [-n length] [-p elements] [-r seed]\n\n");
-	printf("OPTIONS\n   -h              display program help and usage.\n   -a              enable all sorts.\n   -e              enable Heap Sort.\n   -i              enable Insertion Sort.\n   -s              enable Shell Sort.\n   -q              enable Quick Sort.\n   -n length       specify number of array elements (default: 100).\n   -p elements     specify number of elements to print (default: 100).\n   -r seed         specify random seed (default: 13371453).\n");
+        printf("SYNOPSIS\n   A collection of comparison-based sorting algorithms.\n\nUSAGE\n   "
+               "./sorting [-haeisqn:p:r:] [-n length] [-p elements] [-r seed]\n\n");
+        printf("OPTIONS\n   -h              display program help and usage.\n   -a              "
+               "enable all sorts.\n   -e              enable Heap Sort.\n   -i              enable "
+               "Insertion Sort.\n   -s              enable Shell Sort.\n   -q              enable "
+               "Quick Sort.\n   -n length       specify number of array elements (default: 100).\n "
+               "  -p elements     specify number of elements to print (default: 100).\n   -r seed  "
+               "       specify random seed (default: 13371453).\n");
         input_args = empty_set();
     }
     //The program shows a help and usage text when -h is used.
