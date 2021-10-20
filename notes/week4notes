@@ -82,3 +82,52 @@ Static analyzers vs dynamic analyzeres
 	Dynamic analyzers 
 		operate by tracking down error durin prgrm execution
 	PUt infer on system
+
+Recursion
+	A function dfined in terms of itself
+	SUm the first k natrual numbers
+	sum can be calculated recursively
+	calculate fibonnaci numbers
+		can be done recursively
+		Recursive is 2^n, iterative is O(n)
+	IS it inherently inefficient
+		A function call requires makinga stack frame that takes time and space
+		All tail recursive functions can e rewritten as iteration
+	The slowest thing in computer is storage then dram.
+	If you can fit things in the cache it runs fast
+	iterative version of algs fit in the cache so it fast
+	The mem access cost can make it slower
+Recursive algorithm for smallest in list vs iterative for smallest
+	Do it iteratively bec it makes sense
+Recursive binary search of tree
+	Notes on this for my recorded snippet
+	If we walk the tree in n order traversal we get sorted list
+	Investigate what this means later
+	Huffman codE?
+Recursion is natural through search
+	We can use recursion for searching by dividing the space up
+	Plae we have searched and places we have yet to search
+	if we get stuck we can back up and try a diff path
+The knight's tour
+	is it possible for a knight to hit all spaces in chess board
+	Recurse and check and stuff
+	since we hav eto back up and try again if it doesn'y work, we need to do it recursively
+	computers technically don't do recursion
+		It just changes state on stack and push and pop self
+		Ultimately down to transistors
+	
+Eight queens
+	Queen controls row, column an ddiagonals
+	there are more and more solutions as there is more space in the board
+	What is the expected runtime of the board
+	Step one, print the data structure
+		Remember to print the data structure
+	First check if spot in the board is safe
+		Check row left and right diagonal
+		Don't check columns becayse we iter  thru the cols
+	If it don't work, we keep backtracking to k to k-1 to k-2 until it works
+	Place queen in each row
+		Check if it's safe
+		If its safe recurse to the next to place the other
+	Recursion is good for search problems
+	
