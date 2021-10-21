@@ -3,8 +3,8 @@ CFLAGS =  -Wall -Werror -Wpedantic -Wextra
 LFLAGS = -lm
 
 all: tsp
-sorting: tsp.o graph.o path.o stack.o
-	$(CC) -o tsp tsp.o graph.o path.o stack.o $(LFLAGS)
+tsp:  graph.o
+	$(CC) -o tsp graph.o $(LFLAGS)
 graph.o: graph.c
 	$(CC) $(CFLAGS) -c graph.c
 path.o: path.c
@@ -14,6 +14,6 @@ stack.o: stack.c
 tsp.o: tsp.c
 	$(CC) $(CFLAGS) -c tsp.c
 clean:
-	rm sorting *.o
+	rm tsp *.o
 format:
 	clang-format -i -style=file *.[ch]

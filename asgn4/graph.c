@@ -1,16 +1,17 @@
 #include "vertices.h"
-
+#include "graph.h"
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
+#include <stdlib.h>
 struct Graph {
     uint32_t vertices;
     bool undirected;
     bool visited[VERTICES];
-        uint32_t matrix[VERTICES][VERTICES
+        uint32_t matrix[VERTICES][VERTICES];
 };
+int main(){
 }
-
 Graph *graph_create(uint32_t vertices, bool undirected) {
     Graph *G = (Graph *) calloc(1, sizeof(Graph));
     if (vertices <= VERTICES) {
@@ -19,9 +20,11 @@ Graph *graph_create(uint32_t vertices, bool undirected) {
         G->vertices = VERTICES;
         printf("too big array");
         G->undirected = undirected;
-        return G;
     }
-    void graph_delete(Graph * *G) free(*G);
+    return G;
+}
+void graph_delete(Graph **G){
+     	free(*G);
     *G = NULL;
     return;
 }
@@ -43,9 +46,10 @@ bool graph_add_edge(Graph *G, uint32_t i, uint32_t j, uint32_t k) {
                 return true;
             }
         }
-        return false;
+      
     }
-
+    return false;
+}
     bool graph_has_edge(Graph * G, uint32_t i, uint32_t j) {
         if ((i < G->vertices) && (j < G->vertices)) {
             if (G->matrix[i][j] > 0) {
@@ -55,4 +59,4 @@ bool graph_add_edge(Graph *G, uint32_t i, uint32_t j, uint32_t k) {
         return false;
     }
 
-bool graph_visited(Graph *G,
+//bool graph_visited(Graph *G,
