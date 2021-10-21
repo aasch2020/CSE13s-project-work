@@ -11,8 +11,8 @@ path.o: path.c
 	$(CC) $(CFLAGS) -c path.c 
 stack.o: stack.c
 	$(CC) $(CFLAGS) -c stack.c
-sorting.o: sorting.c
-	$(CC) $(CFLAGS) -c sorting.c
+tsp.o: tsp.c
+	$(CC) $(CFLAGS) -c tsp.c
 clean:
 	rm sorting *.o
 format:
