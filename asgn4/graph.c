@@ -10,8 +10,7 @@ struct Graph {
     bool visited[VERTICES];
         uint32_t matrix[VERTICES][VERTICES];
 };
-int main(){
-}
+
 Graph *graph_create(uint32_t vertices, bool undirected) {
     Graph *G = (Graph *) calloc(1, sizeof(Graph));
     if (vertices <= VERTICES) {
