@@ -3,7 +3,7 @@ CFLAGS =  -Wall -Werror -Wpedantic -Wextra
 LFLAGS = -lm
 
 all: tsp
-tsp:  graph.o
+tsp: graph.o
 	$(CC) -o tsp graph.o $(LFLAGS)
 graph.o: graph.c
 	$(CC) $(CFLAGS) -c graph.c
