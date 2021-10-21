@@ -24,9 +24,9 @@ gnuplot <<EOF
 set terminal pdf
 set key outside
 set zeroaxis
-
-set output "LessDomainMoves.pdf"
-set title "Insert vs. Shell vs. Heap vs. Quick"
+set logscale xy
+set output "logcmp2.pdf"
+set title "Insert vs. Shell vs. Heap vs. Quick, Compares"
 plot "/tmp/heap.dat" with lines title "Heap", \
     "/tmp/shell.dat" with lines title "Shell", \
     "/tmp/insert.dat" with lines title "Insert", \

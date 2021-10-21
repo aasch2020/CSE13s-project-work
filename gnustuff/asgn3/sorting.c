@@ -63,7 +63,7 @@ int main(int argc, char **argv) {
         input_args = empty_set();
     }
     Stats stats;
-    for (uint32_t i = 10; i <= 1000; i+=10){
+    for (uint32_t i = 0; i <= 10000; i+=100){
 	array_length = i;
 	for (possible_args k = HEAP; k <= QUICK; k++) {
         if (member_set(k, input_args)) {
@@ -78,19 +78,19 @@ int main(int argc, char **argv) {
             switch (k) {
             case INSERT:
                 printf("Insertion(%d) = %lu moves, ", array_length,
-                    stats.moves);
+                    stats.compares);
                 break;
             case HEAP:
                 printf("Heap(%d) = %lu moves, ", array_length,
-                    stats.moves);
+                    stats.compares);
                 break;
             case SHELL:
                 printf("Shell(%d) = %lu moves, ", array_length,
-                    stats.moves);
+                    stats.compares);
                 break;
             case QUICK:
-                printf("Quick(%d) =  elements %lu moves\n", array_length,
-                    stats.moves);
+                printf("Quick(%d) = %lu moves\n", array_length,
+                    stats.compares);
                 break;
 
             case HELP: printf("This shouldn't be happening. Like at all"); break;
