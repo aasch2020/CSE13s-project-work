@@ -97,6 +97,6 @@ void graph_print(Graph *G) {
     }
 }
 
-void test_graph_undirected(Graph *G) {
+bool test_graph_undirected(Graph *G) {
     return G->undirected;
 }
