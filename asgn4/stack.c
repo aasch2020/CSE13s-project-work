@@ -85,10 +85,11 @@ bool stack_peek(Stack *s, uint32_t *x) {
 }
 
 void stack_copy(Stack *dst, Stack *src) {
-    dst->top = dst->top;
+    dst->top = src->top;
     for (uint32_t i = 0; i < src->capacity; i++) {
         dst->items[i] = src->items[i];
     }
+    return;
 }
 
 void stack_print(Stack *s, FILE *outfile, char *cities[]) {
@@ -99,4 +100,5 @@ void stack_print(Stack *s, FILE *outfile, char *cities[]) {
         }
     }
     fprintf(outfile, "\n");
+    return;
 }
