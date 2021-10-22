@@ -1,5 +1,5 @@
-#include "path.h"
 #include "graph.h"
+#include "path.h"
 #include "stack.h"
 #include "vertices.h"
 
@@ -8,6 +8,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(){
-	printf("test");
+int main() {
+    printf("test");
 }

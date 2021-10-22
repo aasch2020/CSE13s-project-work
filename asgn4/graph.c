@@ -60,11 +60,11 @@ bool graph_has_edge(Graph *G, uint32_t i, uint32_t j) {
     return false;
 }
 
-uint32_t graph_edge_weight(Graph *G, uint32_t i, uint32_t j){
-	if(graph_has_edge(G, i, j)){
-		return 0;
-	}
-	return G->matrix[i][j];
+uint32_t graph_edge_weight(Graph *G, uint32_t i, uint32_t j) {
+    if (!(graph_has_edge(G, i, j))) {
+        return 0;
+    }
+    return G->matrix[i][j];
 }
 
 bool graph_visited(Graph *G, uint32_t v) {
@@ -95,4 +95,8 @@ void graph_print(Graph *G) {
         }
         printf("]\n");
     }
+}
+
+void test_graph_undirected(Graph *G) {
+    return G->undirected;
 }
