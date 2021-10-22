@@ -1,4 +1,5 @@
 #include "stack.h"
+
 #include "vertices.h"
 
 #include <stdbool.h>
@@ -11,8 +12,6 @@ struct Stack {
     uint32_t capacity;
     uint32_t *items;
 };
-
-
 
 Stack *stack_create(uint32_t capacity) {
     Stack *s = (Stack *) malloc(sizeof(Stack));
