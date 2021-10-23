@@ -31,7 +31,7 @@ int main() {
     char *city[9] = { "as", "sa", "fd", "4city", "5city", "nae", "31", "32", "33" };
     //  stack_print(stackone, output, city);
     //  printf("size %d \n", stack_size(stackone));
-    uint32_t popping;
+    uint32_t popping = 15;
     stack_pop(stackone, &popping);
     // printf("popping off %d\n", popping);
     // stack_print(stackone, output, city);
@@ -68,4 +68,7 @@ int main() {
     path_print(pathtwo, output, city);
     printf("vert count %d\n", path_vertices(pathone));
     printf("%d\n", path_length(pathone));
+    path_delete(&pathone);
+    path_delete(&pathtwo);
+    graph_delete(&graphone);
 }
