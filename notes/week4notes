@@ -130,4 +130,92 @@ Eight queens
 		Check if it's safe
 		If its safe recurse to the next to place the other
 	Recursion is good for search problems
+
+Graphs
+	Node and edge spider thing not plots.
+	social netowrk 
+	A graph is a finite set
+	It has vertices adn edges
+	There is a set of edges
+	and a set of vertices
+	each edge is a pair of vertices
+Repr a graph
+	Adjacency matrix
+	nxn, unweighted is 0 for no connection 1 for connection
+	weighted is number of ewight for connection
+Adj matrix
+	Each node is a row, all things connected are in the cols
+	symmeteric across diagonal is undirected
+Asj list
+'	Each node is repr in as anentry in column vector
+	The list elements contain the dest node and teh weight
+	Why prefer this?
+		ADJ matrix is n^2
+		More pspace efficient for sparse graphs
+basic graph algorithms
+	Find the thing in the graph
+	We need to order it first
+	An array would go 0 to n-1 and search
+	Two ways of searching
+		Breadth first search
+		Use a queue
+		Explore the set of vertices immediately reachable
+		Then repeat the process for each vertex in the set
+		AKA level order traversal
+		Depth Frist search
+			Recursion/stack
+			Search as far as possible before backing up
+			Iterative DFS
+	Trees
+		Trees are a special case
+		no loop
+		DAG directed acyclic graph
+		
+BREAD FIRST SEARCH
+	Capcaity of vertices is queue
+	Put vertex in queue
+	while queue isnt; emptyy
+	dequeue a vertex
+	insert the certex
+	go thru the vertices and check if we haven't visited it yet, and if we have an edge
+	Add it to queue if so
+
+DFS
+	SOmething is on the stack
+	Pop first off the stack
+	Pop a value off the stack and push the lsat onto stack
+	Then pop the next one 
+	Then push and the pop last
+Topological sort
+	Sorting depends on sorting shell and heap
+	Which depend on sorting shell and heap.c
+	Make uses a DAG so that you can check if you can have all the available parts
+DF to make topo sort
 	
+
+KAHN's alg
+	A DAG of G <V,E> 
+	STOREs topo ordering list
+	Set of vertices with no incoming edges
+	First check if v had no incoming edges, add all to list
+	While |S|>0
+		remove v in set V
+	For each u in the vertices where e is <v.u> and e within e
+		Add the things and search
+
+return L
+Djikstra's algorithm
+	For v in all the verts
+		Distance from source is inifite
+		Predecessor of vertx in unknown
+		Dist from s to s
+	while s not equal v
+		w is a vertex such tat dist is minimum
+		if S is in a set of W
+		for each adjacent
+		If new distance is short update predecessor and updat edistance
+
+Eulerian path
+	Visits each edge once
+	mega long
+		

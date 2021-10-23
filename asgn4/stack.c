@@ -20,6 +20,7 @@ Stack *stack_create(uint32_t capacity) {
         s->capacity = capacity;
         s->items = (uint32_t *) calloc(capacity, sizeof(uint32_t));
         if (!s->items) {
+            printf("this is very ver bad\n");
             free(s);
             s = NULL;
         }
@@ -69,12 +70,14 @@ bool stack_pop(Stack *s, uint32_t *x) {
     if (stack_empty(s)) {
         return false;
     } else {
-        *x = s->items[(s->top - 1)];
-        s->items[(s->top - 1)] = 0;
         s->top--;
+        *x = s->items[s->top];
+        s->items[s->top] = 0;
+
         return true;
     }
 }
+
 bool stack_peek(Stack *s, uint32_t *x) {
     if (stack_empty(s)) {
         return false;
@@ -101,12 +104,12 @@ void stack_print(Stack *s, FILE *outfile, char *cities[]) {
     }
     fprintf(outfile, "\n");
     return;
-    /*  for (uint32_t i = 0; i < s->top; i++) {
+    /*   for (uint32_t i = 0; i < s->top; i++) {
         printf("%s", cities[s->items[i]]);
         if (i + 1 != s->top) {
             printf(" -> ");
         }
     }
     printf("\n");
-    return;*/
+    return; */
 }
