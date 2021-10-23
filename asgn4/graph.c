@@ -18,6 +18,7 @@ Graph *graph_create(uint32_t vertices, bool undirected) {
     Graph *G = (Graph *) calloc(1, sizeof(Graph));
     if (vertices <= VERTICES) {
         G->vertices = vertices;
+        G->undirected = undirected;
     } else {
         G->vertices = VERTICES;
         printf("too big array");
@@ -36,6 +37,9 @@ uint32_t graph_vertices(Graph *G) {
 }
 
 bool graph_add_edge(Graph *G, uint32_t i, uint32_t j, uint32_t k) {
+    if (i == j) {
+        return false;
+    }
     if ((i < G->vertices) && (j < G->vertices)) {
         G->matrix[i][j] = k;
         if (G->undirected) {
@@ -91,7 +95,7 @@ void graph_print(Graph *G) {
     for (uint32_t i = 0; i < G->vertices; i++) {
         printf("[");
         for (uint32_t j = 0; j < G->vertices; j++) {
-            printf("  %" PRIu32 "  ", G->matrix[i][j]);
+            printf("%3" PRIu32 "", G->matrix[i][j]);
         }
         printf("]\n");
     }

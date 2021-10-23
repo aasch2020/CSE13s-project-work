@@ -93,12 +93,21 @@ void stack_copy(Stack *dst, Stack *src) {
 }
 
 void stack_print(Stack *s, FILE *outfile, char *cities[]) {
-    for (uint32_t i = 0; i < s->top; i++) {
+/*    for (uint32_t i = 0; i < s->top; i++) {
         fprintf(outfile, "%s", cities[s->items[i]]);
         if (i + 1 != s->top) {
             fprintf(outfile, " -> ");
         }
     }
     fprintf(outfile, "\n");
-    return;
+    return; */
+  for (uint32_t i = 0; i < s->top; i++) {
+        printf("%s", cities[s->items[i]]);
+        if (i + 1 != s->top) {
+            printf( " -> ");
+        }
+    }
+    printf( "\n");
+    return; 
+   
 }
