@@ -104,12 +104,4 @@ void stack_print(Stack *s, FILE *outfile, char *cities[]) {
     }
     fprintf(outfile, "\n");
     return;
-    /*   for (uint32_t i = 0; i < s->top; i++) {
-        printf("%s", cities[s->items[i]]);
-        if (i + 1 != s->top) {
-            printf(" -> ");
-        }
-    }
-    printf("\n");
-    return; */
-}
+   }
