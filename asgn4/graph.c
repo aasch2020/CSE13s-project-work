@@ -1,4 +1,5 @@
 #include "graph.h"
+
 #include "vertices.h"
 //The above header files provided in the resources repository by Professor Long. (2021 Professor Long)
 #include <inttypes.h>
@@ -13,7 +14,6 @@ struct Graph {
     bool visited[VERTICES];
     uint32_t matrix[VERTICES][VERTICES];
 };
-
 
 //The below function take an integer number of vertices, and a boolean for undirectedness, and initializes an allocates a graph struct.
 //The below code inspired by the assignment document code provided by Professor Long. (2021 Professor Long)
@@ -96,14 +96,12 @@ bool graph_visited(Graph *G, uint32_t v) {
     return false;
 }
 
-
 //This function takes a vertex and marks it as visited, by marking the index v in the visited array true.
 void graph_mark_visited(Graph *G, uint32_t v) {
     if (v < G->vertices) {
         G->visited[v] = true;
     }
 }
-
 
 //This function takes a vertex and marks it as visited, by marking the index v in the visited array false
 void graph_mark_unvisited(Graph *G, uint32_t v) {
