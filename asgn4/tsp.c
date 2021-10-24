@@ -90,6 +90,7 @@ int main(int argc, char **argv) {
     uint32_t i_vertex;
     uint32_t j_vertex;
     uint32_t weight;
+    
     struct Graph *graph = graph_create(number_vertices, undirected);
     while (fgets(buffer, 1024, input)) {
         if (3 == sscanf(buffer, "%" SCNu32 "%" SCNu32 "%" SCNu32, &i_vertex, &j_vertex, &weight)) {
@@ -108,6 +109,7 @@ int main(int argc, char **argv) {
 
     graph_delete(&graph);
     for (uint32_t i = 0; i < number_vertices; i++) {
+	printf("%s", city[i]);
         free(city[i]);
     }
     free(city);
