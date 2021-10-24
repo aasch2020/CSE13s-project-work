@@ -85,7 +85,14 @@ int main(int argc, char **argv) {
     while ((opt = getopt(argc, argv, OPTIONS)) != -1) {
         switch (opt) {
         case 'h':
-            printf("help msh\n");
+            printf("SYNOPSIS\n");
+            printf("  Traveling Salesman Problem using DFS.\n\n");
+            printf("USAGE\n  ./tsp [-u] [-v] [-h] [-i infile] [-o outfile]\n\nOPTIONS\n");
+            printf("  -u             Use undirected graph.\n");
+            printf("  -v             Enable verbose printing.\n");
+            printf("  -h             Program usage and help.\n");
+            printf("  -i infile      Input containing graph (default: stdin)\n");
+            printf("  -o outfile     Output of computed path (default: stdout)\n");
             return 0;
             break;
         case 'v': verbose = true; break;
