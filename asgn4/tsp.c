@@ -18,7 +18,6 @@ void dsp(Path *current, Path *shortest, uint32_t v, Graph *G, bool verbose, FILE
     path_push_vertex(current, v, G);
     uint32_t total_vertices = graph_vertices(G);
     bool no_dead_end = true;
-    // path_print(shortest, outfile, cities);
     if (!((path_length(shortest) > 0) && (path_length(current) >= (path_length(shortest))))) {
         for (uint32_t i = 0; i < total_vertices; i++) {
             if ((!(graph_visited(G, i)) && (graph_has_edge(G, v, i)))) {
@@ -28,10 +27,8 @@ void dsp(Path *current, Path *shortest, uint32_t v, Graph *G, bool verbose, FILE
         }
         if (no_dead_end) {
             if ((path_vertices(current) == total_vertices) && (graph_has_edge(G, v, 0))) {
-                //  path_print(current, outfile, cities);
                 path_push_vertex(current, 0, G);
                 if (verbose) {
-                    //	 printf("\n full path \n");
                     path_print(current, outfile, cities);
                 }
                 if ((path_length(current) < path_length(shortest))
@@ -45,11 +42,7 @@ void dsp(Path *current, Path *shortest, uint32_t v, Graph *G, bool verbose, FILE
     }
     graph_mark_unvisited(G, v);
     uint32_t popped = 0;
-    if (!path_pop_vertex(current, &popped, G)) {
-
-        printf("\n\n PANIC \n\n");
-    }
-    //   path_print(current, outfile, cities);
+    path_pop_vertex(current, &popped, G);
     return;
 }
 int main(int argc, char **argv) {
@@ -66,7 +59,12 @@ int main(int argc, char **argv) {
             break;
         case 'v': verbose = true; break;
         case 'u': undirected = true; break;
-        case 'i': input = fopen(optarg, "r"); break;
+        case 'i':
+            if (!(input = fopen(optarg, "r"))) {
+                printf("bad file\n");
+                return 1;
+            };
+            break;
         case 'o': output = fopen(optarg, "w"); break;
         }
     }
@@ -82,12 +80,7 @@ int main(int argc, char **argv) {
 
     for (uint32_t i = 0; i < number_vertices; i++) {
         fgets(buffer, 1024, input);
-        //     printf("%s", buffer);
-
-        // sscanf(buffer, "%s", city[i]);
         buffer[strlen(buffer) - 1] = '\0';
-        //	fprintf(output,"%s", buffer);
-        //sscanf(buffer, "%s", city[i]);
         city[i] = strdup(buffer);
     }
     uint32_t i_vertex;
@@ -100,6 +93,8 @@ int main(int argc, char **argv) {
         sscanfout = sscanf(buffer, "%" SCNu32 "%" SCNu32 "%" SCNu32, &i_vertex, &j_vertex, &weight);
         if (sscanfout == 3) {
             graph_add_edge(graph, i_vertex, j_vertex, weight);
+        } else if (sscanfout > 0) {
+            printf("%d, %d, %d\n", i_vertex, j_vertex, weight);
         } else if (sscanfout == EOF) {
             break;
         } else {
@@ -115,7 +110,7 @@ int main(int argc, char **argv) {
     path_print(shortest, output, city);
 
     graph_delete(&graph);
-    fprintf(output, "%d", EOF);
+    fprintf(output, "\n");
     for (uint32_t i = 0; i < number_vertices; i++) {
         free(city[i]);
     }
