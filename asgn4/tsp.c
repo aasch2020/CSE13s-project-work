@@ -83,7 +83,7 @@ int main(int argc, char **argv) {
         fgets(buffer, 1024, input);
 //	printf("%s", buffer);
         buffer[strlen(buffer) - 1] = '\0';
-	fprintf(output,"%s", buffer);
+//	fprintf(output,"%s", buffer);
 	//sscanf(buffer, "%s", city[i]);
         city[i] = strdup(buffer);
      }
@@ -109,7 +109,7 @@ int main(int argc, char **argv) {
 
     graph_delete(&graph);
     for (uint32_t i = 0; i < number_vertices; i++) {
-	printf("%s", city[i]);
+//	printf("%s", city[i]);
         free(city[i]);
     }
     free(city);
