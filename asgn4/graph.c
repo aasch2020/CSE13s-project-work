@@ -58,7 +58,7 @@ bool graph_add_edge(Graph *G, uint32_t i, uint32_t j, uint32_t k) {
 bool graph_has_edge(Graph *G, uint32_t i, uint32_t j) {
     if ((i < G->vertices) && (j < G->vertices)) {
         if (G->matrix[i][j] != 0) {
-         //   printf("%d", G->matrix[i][j]);
+            //   printf("%d", G->matrix[i][j]);
             return true;
         }
     }

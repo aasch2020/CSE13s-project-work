@@ -18,34 +18,38 @@ void dsp(Path *current, Path *shortest, uint32_t v, Graph *G, bool verbose, FILE
     path_push_vertex(current, v, G);
     uint32_t total_vertices = graph_vertices(G);
     bool no_dead_end = true;
-    for (uint32_t i = 0; i < total_vertices; i++) {
-        if ((!(graph_visited(G, i)) && (graph_has_edge(G, v, i)))) {
-            no_dead_end = false;
-            dsp(current, shortest, i, G, verbose, outfile, cities, recursions);
+    // path_print(shortest, outfile, cities);
+    if (!((path_length(shortest) > 0) && (path_length(current) >= (path_length(shortest))))) {
+        for (uint32_t i = 0; i < total_vertices; i++) {
+            if ((!(graph_visited(G, i)) && (graph_has_edge(G, v, i)))) {
+                no_dead_end = false;
+                dsp(current, shortest, i, G, verbose, outfile, cities, recursions);
+            }
         }
-    }
-    if (no_dead_end) {
-        if ((path_vertices(current) == total_vertices) && (graph_has_edge(G, v, 0))) {
-	  //  path_print(current, outfile, cities);
-            path_push_vertex(current, 0, G);
-            if (verbose) {
-	//	 printf("\n full path \n");
-                path_print(current, outfile, cities);
+        if (no_dead_end) {
+            if ((path_vertices(current) == total_vertices) && (graph_has_edge(G, v, 0))) {
+                //  path_print(current, outfile, cities);
+                path_push_vertex(current, 0, G);
+                if (verbose) {
+                    //	 printf("\n full path \n");
+                    path_print(current, outfile, cities);
+                }
+                if ((path_length(current) < path_length(shortest))
+                    || (path_length(shortest) == 0)) {
+                    path_copy(shortest, current);
+                }
+                uint32_t ye = 0;
+                path_pop_vertex(current, &ye, G);
             }
-            if ((path_length(current) < path_length(shortest)) || (path_length(shortest) == 0)) {
-                path_copy(shortest, current);
-            }
-	    uint32_t ye = 0;
-	    path_pop_vertex(current, &ye, G);
         }
     }
     graph_mark_unvisited(G, v);
     uint32_t popped = 0;
-   if(! path_pop_vertex(current, &popped, G)){
+    if (!path_pop_vertex(current, &popped, G)) {
 
-	printf("\n\n PANIC \n\n");
-}
-//   path_print(current, outfile, cities);
+        printf("\n\n PANIC \n\n");
+    }
+    //   path_print(current, outfile, cities);
     return;
 }
 int main(int argc, char **argv) {
@@ -80,9 +84,9 @@ int main(int argc, char **argv) {
         buffer[strlen(buffer) - 1] = '\0';
         city[i] = strdup(buffer);
     }
-  //  for (uint32_t i = 0; i < number_vertices; i++) {
-   //     printf("city %d is  %s\n", i, city[i]);
-  //  }
+    //  for (uint32_t i = 0; i < number_vertices; i++) {
+    //     printf("city %d is  %s\n", i, city[i]);
+    //  }
     uint32_t i_vertex;
     uint32_t j_vertex;
     uint32_t weight;
@@ -91,16 +95,15 @@ int main(int argc, char **argv) {
         if (3 == sscanf(buffer, "%" SCNu32 "%" SCNu32 "%" SCNu32, &i_vertex, &j_vertex, &weight)) {
             graph_add_edge(graph, i_vertex, j_vertex, weight);
         } else {
-    //        printf("bad inputs\n");
+            //        printf("bad inputs\n");
             break;
         }
     }
-    graph_print(graph);
     struct Path *current = path_create();
     struct Path *shortest = path_create();
     uint32_t num_rcr = 0;
     dsp(current, shortest, 0, graph, verbose, output, city, &num_rcr);
-    printf("num recur %u\n", num_rcr);
+    printf("Total recursive calls: %u\n", num_rcr);
     graph_delete(&graph);
     path_print(shortest, output, city);
     for (uint32_t i = 0; i < number_vertices; i++) {
