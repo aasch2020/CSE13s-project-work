@@ -78,6 +78,7 @@ int main(int argc, char **argv) {
         printf("Please enter vaid num vert\n");
         return 1;
     }
+    printf(" ");
     char **city = (char **) calloc(number_vertices, sizeof(char *));
     for (uint32_t i = 0; i < number_vertices; i++) {
         fgets(buffer, 1024, input);
@@ -108,7 +109,6 @@ int main(int argc, char **argv) {
     path_print(shortest, output, city);
 
     graph_delete(&graph);
-    printf(" ");
 
     for (uint32_t i = 0; i < number_vertices; i++) {
         free(city[i]);
