@@ -108,7 +108,7 @@ int main(int argc, char **argv) {
     path_print(shortest, output, city);
 
     graph_delete(&graph);
-    fflush(output);
+    fflush(stdout);
     for (uint32_t i = 0; i < number_vertices; i++) {
         free(city[i]);
     }
