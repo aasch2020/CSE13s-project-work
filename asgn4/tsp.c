@@ -81,8 +81,7 @@ int main(int argc, char **argv) {
     char **city = (char **) calloc(number_vertices, sizeof(char *));
     for (uint32_t i = 0; i < number_vertices; i++) {
         fgets(buffer, 1024, input);
-       // buffer[strlen(buffer) - 1] = '\0';
-	sscanf(buffer, "%s", city[i]);
+        buffer[strlen(buffer) - 1] = ' ';
         city[i] = strdup(buffer);
     }
   //  for (uint32_t i = 0; i < number_vertices; i++) {
