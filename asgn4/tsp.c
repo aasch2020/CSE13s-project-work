@@ -93,7 +93,8 @@ int main(int argc, char **argv) {
         sscanfout = sscanf(buffer, "%" SCNu32 "%" SCNu32 "%" SCNu32, &i_vertex, &j_vertex, &weight);
         if (sscanfout == 3) {
             graph_add_edge(graph, i_vertex, j_vertex, weight);
-        } else if (sscanfout > 0) {
+        } else if (sscanfout == 2) {
+	    
             printf("%d, %d, %d\n", i_vertex, j_vertex, weight);
         } else if (sscanfout == EOF) {
             break;
@@ -106,11 +107,10 @@ int main(int argc, char **argv) {
     struct Path *shortest = path_create();
     uint32_t num_rcr = 0;
     dsp(current, shortest, 0, graph, verbose, output, city, &num_rcr);
-    // printf("Total recursive calls: %u\n", num_rcr);
     path_print(shortest, output, city);
 
     graph_delete(&graph);
-    fprintf(output, "\n");
+    fprintf(output, "Total recursive calls: %d\n", num_rcr);
     for (uint32_t i = 0; i < number_vertices; i++) {
         free(city[i]);
     }
