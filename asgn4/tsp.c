@@ -107,4 +107,6 @@ int main(int argc, char **argv) {
         free(city[i]);
     }
     free(city);
+    path_delete(&current);
+    path_delete(&shortest);
 }
