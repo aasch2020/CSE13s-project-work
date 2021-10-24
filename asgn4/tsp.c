@@ -85,15 +85,8 @@ int main(int argc, char **argv) {
         buffer[strlen(buffer) - 1] = '\0';
 	fprintf(output,"%s", buffer);
 	//sscanf(buffer, "%s", city[i]);
-         city[i] = strdup(buffer);
-    }
-    //  for (uint32_t i = 0; i < number_vertices; i++) {
-    //    fprintf(output, "city %s, ", city[i]);
-    // }
-   // for (uint32_t i = 0; i < number_vertices; i++) {
-     //   strpcpy(city[i], city[i];
-   // }
-
+        city[i] = strdup(buffer);
+     }
     uint32_t i_vertex;
     uint32_t j_vertex;
     uint32_t weight;
@@ -121,3 +114,4 @@ int main(int argc, char **argv) {
     path_delete(&current);
     path_delete(&shortest);
 }
+
