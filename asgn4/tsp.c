@@ -103,7 +103,7 @@ int main(int argc, char **argv) {
     struct Path *shortest = path_create();
     uint32_t num_rcr = 0;
     dsp(current, shortest, 0, graph, verbose, output, city, &num_rcr);
-    printf("Total recursive calls: %u\n", num_rcr);
+    // printf("Total recursive calls: %u\n", num_rcr);
     graph_delete(&graph);
     path_print(shortest, output, city);
     for (uint32_t i = 0; i < number_vertices; i++) {
