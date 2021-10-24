@@ -84,9 +84,10 @@ int main(int argc, char **argv) {
         buffer[strlen(buffer) - 1] = '\0';
         city[i] = strdup(buffer);
     }
-    //  for (uint32_t i = 0; i < number_vertices; i++) {
-    //     printf("city %d is  %s\n", i, city[i]);
-    //  }
+    for (uint32_t i = 0; i < number_vertices; i++) {
+        printf("city %s, ", city[i]);
+    }
+
     uint32_t i_vertex;
     uint32_t j_vertex;
     uint32_t weight;
@@ -104,8 +105,9 @@ int main(int argc, char **argv) {
     uint32_t num_rcr = 0;
     dsp(current, shortest, 0, graph, verbose, output, city, &num_rcr);
     // printf("Total recursive calls: %u\n", num_rcr);
-    graph_delete(&graph);
     path_print(shortest, output, city);
+
+    graph_delete(&graph);
     for (uint32_t i = 0; i < number_vertices; i++) {
         free(city[i]);
     }
