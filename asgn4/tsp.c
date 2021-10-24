@@ -8,65 +8,103 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#define OPTIONS "huvi:o:"
 void dsp(Path *current, Path *shortest, uint32_t v, Graph *G, bool verbose, FILE *outfile,
-    char *cities[]) {
+    char *cities[], uint32_t *recursions) {
+    *recursions += 1;
     graph_mark_visited(G, v);
     path_push_vertex(current, v, G);
     uint32_t total_vertices = graph_vertices(G);
-    bool no_dead_end = false;
+    bool no_dead_end = true;
     for (uint32_t i = 0; i < total_vertices; i++) {
-        if ((!graph_visited(G, i) && (graph_has_edge(G, v, i)))) {
-            //	printf("there is a path from %d to %d\n", v, i);
-            //	printf("%d, checking with the graph\n", graph_has_edge(G, v, i));
-            no_dead_end = true;
-            dsp(current, shortest, i, G, verbose, outfile, cities);
+        if ((!(graph_visited(G, i)) && (graph_has_edge(G, v, i)))) {
+            no_dead_end = false;
+            dsp(current, shortest, i, G, verbose, outfile, cities, recursions);
         }
     }
-    if (!no_dead_end) {
+    if (no_dead_end) {
         if ((path_vertices(current) == total_vertices) && (graph_has_edge(G, v, 0))) {
+	  //  path_print(current, outfile, cities);
+            path_push_vertex(current, 0, G);
             if (verbose) {
+	//	 printf("\n full path \n");
                 path_print(current, outfile, cities);
-                printf("length %d\n", path_length(current));
             }
             if ((path_length(current) < path_length(shortest)) || (path_length(shortest) == 0)) {
                 path_copy(shortest, current);
             }
+	    uint32_t ye = 0;
+	    path_pop_vertex(current, &ye, G);
         }
     }
     graph_mark_unvisited(G, v);
     uint32_t popped = 0;
-    path_pop_vertex(current, &popped, G);
+   if(! path_pop_vertex(current, &popped, G)){
+
+	printf("\n\n PANIC \n\n");
+}
+//   path_print(current, outfile, cities);
     return;
 }
-int main() {
-
-    struct Graph *graphone = graph_create(26, false);
-    srandom(1234);
-    graph_add_edge(graphone, 1, 4, 22);
-    graph_add_edge(graphone, 3, 4, 10);
-    graph_add_edge(graphone, 1, 0, 56);
-    graph_add_edge(graphone, 0, 1, 21);
-    graph_add_edge(graphone, 1, 3, 10);
-    graph_add_edge(graphone, 3, 2, 90);
-    graph_add_edge(graphone, 2, 4, 13);
-    graph_add_edge(graphone, 4, 0, 9);
-    for (int yeet = 0; yeet < 800; yeet++) {
-        graph_add_edge(graphone, random() % 26, random() % 26, random() % 100);
-    }
-    graph_print(graphone);
-    ///    for (int i = 0; i < 80; i++) {
-    //        graph_add_edge(graphone, (random() % 5), (random() % 5), (random() % 100 + 1));
-    //    }
+int main(int argc, char **argv) {
+    int opt = 0;
+    bool verbose = false;
+    bool undirected = false;
+    FILE *input = stdin;
     FILE *output = stdout;
-    graph_print(graphone);
-    char *city[26] = { "the zero city", "the first city", "the second city", "3city", "4city",
-        "5city", "7city", "8city", "9city", "10", "11", "12", "13", "14", "15", "16", "17", "18",
-        "19", "20", "21", "22", "23", "24", "25", "26" };
+    while ((opt = getopt(argc, argv, OPTIONS)) != -1) {
+        switch (opt) {
+        case 'h':
+            printf("help msh\n");
+            return 0;
+            break;
+        case 'v': verbose = true; break;
+        case 'u': undirected = true; break;
+        case 'i': input = fopen(optarg, "r"); break;
+        case 'o': output = fopen(optarg, "w"); break;
+        }
+    }
+    uint32_t number_vertices = 0;
 
-    struct Path *pathone = path_create();
-    struct Path *pathtwo = path_create();
-
-    dsp(pathone, pathtwo, 0, graphone, true, output, city);
-    path_print(pathtwo, output, city);
-    printf("shortest length = %d\n", path_length(pathtwo));
+    char buffer[1024];
+    fgets(buffer, 1024, input);
+    if (1 != sscanf(buffer, "%" SCNu32, &number_vertices)) {
+        printf("Please enter vaid num vert\n");
+        return 1;
+    }
+    char **city = (char **) calloc(number_vertices, sizeof(char *));
+    for (uint32_t i = 0; i < number_vertices; i++) {
+        fgets(buffer, 1024, input);
+        buffer[strlen(buffer) - 1] = '\0';
+        city[i] = strdup(buffer);
+    }
+  //  for (uint32_t i = 0; i < number_vertices; i++) {
+   //     printf("city %d is  %s\n", i, city[i]);
+  //  }
+    uint32_t i_vertex;
+    uint32_t j_vertex;
+    uint32_t weight;
+    struct Graph *graph = graph_create(number_vertices, undirected);
+    while (fgets(buffer, 1024, input)) {
+        if (3 == sscanf(buffer, "%" SCNu32 "%" SCNu32 "%" SCNu32, &i_vertex, &j_vertex, &weight)) {
+            graph_add_edge(graph, i_vertex, j_vertex, weight);
+        } else {
+    //        printf("bad inputs\n");
+            break;
+        }
+    }
+    graph_print(graph);
+    struct Path *current = path_create();
+    struct Path *shortest = path_create();
+    uint32_t num_rcr = 0;
+    dsp(current, shortest, 0, graph, verbose, output, city, &num_rcr);
+    printf("num recur %u\n", num_rcr);
+    graph_delete(&graph);
+    path_print(shortest, output, city);
+    for (uint32_t i = 0; i < number_vertices; i++) {
+        free(city[i]);
+    }
+    free(city);
 }

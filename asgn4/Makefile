@@ -3,6 +3,8 @@ CFLAGS =  -Wall -Werror -Wpedantic -Wextra
 LFLAGS = -lm
 
 all: tsp
+debug: tsp.c graph.c stack.c path.c
+	gcc -g tsp.c graph.c stack.c path.c
 tsp: tsp.o graph.o stack.o path.o
 	$(CC) -o tsp tsp.o graph.o stack.o path.o $(LFLAGS)
 graph.o: graph.c
