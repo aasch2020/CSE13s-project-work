@@ -79,14 +79,16 @@ int main(int argc, char **argv) {
         return 1;
     }
     char **city = (char **) calloc(number_vertices, sizeof(char *));
+
     for (uint32_t i = 0; i < number_vertices; i++) {
-        fgets(buffer, 1024, input) {
-            //	printf("%s", buffer);
-            buffer[strlen(buffer) - 1] = '\0';
-            //	fprintf(output,"%s", buffer);
-            //sscanf(buffer, "%s", city[i]);
-            city[i] = strdup(buffer);
-        }
+        fgets(buffer, 1024, input);
+        //     printf("%s", buffer);
+
+        // sscanf(buffer, "%s", city[i]);
+        buffer[strlen(buffer) - 1] = '\0';
+        //	fprintf(output,"%s", buffer);
+        //sscanf(buffer, "%s", city[i]);
+        city[i] = strdup(buffer);
     }
     uint32_t i_vertex;
     uint32_t j_vertex;
@@ -94,10 +96,14 @@ int main(int argc, char **argv) {
 
     struct Graph *graph = graph_create(number_vertices, undirected);
     while (fgets(buffer, 1024, input)) {
-        if (3 == sscanf(buffer, "%" SCNu32 "%" SCNu32 "%" SCNu32, &i_vertex, &j_vertex, &weight)) {
+        int sscanfout = 0;
+        sscanfout = sscanf(buffer, "%" SCNu32 "%" SCNu32 "%" SCNu32, &i_vertex, &j_vertex, &weight);
+        if (sscanfout == 3) {
             graph_add_edge(graph, i_vertex, j_vertex, weight);
+        } else if (sscanfout == EOF) {
+            break;
         } else {
-            //        printf("bad inputs\n");
+            printf("error");
             break;
         }
     }
@@ -109,7 +115,7 @@ int main(int argc, char **argv) {
     path_print(shortest, output, city);
 
     graph_delete(&graph);
-    printf(" ");
+    fprintf(output, "%d", EOF);
     for (uint32_t i = 0; i < number_vertices; i++) {
         free(city[i]);
     }
