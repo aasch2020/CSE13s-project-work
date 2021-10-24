@@ -81,12 +81,16 @@ int main(int argc, char **argv) {
     char **city = (char **) calloc(number_vertices, sizeof(char *));
     for (uint32_t i = 0; i < number_vertices; i++) {
         fgets(buffer, 1024, input);
-       // buffer[strlen(buffer) - 1] = ' ';
+       // buffer[strlen(buffer) - 1] = '\0';
+     
         city[i] = strdup(buffer);
     }
   //  for (uint32_t i = 0; i < number_vertices; i++) {
     //    fprintf(output, "city %s, ", city[i]);
    // }
+    for(uint32_t i = 0;  i < number_vertices; i++){
+	city[i][strlen(city[i]) - 1] = '\0';
+ }
 
     uint32_t i_vertex;
     uint32_t j_vertex;
