@@ -80,13 +80,13 @@ int main(int argc, char **argv) {
     }
     char **city = (char **) calloc(number_vertices, sizeof(char *));
     for (uint32_t i = 0; i < number_vertices; i++) {
-        if(fgets(buffer, 1024, input)){
-        //	printf("%s", buffer);
-        buffer[strlen(buffer) - 1] = '\0';
-        //	fprintf(output,"%s", buffer);
-        //sscanf(buffer, "%s", city[i]);
-        city[i] = strdup(buffer);
-	}
+        fgets(buffer, 1024, input) {
+            //	printf("%s", buffer);
+            buffer[strlen(buffer) - 1] = '\0';
+            //	fprintf(output,"%s", buffer);
+            //sscanf(buffer, "%s", city[i]);
+            city[i] = strdup(buffer);
+        }
     }
     uint32_t i_vertex;
     uint32_t j_vertex;
@@ -109,7 +109,7 @@ int main(int argc, char **argv) {
     path_print(shortest, output, city);
 
     graph_delete(&graph);
-   // printf(" ");
+    printf(" ");
     for (uint32_t i = 0; i < number_vertices; i++) {
         free(city[i]);
     }
