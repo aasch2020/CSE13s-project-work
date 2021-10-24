@@ -72,7 +72,7 @@ int main(int argc, char **argv) {
     }
     uint32_t number_vertices = 0;
 
-    char buffer[1024];
+    char buffer[1025];
     fgets(buffer, 1024, input);
     if (1 != sscanf(buffer, "%" SCNu32, &number_vertices)) {
         printf("Please enter vaid num vert\n");
