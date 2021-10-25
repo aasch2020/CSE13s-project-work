@@ -1,0 +1,71 @@
+Stack and queues
+	Any data type may be placed in either
+	Both hav well defined semantics
+	A fixed set of ops
+	A distinct ordering
+Stack
+	LIFO
+	Ccapacity is num that fits
+	Increase capacity thorugh realloc
+	Often done with arrays
+	Make sure to follow semantics
+	Create the stack allocate the stuff
+	stack_push 
+		Can set it if realloc to bigger memory if stack is full and doubles it
+		What do when out of memory
+			Basically all you can do it abort prgrm
+			C cant do io
+	stack_pop
+		when pop the top technically appears
+	you can pop and push and malloc/calloc nodes per time
+Queue
+	the successor wraps around when at cap of queue
+	Queue is an adt just like stack
+	Create and delete mem like stack
+	if queue is full you enqueue which is put the thing at the head, and the head is the successor of previous head
+		What does tha mean
+			Now once thing is in the queue we add
+			Like a stack but head moves back and tail stays zero
+			
+		
+	dequeue
+		return thing at tail
+		Make that i
+		tail moves up by one
+	Tail chases head
+	What do when we at the end
+	modular arithmetic to keep moving tail
+	If queue is empty of full
+		if head = tail then full
+		if succ head = tail
+	It's circular somehow
+Unbounded queue
+	Can be implemented witha linked list
+	The unbounded queue is a rapper for a linked list
+	make a queue
+		Both head and tail start null
+		enqueue
+		Create node ot enqueq
+		if tail null then queue empty
+	dequeue
+		first save the value being dequeue
+		The head of th equeue is moved forward one
+		We savea ptr to it so we can free the memoery it pointed to
+		if head is now null then the queue is empty and tail should null
+		
+Stack lifo
+queue both ends
+Queues implemented
+	array linked list
+priority queue
+	Like a generic queue
+	everyting has high prioirity, thing with highest priority is assoiciated with it
+	element of highest prio is dequeuned before elements of lower priority
+	In the case of eqaul done by position of element in queue
+	In suimmary
+	LFIO stack
+	QUEUE ARE FIFO
+	both can be done with array or linked list
+	always follow api
+	Dont try to be too clever
+	
