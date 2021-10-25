@@ -122,6 +122,7 @@ void graph_print(Graph *G) {
     }
 }
 
+//This is an accessor function for if the graph is undirected, it take a graph pointer and returns a boolean of directedness
 bool test_graph_undirected(Graph *G) {
     return G->undirected;
 }
