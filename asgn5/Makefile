@@ -1,7 +1,7 @@
 CC = clang
 CFLAGS =  -Wall -Werror -Wpedantic -Wextra
 LFLAGS = -lm
-
+all: huffman
 huffman: node.o
 	$(CC) $(CFLAGS) -o huffman node.o
 
