@@ -43,7 +43,7 @@ void node_print(Node *n) {
     //	}
     //	printf("\n");
 }
-
+/*
 int main() {
     printf("main\n");
     struct Node *nodeone = node_create('a', 5);
@@ -58,3 +58,4 @@ int main() {
     node_delete(&nodetwo);
     node_delete(&nodethree);
 }
+*/
