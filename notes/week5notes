@@ -192,4 +192,68 @@ LZ78
 	encode abababa
 	We make a pair a,b, empty
 	Then we stpep down
+One step of heapsort each time.
+pop pop join push
+Bit vectors
+lefsmallest unit is a bit
+0 or 1
+nibble is 4 bit 
+byte is 8 bit, ASCII
+half word is 16 bit
+word is 32
+Long word is 64
+word and long word may be dif based on commuter
+Logical shift, 0 in from the right
+Logical shift right, 0 in frm left
+Arithmetics= shift lef, zeroes shifted in on the right
+Arithmeti shift right, sign bit shifted on left
+Bitwise operator
+& AND
+| or
+>>
+v1  right shift v2
+if v1 is unsigned or signed non negative
+If v1 is signed with a negative value
+who knows what happen
+<< left shift
+zeroes are filled
+v1 << v1) = v1 * 2^v2 mod n
+And truth table
+Only qq is true
+XOR
+OR
+NOT
+we know that
+Getting a higher order nibbl
+This is most significant 4 bits
+We bit shift right 4 times so that the high order nibble takes place of low order
+and with 0x0F for HO nibble
+Set a high order nibble
+Place a nibble into the higher order bits of a byte
+mask it with an and
+Bit shift nibble left 4 time
+Or byte with bit shifted nibble
+Sets
+unordered
+sets are eq iff same elements
+basic relation is membership
+Set intersect set union set difference
+Set complement
+A - B
+We repr sets with bit, and do bitwise ops
+setting a bit
+clearing a bit
+take the bit you want, shift it to position, invert the mask, and mask with og
+fetch bit
+take a one, shift it a certain direction
+Sets are numbered bit 0 to 63
+To know if in a set
+Take a one, shift it over by number of thing asking, mask off high order bits shift one over and do and.
+Bit vector is a set of arbitrary size
+Its a pointer and a size
+Allocate bit vector
+Calculate how many bytes we need allocate it
+allocate thing
+
+
 
