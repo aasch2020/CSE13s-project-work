@@ -68,4 +68,128 @@ priority queue
 	both can be done with array or linked list
 	always follow api
 	Dont try to be too clever
+
+
+Communication
+	Claude shannon, father of modern info theory
+	Info source
+		Produce a msg or sequence to receiver
+		A sequence of symbls like a telegraph
+		A sinfle funtion of time like radio
+		A function of time and other vars lke b/w tv
+		2 or more functions of tmie like sound transmission
+		Severtal func of vars like color tv
+	transmitter
+		Operatoes onn the msg to produce a signal suiatble for transmission over channel
+		This is where compression/encryption occurs
+	Channel
+		The mediom through whihc a signal is transmisstted
+		Radio freq
+		Beam of light
+		Coaxial cable
+		Wires
+		Fiber optic
+		noise source which causes loss
+	reciever is the dst
+	Then goes to you
+
+Entropy
+	Defined by shannon as a measure of uncertainty of the occurence of an event
+	Assume a set of possible evebts with probabilities of p1, p2, p3, such that sum of all p ftom 1 t n is one
+		That is, the probability of event ei occuring for pi is between one and n
+	If such a meashre exists call it H
+		H is contnuous in p
+		If all pi are equal then pi is 1/n thus monotonic increase
+		There is some uncertaintyy
+		The more evens the more uncertainty
+	Thus H is entropy negative sum of pi of log base 2 (pi)
 	
+Assume AAAA message
+	p(A) = 1
+	Using the formula for entroypy is zero since log 1 is zero
+AABC
+	p(A0 = 1/2 p(b) = 1/4 p(c) is 1/4
+	Sum with those thress terms
+	3/4 entropy
+ABCD
+	p(A)1/4 p(B)=1/4 p(C)=1/4 p(D) =1/4
+	entrop is 2
+Entropy is sota a measure of amount of info in the msg
+Guesssing a symbol
+	Message ABCD
+	Best way to guess a random symbol is deisions tree
+Run length coding
+	Compress data
+	Split msg into sequences of identitacl symbols
+	These seqs are referred to as run
+	Runs are symbl then count of
+	Great for files wit lots of repeate data
+Huffman coding
+	UCSC faculty
+	Assign each symbol a unique bit str code
+		Generate a histogram of unique symbols in data
+		The more freq a symbol appears the shorter its code
+	So how does it work?
+Make histogram
+	First make histogram of msg unique symbol and their freq
+	Assume each symbol is an ascii char
+	Repr the histogram as an array with 256 indices
+Priority queueing
+	Each eymbol with a non zero freq is added to a priority quue as a node
+	Lower freq higher prio
+	In a prio queue theo nly guarantee is that the highest proiirty elemenet is first
+	The rest of hte order is not well defeines
+	We can provide this guarantee by sorting queue using heap
+Building a huffman tree
+	We will create a huffman trtee using node in theh pq
+	WHile the queue has more than one mode
+	DQ a node this is the lef t cild
+	DQ another node this is right child
+	CREATe a parent node for the lef tan right hild
+	ENQ teh parent node
+	LAst node in q is root of tree.
+	DQ, join, put it back in.
+What is the most common symbol
+	A is most cmn
+	then n
+	then s and b
+Build the code
+	We do a post order travestal
+	Go left, if we walk down left we push o to bit stack, a's code is zero
+	Now return from dfs and go right
+	Push one for right tree 0 for left tree
+	S has a code of 1, 0, 0
+	b code 101.
+	now n code is 11
+Code table contain bit vectors
+	Which longest is 32 byte
+		sohuldnt happen
+Dump thre tree
+	Walk the tree and print the node we on after printing the children.
+	If leaf is reached output L followed by nodes symbol
+	If an interior nodes child has been trav, output i to indicate interior node
+	The num of symvols repr tree dump 3xleaves -1
+Emit codes
+	FOr each symbol in msg output its code
+	We use the coe for fast trans
+	Start with buffer of bits
+	append things to buffer, when its full write the buffer
+Decode bit by bit
+	Walk the tree and go down
+	and we can see the char
+Encode is to make the bit decode make tree	
+lempel ziv coding
+	Adaptive dict coder
+	Dicstionaries arent ouput as part of encode
+	dit built icrementally
+	The larger theo cdoe the longer the words
+	To store wrods we use a trie
+		Names bc good data reterive
+		Also calles prefix tree
+		The trie node repr the en of a word stores cod for teh word
+		Min redun
+LZ78
+	encode abababa
+	We make a pair a,b, empty
+	Then we stpep down
+
