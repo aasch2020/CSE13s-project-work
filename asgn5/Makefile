@@ -2,12 +2,21 @@ CC = clang
 CFLAGS =  -Wall -Werror -Wpedantic -Wextra
 LFLAGS = -lm
 
-all: huffman
+all: encode decode
 
-huffman: huffman.o pq.o node.o
-	$(CC) $(CFLAGS) -o huffman pq.o node.o huffman.o
+encode: pq.o node.o encode.o
+	$(CC) $(CFLAGS) -o encode pq.o node.o encode.o
+
+decode: pq.o node.o decode.o
+	$(CC) $(CFLAGS) -o decode pq.o node.o encode.o
+
 huffman.o: huffman.c
 	$(CC) $(CFLAGS) -c huffman.c
+encode.o: encode.c
+	$(CC) $(CFLAGS) -c encode.c
+decode.o: decode.c
+	$(CC) $(CFLAGS) -c decode.c
+
 pqdb: pq.o node.o
 	$(CC) $(CFLAGS) -o pq pq.o node.o
 nodedb: node.o
@@ -18,7 +27,7 @@ node.o: node.c
 	$(CC) $(CFLAGS) -c node.c
 
 clean:
-	rm huffman *.o
+	rm encode decode *.o
 format:
 	clang-format -i -style=file *.[ch]
 
