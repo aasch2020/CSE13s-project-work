@@ -3,7 +3,7 @@
 //#include <stdio.h>
 
 //int main() {
- /*   printf("asdf\n");
+/*   printf("asdf\n");
     printf("mainskis\n");
     struct Node *nodeone = node_create('a', 5);
     struct Node *nodetwo = node_create('x', 12);
