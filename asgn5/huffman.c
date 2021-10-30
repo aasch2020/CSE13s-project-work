@@ -1,9 +1,9 @@
-#include "pq.h"
-#include "node.h"
-#include <stdio.h>
+//#include "pq.h"
+//#include "node.h"
+//#include <stdio.h>
 
-int main() {
-    printf("asdf\n");
+//int main() {
+ /*   printf("asdf\n");
     printf("mainskis\n");
     struct Node *nodeone = node_create('a', 5);
     struct Node *nodetwo = node_create('x', 12);
@@ -54,4 +54,4 @@ int main() {
     node_delete(&c);
     node_delete(&d);
     node_delete(&e);
-}
+//}
