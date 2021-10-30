@@ -10,8 +10,6 @@ encode: pq.o node.o encode.o
 decode: pq.o node.o decode.o
 	$(CC) $(CFLAGS) -o decode pq.o node.o encode.o
 
-huffman.o: huffman.c
-	$(CC) $(CFLAGS) -c huffman.c
 encode.o: encode.c
 	$(CC) $(CFLAGS) -c encode.c
 decode.o: decode.c
