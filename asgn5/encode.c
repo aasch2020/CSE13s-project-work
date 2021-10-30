@@ -4,4 +4,6 @@
 #include "stack.h"
 #include "huffman.h"
 int main() {
+    Code C = code_init();
+    code_print(&C);
 }
