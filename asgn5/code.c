@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <inttypes.h>
-Code code_init(void) {
+/*Code code_init(void) {
     Code c;
     c.top = 0;
     for (uint32_t i = 0; i < (MAX_CODE_SIZE); i++) {
@@ -33,4 +33,4 @@ void code_print(Code *c) {
         printf("%" PRIu8, c->bits[i]);
     }
     printf("\n");
-}
+}*/
