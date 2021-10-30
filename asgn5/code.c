@@ -22,10 +22,23 @@ bool code_empty(Code *c) {
 }
 
 bool code_full(Code *c) {
-    if (c->top == MAX_CODE_SIZE) {
+    if (c->top == MAX_CODE_SIZE * 8) {
         return true;
     }
     return false;
+}
+
+bool code_set_bit(Code *c, uint32_t i) {
+    if (i >= MAX_CODE_SIZE * 8) {
+        return false;
+    }
+    printf("\n");
+    printf("%d\n", (i / 8));
+
+    printf("asdf\n");
+    printf("%d\n", (i % 8));
+    c->bits[(i / 8)] = (c->bits[(i / 8)] | (1 << (% 8)));
+    return true;
 }
 void code_print(Code *c) {
     printf("%u\n", c->top);
