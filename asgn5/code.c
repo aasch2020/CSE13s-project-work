@@ -32,13 +32,60 @@ bool code_set_bit(Code *c, uint32_t i) {
     if (i >= MAX_CODE_SIZE * 8) {
         return false;
     }
-    printf("\n");
-    printf("%d\n", (i / 8));
-
-    printf("asdf\n");
-    printf("%d\n", (i % 8));
-    c->bits[(i / 8)] = (c->bits[(i / 8)] | (1 << (% 8)));
+       c->bits[(i / 8)] = (c->bits[(i / 8)] | (1 << (i % 8)));
     return true;
+}
+
+bool code_clr_bit(Code *c, uint32_t i){
+ if (i >= MAX_CODE_SIZE * 8) {
+        return false;
+    }
+       c->bits[(i / 8)] = (c->bits[(i / 8)] & ~(1 << (i % 8)));
+    return true;	
+}
+bool code_get_bit(Code *c, uint32_t i){
+	if (i >= MAX_CODE_SIZE * 8) {
+        return false;
+    }
+    return (c->bits[(i/8)] >> (i % 8) & 1);
+
+}
+bool code_push_bit(Code *c, uint8_t bit){
+	if(c->top >= MAX_CODE_SIZE*8){
+		return false;
+	
+	}
+	if(bit){
+
+
+	code_set_bit(c, c->top);
+		c->top++;
+		return true;
+
+	}else{
+		c->top++;
+		return true;
+
+	}
+	
+}
+
+bool code_pop_bit(Code *c, uint8_t *bit){
+	if(c->top >= MAX_CODE_SIZE*8){
+
+		return false;
+	}
+	if(code_get_bit(c, c->top - 1)){
+		*bit = 1;
+		code_clr_bit(c, c->top -1);
+		c->top--;
+		return true;
+	}else{
+		code_clr_bit(c, c->top -1);
+		*bit = 0;
+		c->top--;
+		return true;
+	}	
 }
 void code_print(Code *c) {
     printf("%u\n", c->top);
