@@ -93,13 +93,11 @@ bool stack_pop(Stack *s, Node **n) {
     }
 }
 
-
-
 //This code is given in the assignment document by Professor Long (2021 Professor Long)
 //This function prints the contents of the stack to the given file outfile, and maps the integers in the stack
 //to the array of cities given.
-void stack_print(Stack *s){
-	for (uint32_t i = 0; i < s->top; i++){
-		node_print(s->items[i]);
-}	
+void stack_print(Stack *s) {
+    for (uint32_t i = 0; i < s->top; i++) {
+        node_print(s->items[i]);
+    }
 }
