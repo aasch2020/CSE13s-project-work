@@ -45,4 +45,13 @@ int main() {
     code_pop_bit(&C, &as);
     printf("poppin as%u\n", as);
     code_print(&C);
+    Node *nodeone = node_create('s', 4);
+    Node *nocdetwo = node_create('a', 8);
+    Stack *s = stack_create(12);
+   stack_push(s, nodeone);
+  stack_push(s, nocdetwo); 
+  stack_print(s);
+     Node *nd = node_create('f', 16);
+     stack_pop(s, &nd);
+     node_print(nd);
 }
