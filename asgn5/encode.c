@@ -54,4 +54,8 @@ int main() {
     Node *nd = node_create('f', 16);
     stack_pop(s, &nd);
     node_print(nd);
+    node_delete(&nodeone);
+    node_delete(&nocdetwo);
+    node_delete(&nd);
+    stack_delete(&s);
 }
