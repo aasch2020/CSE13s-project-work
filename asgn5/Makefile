@@ -1,6 +1,6 @@
 CC = clang
 CFLAGS =  -Wall -Werror -Wpedantic -Wextra
-LFLAGS = -lm
+
 
 all: encode decode
 
