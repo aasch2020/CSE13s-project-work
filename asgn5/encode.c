@@ -1,10 +1,34 @@
 #include "node.h"
 #include "pq.h"
+#include "io.h"
 #include "code.h"
 #include "stack.h"
 #include "huffman.h"
+#include <unistd.h>
 #include <stdio.h>
-int main() {
+#include <stdlib.h>
+#include <fcntl.h>
+#define OPTIONS "hvi:o:"
+int main(int argc, char **argv) {
+    // The below code parses command line arguments,
+    // It sets the verbose and undirected booleans to true if given.
+    // It also sets the input and output files if they are given, and errors if the infile is invalid.
+    int opt = 0;
+    bool stats = false;
+    int input = 0;
+    int output = 1;
+    while ((opt = getopt(argc, argv, OPTIONS)) != -1) {
+        switch (opt) {
+        case 'h':
+            printf("HELP\n");
+            printf("HELPMSG\n\n");
+            return 0;
+            break;
+        case 'v': stats = true; break;
+        case 'i': input = open(optarg, O_RDONLY); break;
+        case 'o': output = open(optarg, O_WRONLY); break;
+        }
+    }
     Code C = code_init();
     code_push_bit(&C, 1);
     code_push_bit(&C, 0);
@@ -51,11 +75,14 @@ int main() {
     stack_push(s, nodeone);
     stack_push(s, nocdetwo);
     stack_print(s);
-    Node *nd = node_create('f', 16);
+    Node *nd;
     stack_pop(s, &nd);
     node_print(nd);
     node_delete(&nodeone);
     node_delete(&nocdetwo);
-    node_delete(&nd);
+
     stack_delete(&s);
+    uint8_t arr[1000];
+    read_bytes(input, arr, 5);
+    printf("%c\n", arr[4]);
 }

@@ -3,6 +3,8 @@ CFLAGS =  -Wall -Werror -Wpedantic -Wextra
 
 
 all: encode decode
+debugenc: pq.c node.c encode.c code.c io.c stack.c huffman.c
+	gcc -g -o encode pq.c node.c encode.c code.c io.c stack.c huffman.c
 
 encode: pq.o node.o encode.o code.o io.o stack.o huffman.o
 	$(CC) $(CFLAGS) -o encode pq.o node.o encode.o code.o io.o stack.o huffman.o
@@ -19,7 +21,7 @@ huffman.o: huffman.c
 code.o: code.c
 	$(CC) $(CFLAGS) -c code.c
 io.o: io.c
-	$(CC) $(CFLAGS) -c io.c
+	$(CC) $(CFLAGS) -c io.c 
 stack.o: stack.c
 	$(CC) $(CFLAGS) -c stack.c
 pq.o: pq.c
