@@ -1,0 +1,102 @@
+Into to files
+	We wanna store biggie data
+		def of large has changed by 6 orders of magnitude over the years
+		DRAM doesnt survive turning the computer off
+		Files are accessed using names, memory is accessed using addresses
+		Liquid nitrogen preserves dram
+	File names are preserved, stored by addresses
+	Your computer has a millions of files
+	how ot uniquely specify
+	FIle has basename, dot and extension
+	In some OS the extension is a separate entity
+	in UNIX the extension is only used by convention
+	.o is an object file is binary normally
+	Some prorgams expect the tpe of file
+	File structure
+		Unix files are a seq of bytes
+		Older files are sequence of records
+	Files may have internal structure
+		exe header file then text then data then relocation bits and symbol table
+		Archive file
+			Header module name dat owner protection size
+	File access
+		Names and extensions
+	Sequntial access
+		Read all bytes/record from the beginning
+		Cannot jump around may reqind or back up
+		Convenient when medium was magnetic tape
+	Random access
+		bytes/record read in any order
+		essential for database systems
+		Read can be
+			Move file marker ten read or read then move marker
+Files have metadata data abt data
+	Protection, who can access
+	Password
+	who made the file?
+	Is it read only?
+	Hidden flag
+	System flag
+	ASCCI or binary flag
+	Random access flag
+	temp flag
+File ops
+	Create delete open close read write
+	append seek getattr setatttr rename
+	
+directories
+	Names not number
+	We use hierarchy to manage complexity
+	Files systems allow this to be done with directories
+	Grouping makes it easier to find file, remember where, locate related files determine which files are related
+hierarchicahl file system
+	root directory
+		each user has a dir
+			can make mor dirs in the dir
+Directory options
+	create delete
+	oen close
+	readdir rename
+	link unlink
+Big hierarchicahl file system
+	bigge files
+can linke directories
+Two directories can share a file same file
+	Dont do this a lot
+	same with soft links
+
+UINX V7 Fiel system
+	I-node number
+	File name
+The table has i node, has pointers to table of i node
+	Each i node is a file
+	The first few addresses in the i node are the adreses of the block on disk
+	If I wanted t do all direct pointer wed have hecka data
+	each of them points to a thing
+	any problem of cs can be solved with inderections
+	I node put the thing in the file system
+	File descriptor
+	Put files in entry number zero
+	file descriptor is actually an int
+File system implementation
+	You got a disk
+	the disk is an array fo block
+	each block is called a sector
+	partition 
+	MBR master boot record
+	the computer only boots from bios and know enough to read master boot record
+	the MBR then reads more parts of the file system
+		boot block boots file system
+		Super block starts file system
+		free spapce mgmt
+			Checks whats free or not
+		I-nodes is 
+		root directory is huge
+		Files and directory
+		fixed size
+		bootloader is the first thing that gets run
+cat.c
+	Copies standard in to standard out
+	Sequentially copies multiple files to stdout
+	discuss in detail later
+	
