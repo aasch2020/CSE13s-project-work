@@ -29,7 +29,7 @@ int main(int argc, char **argv) {
         case 'o': output = open(optarg, O_WRONLY); break;
         }
     }
-    Code C = code_init();
+    /*  Code C = code_init();
     code_push_bit(&C, 1);
     code_push_bit(&C, 0);
     code_push_bit(&C, 1);
@@ -90,5 +90,9 @@ int main(int argc, char **argv) {
     printf("\n");
     printf("%ld\n", bytes_read);
     write_bytes(output, arr, cnt - 1);
-    write_bytes(output, scarr, cnt2 - 1);
+    write_bytes(output, scarr, cnt2 - 1);*/
+    uint8_t bit = 0;
+    while (read_bit(input, &bit)) {
+        printf("%u", bit);
+    }
 }

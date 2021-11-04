@@ -10,7 +10,7 @@ encode: pq.o node.o encode.o code.o io.o stack.o huffman.o
 	$(CC) $(CFLAGS) -o encode pq.o node.o encode.o code.o io.o stack.o huffman.o
 
 decode: pq.o node.o decode.o code.o io.o stack.o huffman.o
-	$(CC) $(CFLAGS) -o decode pq.o node.o encode.o code.o io.o stack.o huffman.o
+	$(CC) $(CFLAGS) -o decode pq.o node.o decode.o code.o io.o stack.o huffman.o
 
 encode.o: encode.c
 	$(CC) $(CFLAGS) -c encode.c
