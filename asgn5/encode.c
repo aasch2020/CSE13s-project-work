@@ -83,7 +83,12 @@ int main(int argc, char **argv) {
 
     stack_delete(&s);
     uint8_t arr[1000];
-    int cnt = read_bytes(input, arr, 1000);
-    printf("sdfd\n");
-    write_bytes(output, arr, cnt);
+    int cnt = read_bytes(input, arr, 10);
+    uint8_t scarr[10000];
+    int cnt2 = read_bytes(input, scarr, 1000);
+    printf("%d, count 2 \n", cnt2);
+    printf("\n");
+    printf("%ld\n", bytes_read);
+    write_bytes(output, arr, cnt - 1);
+    write_bytes(output, scarr, cnt2 - 1);
 }

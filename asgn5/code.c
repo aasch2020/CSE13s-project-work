@@ -53,13 +53,14 @@ bool code_push_bit(Code *c, uint8_t bit) {
     if (c->top >= MAX_CODE_SIZE * 8) {
         return false;
     }
-    if (bit) {
+    if (bit){
 
         code_set_bit(c, c->top);
         c->top++;
         return true;
 
     } else {
+	code_clr_bit(c, c->top);
         c->top++;
         return true;
     }
