@@ -99,4 +99,80 @@ cat.c
 	Copies standard in to standard out
 	Sequentially copies multiple files to stdout
 	discuss in detail later
-	
+Linked lists
+	traverse better adn less memeory but hard to access one specific
+	single link
+		Each ndoe has  apointer ot the next
+	Doubly linked
+		Each node has pointer to next and prev
+		Cost is more memory
+		Harder to add to 
+	Sentinedl nodes
+		Dummy nodes used to mark ends of a linked list
+		Costs you a fake node
+		insertion will always work the same as the added elements will always point to head and tail
+	ciruculat double linked list with sentinel nodes
+		head and tai link together
+	Singly linked list
+		Has a key and a pointer to next node
+		To make one, pass ina key, malloc node, mak enext point null
+		Delete node, same as makeing it
+	ll_delete
+		delete the entirlist
+	lookup a thing
+		Go from head to tail, and see if the key you want is the key you at
+		return the node, if not found null
+	how to insert into linked list
+		First lookup if theres already something with a key
+	I		if it is dont do aything
+		If not, stick the thing at the front, aka with a link to head and a link to next
+	print linked list
+		beginning to end print the keys
+	removing a thing from  a linked list
+		First check if the head exists
+		point current at head a previous at nothing
+		While you havent reached the end of the list
+			If you find thei thing to remove
+				Make the next of prev next of current 
+			If theres not anything, aka we at teh start, make the head point to the next
+			delete the current one
+			make the prevoius equal current and the next of current equal current
+Move to front rule
+	What is most likely to happen?
+	If you're looking something and likely to look for it again
+	its more efficient to look for front of list than at the ends
+	The more something gets looked up move it up
+	Ok so what is the move to front rule
+		amortized analysis?
+		basically, given that you just acessed something, you probably will be likeley to do it again
+		if you find the thing, move it to the front of the list
+		return the head
+		make a list and go thru the steps do picutres
+Linked list stacks
+	Pushing in element is inserting it at the head, to pop is to follow pointer and put ponter at top and remove from head
+LL queue
+	Add at tail
+	remove at head
+	point the head thing and stuff
+A doubly linked list ADT
+	You have a node, key with a forward and bakward 
+New struct called list head
+	Points at head and tail
+Make a new ndode, forward a nd rev point at nothing
+Make a new list
+	Allocate a list head and p;oint it at nothing
+Prepend an element
+	if you have both a head and node
+	if head and tail are nil, both point at new thing
+	If not, point the one behind it to it, and the one in front of it back to it
+Apending
+	point the tail and stuff around, draw pictures
+Inserting
+	insert a node lexicographically
+	There is a pointer p at beginning
+		While not at the end and we are at the key for p, just addd p key
+	If p goes to end append
+	if p no move prepend
+	if not, put it na specifict spot, by moving the pointers of the before and after aroud
+Inserting into a doubel linked list
+em=ocing	
