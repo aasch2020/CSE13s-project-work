@@ -86,7 +86,7 @@ bool code_pop_bit(Code *c, uint8_t *bit) {
 void code_print(Code *c) {
     printf("%u\n", c->top);
     for (uint32_t i = 0; i < (MAX_CODE_SIZE); i++) {
-        printf("%" PRIu8, c->bits[i]);
+        printf(" %" PRIu8 " ", c->bits[i]);
     }
     printf("\n");
 }

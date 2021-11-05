@@ -25,15 +25,17 @@ int read_bytes(int infile, uint8_t *buf, int nbytes) {
 int write_bytes(int outfile, uint8_t *buf, int nbytes) {
     int written_bytes = 0;
     if (nbytes == 0) {
+        printf("why print empty\n");
         return 0;
     }
     int crr_bytes = 0;
     while (written_bytes <= nbytes) {
         crr_bytes = write(outfile, buf, nbytes - written_bytes);
-        written_bytes += crr_bytes;
+
         if (crr_bytes == 0) {
             break;
         }
+        written_bytes += crr_bytes;
     }
     return written_bytes;
 }
@@ -59,4 +61,32 @@ bool read_bit(int infile, uint8_t *bit) {
         index = 0;
     }
     return true;
+}
+
+static uint8_t writebuf[BLOCK];
+static int writeindex = 0;
+void write_code(int outfile, Code *c) {
+    for (uint32_t i = 0; i < code_size(c); i++) {
+        int bit = code_get_bit(c, i);
+            if (bit == 1) {
+            writebuf[writeindex / 8] = (writebuf[writeindex / 8] | (1 << (writeindex % 8)));
+        } else if (bit == 0) {
+            writebuf[writeindex / 8] = (writebuf[writeindex / 8] & (~(1 << (writeindex % 8))));
+        }
+        writeindex++;
+        if (writeindex == BLOCK * 8) {
+            flush_codes(outfile);
+            writeindex = 0;
+        }
+    }
+}
+
+void flush_codes(int outfile) {
+    if (writeindex > 0) {
+        int indbytes = writeindex / 8;
+        if ((writeindex % 8) != 0) {
+            indbytes++;
+        }
+        write_bytes(outfile, writebuf, indbytes);
+    }
 }
