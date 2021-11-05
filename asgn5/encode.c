@@ -3,6 +3,7 @@
 #include "io.h"
 #include "code.h"
 #include "stack.h"
+#include "defines.h"
 #include "huffman.h"
 #include <unistd.h>
 #include <stdio.h>
@@ -29,7 +30,7 @@ int main(int argc, char **argv) {
         case 'o': output = open(optarg, O_WRONLY); break;
         }
     }
-    /*  Code C = code_init();
+    /* Code C = code_init();
     code_push_bit(&C, 1);
     code_push_bit(&C, 0);
     code_push_bit(&C, 1);
@@ -91,6 +92,16 @@ int main(int argc, char **argv) {
     printf("%ld\n", bytes_read);
     write_bytes(output, arr, cnt - 1);
     write_bytes(output, scarr, cnt2 - 1);*/
-    uint8_t hist[ALPHABET];
-    uint8_t[
+    uint64_t hist[ALPHABET] = { 0 };
+    uint8_t arr[10];
+    int bytes_read = 11;
+    while (bytes_read >= 10) {
+        bytes_read = read_bytes(input, arr, 10);
+        for (int i = 0; i < bytes_read; i++) {
+            hist[arr[i]]++;
+        }
+    }
+    hist[0]++;
+    hist[255]++;
+    build_tree(hist);
 }

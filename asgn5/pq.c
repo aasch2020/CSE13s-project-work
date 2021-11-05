@@ -113,7 +113,7 @@ void pq_print(PriorityQueue *q) {
     uint32_t cntr = 0;
     uint32_t tree = 1;
     for (uint32_t i = 0; i < q->top; i++) {
-        printf("           %lu             ", (q->items[i])->frequency);
+        printf("         %c  %lu             ", ((q->items[i])->symbol), (q->items[i])->frequency);
         cntr++;
         if (cntr == tree) {
             printf("\n");
