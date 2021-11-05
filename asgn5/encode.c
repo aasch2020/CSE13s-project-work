@@ -91,18 +91,6 @@ int main(int argc, char **argv) {
     printf("%ld\n", bytes_read);
     write_bytes(output, arr, cnt - 1);
     write_bytes(output, scarr, cnt2 - 1);*/
-    Code c = code_init();
-    uint8_t bit = 0;
-
- while (read_bit(input, &bit)) {
-        if(!(code_push_bit(&c, bit))){
-			break;
-			}
-    }
-
-
- //   code_print(&C);
-    write_code(output, &c);
-
-    flush_codes(output);
+    uint8_t hist[ALPHABET];
+    uint8_t[
 }
