@@ -175,4 +175,58 @@ Inserting
 	if p no move prepend
 	if not, put it na specifict spot, by moving the pointers of the before and after aroud
 Inserting into a doubel linked list
-em=ocing	
+em=ocing
+
+
+Memory hierarchy
+	smal and fast or large and slow
+	Cache
+		level 1 on the cPU chip
+		L2 may be on or off chip
+		L3 off cachse made of chip
+	Main memoery is the dRAM
+	Then is disk, many tera of slow cheap non volatile storage
+	Memeory manager makes sure to check which memeory is what so it doesnt blow up or overwrite
+OS timeline
+	getn 1 vacuum tubes plug boards
+	gen 2
+		transistors batch systems
+	third gen integreated circuit multiprogramming
+	4th gen large secale integreation personal computer
+	5th gen mobile devices
+1st gen
+2nd gen
+	 bring cards to the machine, read cards into input tape
+	put input tape on 67093
+	perform computation writing results to output tape
+	put output tapeo on 1401 wihic print out
+Cards have a header and then code then data
+
+
+3rd gen
+	where all the os from timeshare
+	MVS Freebsd linux
+	win 100 mx os
+	real time OS
+	snart card OS
+	Components of a simple PC
+		processor memory cpu 
+		The BUS connects everything and is the mobo
+		video card
+	Multicore CPU 
+		Shared L@ cachse or separate L2 cache
+		superscalar CPU
+			multiple t hreads per core by superscaling
+	processor look wocky
+	a cpu have many cpus in it
+	billion or more transistors
+Storag e [yramid
+	Registers as fast as cpu .4ns
+	on chip cahe, 10x slower 4ns
+	cache 10 ns		
+        dram 50 ns
+	main mem 560 ns
+	flsah memory 100 mew s
+	magnetic disk 5 ms
+	magnetic tape 50 sec
+
