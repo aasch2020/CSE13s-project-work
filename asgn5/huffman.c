@@ -34,16 +34,18 @@ void build_codes(Node *root, Code table[static ALPHABET]) {
         frstrun = true;
     }
     if (!(root == NULL)) {
-        if (root->symbol == '$') {
+        if (!(root->left) && !(root->right)) {
+            table[root->symbol] = c;
+
+        } else {
+            table[root->symbol] = c;
             code_push_bit(&c, 0);
             build_codes(root->left, table);
             uint8_t bit;
             code_pop_bit(&c, &bit);
             code_push_bit(&c, 1);
             build_codes(root->right, table);
-
-        } else {
-            table[root->symbol] = c;
+            code_pop_bit(&c, &bit);
         }
     } else {
         printf("null root error\n");
@@ -52,15 +54,15 @@ void build_codes(Node *root, Code table[static ALPHABET]) {
 
 void dump_tree(int outfile, Node *root) {
     if (!(root == NULL)) {
-            dump_tree(outfile, root->left);
-            dump_tree(outfile, root->right);
-	    
-	    if( !(root->symbol == '$')){
-		    uint8_t buf[2] = {'L', root->symbol};
-		    write_bytes(outfile, buf, 2);
-            }else{
-		uint8_t buff[1] = {'I'};
-		write_bytes(outfile, buff, 1);
-	    } 
- 
-    }}
+        dump_tree(outfile, root->left);
+        dump_tree(outfile, root->right);
+
+        if (((root->left == NULL) && (root->right == NULL))) /*!(root->symbol == '$'))*/ {
+            uint8_t buf[2] = { 'L', root->symbol };
+            write_bytes(outfile, buf, 2);
+        } else {
+            uint8_t buff[1] = { 'I' };
+            write_bytes(outfile, buff, 1);
+        }
+    }
+}

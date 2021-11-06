@@ -30,14 +30,14 @@ int write_bytes(int outfile, uint8_t *buf, int nbytes) {
     }
     int crr_bytes = 0;
     do {
-//	printf("the num of byte writ%d", nbytes - written_bytes);
+        //	printf("the num of byte writ%d", nbytes - written_bytes);
         crr_bytes = write(outfile, buf + written_bytes, nbytes - written_bytes);
 
         if (crr_bytes == 0) {
             break;
         }
         written_bytes += crr_bytes;
-    }while (written_bytes < nbytes); 
+    } while (written_bytes <= nbytes);
     bytes_written += written_bytes;
     return written_bytes;
 }
@@ -87,7 +87,7 @@ void flush_codes(int outfile) {
     if (writeindex > 0) {
         int indbytes = writeindex / 8;
         if ((writeindex % 8) != 0) {
-            writebuf[writeindex / 8] = (writebuf[writeindex / 8] & ~(~0 << (writeindex % 8)));
+            writebuf[writeindex / 8] = (writebuf[writeindex / 8] & ~(255 << (writeindex % 8)));
             indbytes++;
         }
         write_bytes(outfile, writebuf, indbytes);
