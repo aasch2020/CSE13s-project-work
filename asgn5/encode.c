@@ -34,10 +34,10 @@ int main(int argc, char **argv) {
     }
 
     uint64_t hist[ALPHABET] = { 0 };
-    uint8_t arr[10];
-    int bytes_read = 11;
-    while (bytes_read >= 10) {
-        bytes_read = read_bytes(input, arr, 10);
+    uint8_t arr[BLOCK];
+    int bytes_read = BLOCK + 1;
+    while (bytes_read >= BLOCK) {
+        bytes_read = read_bytes(input, arr, BLOCK);
         for (int i = 0; i < bytes_read; i++) {
             hist[arr[i]]++;
         }
@@ -71,11 +71,11 @@ int main(int argc, char **argv) {
     write_bytes(output, bufprin, 16);
     dump_tree(output, root);
     lseek(input, 0, SEEK_SET);
-    uint8_t arr2[1000] = { 0 };
+    uint8_t arr2[BLOCK] = { 0 };
     // printf("num bytes we readin %d\n", bytes_read);
-    int bytes_read_code = 11;
-    while (bytes_read_code >= 10) {
-        bytes_read_code = read_bytes(input, arr2, 10);
+    int bytes_read_code = BLOCK + 1;
+    while (bytes_read_code >= BLOCK) {
+        bytes_read_code = read_bytes(input, arr2, BLOCK);
         for (int i = 0; i < bytes_read_code; i++) {
             //        printf("charr is %c\n", arr2[i]);
             //      code_print(&ctable[arr2[i]]);
