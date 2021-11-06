@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 Node *node_create(uint8_t symbol, uint64_t frequency) {
-    Node *n = (Node *) malloc(sizeof(Node));
+    Node *n = (Node *) calloc(1, sizeof(Node));
     n->symbol = symbol;
     n->frequency = frequency;
     return n;

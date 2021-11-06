@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 Node *build_tree(uint64_t hist[static ALPHABET]) {
-    Node *a = node_create('0', 0);
+    Node *a;
     PriorityQueue *pq = pq_create(ALPHABET);
     for (int i = 0; i < 256; i++) {
         if (hist[i]) {
@@ -23,6 +23,8 @@ Node *build_tree(uint64_t hist[static ALPHABET]) {
     }
     Node *d;
     dequeue(pq, &d);
+
+    pq_delete(&pq);
     return d;
 }
 
@@ -63,6 +65,17 @@ void dump_tree(int outfile, Node *root) {
         } else {
             uint8_t buff[1] = { 'I' };
             write_bytes(outfile, buff, 1);
+        }
+    }
+}
+
+void delete_tree(Node **root) {
+    if (!(*root == NULL)) {
+        delete_tree(&((*root)->left));
+        delete_tree(&((*root)->right));
+
+        if ((((*root)->left == NULL) && ((*root)->right == NULL))) /*!(root->symbol == '$'))*/ {
+            node_delete(root);
         }
     }
 }

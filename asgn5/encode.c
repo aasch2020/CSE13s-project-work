@@ -83,5 +83,9 @@ int main(int argc, char **argv) {
         }
     }
     flush_codes(output);
-    // write_bytes(output, arr2, cntr2);
+    // write_bytes(output, arr2, cntr2)
+    delete_tree(&root);
+
+    close(input);
+    close(output);
 }
