@@ -28,7 +28,7 @@ int main(int argc, char **argv) {
             break;
         case 'v': stats = true; break;
         case 'i': input = open(optarg, O_RDONLY); break;
-        case 'o': output = open(optarg, O_WRONLY); break;
+        case 'o': output = open(optarg, O_WRONLY | O_CREAT, 00400 | 00200); break;
         }
     }
 
@@ -106,10 +106,11 @@ int main(int argc, char **argv) {
     hist[0]++;
     hist[255]++;
     Node *root = build_tree(hist);
+    // node_print(root);
     Code ctable[ALPHABET] = { 0 };
     build_codes(root, ctable);
-    for (int i = 0; i < 256; i++) {
-        printf("symbol is %d\n", i);
-        code_print(&ctable[i]);
-    }
+    //    for (int i = 0; i < 256; i++) {
+    //             code_print(&ctable[i]);
+    // }
+    dump_tree(output, root);
 }

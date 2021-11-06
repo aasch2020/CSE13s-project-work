@@ -30,7 +30,7 @@ int write_bytes(int outfile, uint8_t *buf, int nbytes) {
     }
     int crr_bytes = 0;
     while (written_bytes <= nbytes) {
-        crr_bytes = write(outfile, buf, nbytes - written_bytes);
+        crr_bytes = write(outfile, buf + written_bytes, nbytes - written_bytes);
 
         if (crr_bytes == 0) {
             break;

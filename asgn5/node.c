@@ -27,19 +27,15 @@ Node *node_join(Node *left, Node *right) {
 }
 
 void node_print(Node *n) {
-    printf("The symbol is %c\n", n->symbol);
+    printf("The symbol is %d\n", n->symbol);
     printf("With a frequency of %" PRIu64 "\n", n->frequency);
     if (n->left) {
 
-        printf("[left node");
         node_print(n->left);
-        printf("]");
     }
     if (n->right) {
 
-        printf("[right node");
         node_print(n->right);
-        printf("]");
     }
     printf("\n");
 }
