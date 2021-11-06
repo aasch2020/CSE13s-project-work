@@ -82,6 +82,7 @@ int main(int argc, char **argv) {
             write_code(output, &ctable[arr2[i]]);
         }
     }
+    fchmod(input, head.permissions);
     flush_codes(output);
     // write_bytes(output, arr2, cntr2)
     delete_tree(&root);
