@@ -5,6 +5,7 @@
 #include "stack.h"
 #include "defines.h"
 #include "huffman.h"
+#include "header.h"
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -30,6 +31,7 @@ int main(int argc, char **argv) {
         case 'o': output = open(optarg, O_WRONLY); break;
         }
     }
+
     /* Code C = code_init();
     code_push_bit(&C, 1);
     code_push_bit(&C, 0);
@@ -103,5 +105,11 @@ int main(int argc, char **argv) {
     }
     hist[0]++;
     hist[255]++;
-    build_tree(hist);
+    Node *root = build_tree(hist);
+    Code ctable[ALPHABET] = { 0 };
+    build_codes(root, ctable);
+    for (int i = 0; i < 256; i++) {
+        printf("symbol is %d\n", i);
+        code_print(&ctable[i]);
+    }
 }
