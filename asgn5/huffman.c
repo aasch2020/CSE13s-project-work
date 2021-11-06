@@ -52,17 +52,15 @@ void build_codes(Node *root, Code table[static ALPHABET]) {
 
 void dump_tree(int outfile, Node *root) {
     if (!(root == NULL)) {
-        if (root->symbol == '$') {
             dump_tree(outfile, root->left);
             dump_tree(outfile, root->right);
-            uint8_t bufprinta[1] = { 'I' };
-            write_bytes(outfile, bufprinta, 1);
-
-        } else {
-            uint8_t bufprint[2] = { 'L', root->symbol };
-            write_bytes(outfile, bufprint, 2);
-        }
-    } else {
-        printf("null root error\n");
-    }
-}
+	    
+	    if( !(root->symbol == '$')){
+		    uint8_t buf[2] = {'L', root->symbol};
+		    write_bytes(outfile, buf, 2);
+            }else{
+		uint8_t buff[1] = {'I'};
+		write_bytes(outfile, buff, 1);
+	    } 
+ 
+    }}

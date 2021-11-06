@@ -106,11 +106,23 @@ int main(int argc, char **argv) {
     hist[0]++;
     hist[255]++;
     Node *root = build_tree(hist);
-    // node_print(root);
+    node_print(root);
     Code ctable[ALPHABET] = { 0 };
     build_codes(root, ctable);
-    //    for (int i = 0; i < 256; i++) {
-    //             code_print(&ctable[i]);
-    // }
+//    for (int i = 0; i < 256; i++) {
+ //       if (ctable[i].top != 0) {
+//            code_print(&ctable[i]);
+ //       }
+ //   }
+   // Header head;
+  //  head.magic = MAGIC;
+  //  uint8_t magicbuff[4] = head.magic[1];
+  //  write_bytes(output, magicbuff, 4);
     dump_tree(output, root);
+   // lseek(input, 0, SEEK_SET); 
+   // uint8_t arr2[1000] = {0};
+   // printf("num bytes we readin %d\n", bytes_read);
+   // int cntr2 = read_bytes(input, arr2, 1000);
+  //  write_bytes(output, arr2, cntr2);
+     
 }
