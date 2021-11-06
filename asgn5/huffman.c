@@ -34,11 +34,11 @@ void build_codes(Node *root, Code table[static ALPHABET]) {
         frstrun = true;
     }
     if (!(root == NULL)) {
-        if (!(root->left) && !(root->right)) {
+        if ((root->left == NULL) && (root->right == NULL)) {
             table[root->symbol] = c;
 
         } else {
-            table[root->symbol] = c;
+
             code_push_bit(&c, 0);
             build_codes(root->left, table);
             uint8_t bit;
