@@ -24,8 +24,12 @@ int main(int argc, char **argv) {
     while ((opt = getopt(argc, argv, OPTIONS)) != -1) {
         switch (opt) {
         case 'h':
-            printf("HELP\n");
-            printf("HELPMSG\n\n");
+            printf("SYNOPSIS\n  A Huffman decoder.\n  Decompresses a file using the Huffman coding "
+                   "algorithm.\n\n");
+            printf("USAGE\n  ./decode [-h] [-i infile] [-o outfile]\n\n");
+            printf("OPTIONS\n  -h             Program usage and help.\n  -v             Print "
+                   "compression statistics.\n  -i infile      Input file to decompress.\n  -o "
+                   "outfile     Output of decompressed data.\n");
             return 0;
             break;
         case 'v': stats = true; break;
@@ -37,7 +41,7 @@ int main(int argc, char **argv) {
     read_bytes(input, buf, 4);
     uint32_t magic = buf[0] | (buf[1] << 8) | (buf[2] << 16) | (buf[3] << 24);
     if (!(magic == MAGIC)) {
-        printf("bad file \n");
+        printf("Error, unable to read header \n");
         return 1;
     }
     uint8_t permissions[2] = { 0 };
@@ -77,7 +81,7 @@ int main(int argc, char **argv) {
             } else if (bit == 1) {
                 iters = iters->right;
             } else {
-                printf("what the");
+                return -1;
             }
         }
     }
