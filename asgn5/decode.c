@@ -72,7 +72,7 @@ int main(int argc, char **argv) {
             numdec++;
             numprint++;
             prnlis[numprint] = iters->symbol;
-            if (numprint == (100)) {
+            if (numprint == (101)) {
                 write_bytes(output, prnlis, 100);
                 numprint = 0;
             }
