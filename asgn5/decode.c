@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
+#include <inttypes.h>
 #include <sys/stat.h>
 #define OPTIONS "hvi:o:"
 int main(int argc, char **argv) {
@@ -36,34 +37,53 @@ int main(int argc, char **argv) {
     uint8_t buf[4] = { 0 };
     read_bytes(input, buf, 4);
     uint32_t magic = buf[0] | (buf[1] << 8) | (buf[2] << 16) | (buf[3] << 24);
-    write_bytes(output, buf, 4);
+    // write_bytes(output, buf, 4);
     if (!(magic == MAGIC)) {
         printf("bad file \n");
         return 1;
     }
     uint8_t permissions[2] = { 0 };
     read_bytes(input, permissions, 2);
-   write_bytes(output, permissions, 2);
+    // write_bytes(output, permissions, 2);
     uint16_t perms = permissions[0] | (permissions[1] << 8);
     fchmod(output, perms);
     uint8_t tree[2] = { 0 };
     read_bytes(input, tree, 2);
-    write_bytes(output, tree, 2);
+    // write_bytes(output, tree, 2);
     uint16_t tree_size = tree[0] | (tree[1] << 8);
-    printf("%d", tree_size);
+    // printf("%d", tree_size);
     uint8_t file_size[8] = { 0 };
-    uint32_t sizeinbyte = 0;
+    uint64_t sizeinbyte = 0;
     read_bytes(input, file_size, 8);
     for (int i = 0; i < 8; i++) {
         sizeinbyte |= (file_size[i] << (8 * i));
     }
-    write_bytes(output, file_size, 8);
-     uint8_t *treebuffs = (uint8_t*)calloc(tree_size, sizeof(uint8_t));
+    // printf("file size %" PRIu64 "\n", sizeinbyte);
+    uint8_t *treebuffs = (uint8_t *) calloc(tree_size, sizeof(uint8_t));
     //uint8_t treebuffs[100] = { 0} ;
-     read_bytes(input, treebuffs, tree_size);
-    
-      write_bytes(output, treebuffs, tree_size);
-   
-    //  uint32_t *pr = (uint32_t*) &buf;
-    // write_bytes(output, buf, 4);
+    read_bytes(input, treebuffs, tree_size);
+
+    // write_bytes(output, treebuffs, tree_size);
+    Node *root = rebuild_tree(tree_size, treebuffs);
+    // node_print(root);
+    // bool fulldecode = false;
+    Node *iters = root;
+    uint64_t numdec = 0;
+    uint8_t bit = 0;
+    while (numdec < sizeinbyte) {
+        if (!((iters->left) || (iters->right))) {
+            uint8_t prnlis[1];
+            prnlis[0] = iters->symbol;
+            write_bytes(output, prnlis, 1);
+            iters = root;
+            numdec++;
+        } else {
+            read_bit(input, &bit);
+            if (bit == 0) {
+                iters = iters->left;
+            } else {
+                iters = iters->right;
+            }
+        }
+    }
 }

@@ -28,7 +28,13 @@ int main(int argc, char **argv) {
             return 0;
             break;
         case 'v': stats = true; break;
-        case 'i': input = open(optarg, O_RDONLY); break;
+        case 'i':
+            input = open(optarg, O_RDONLY);
+            if (input == -1) {
+                printf("No input file given\n");
+                return -1;
+            }
+            break;
         case 'o': output = open(optarg, O_WRONLY | O_CREAT | O_TRUNC, 00400 | 00200); break;
         }
     }
@@ -63,9 +69,9 @@ int main(int argc, char **argv) {
     fstat(input, &statsbuf);
     head.permissions = statsbuf.st_mode;
     head.file_size = statsbuf.st_size;
-    
+
     head.tree_size = numchar;
-    printf("%u", head.tree_size);
+    // printf("%u", head.tree_size);
     // printf("perms %d\n", statsbuf.st_mode);
     uint8_t *bufprin = (uint8_t *) &head;
 
@@ -91,5 +97,5 @@ int main(int argc, char **argv) {
     close(input);
     close(output);
 
-  //  Node *root = build_tree(hist);
+    //  Node *root = build_tree(hist);
 }

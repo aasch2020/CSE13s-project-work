@@ -1,6 +1,7 @@
 #include "huffman.h"
 #include "pq.h"
 #include "io.h"
+#include "stack.h"
 #include "node.h"
 #include <stdio.h>
 #include <stdbool.h>
@@ -80,7 +81,33 @@ void delete_tree(Node **root) {
     }
 }
 
-/*Node *rebuild_tree(uint16_t nbytes, uint8_t tree_dump[static nbytes]){
-	
+Node *rebuild_tree(uint16_t nbytes, uint8_t tree_dump[static nbytes]) {
+    Stack *a = stack_create(nbytes);
+    for (uint16_t i = 0; i < nbytes; i++) {
+        if (tree_dump[i] == 'L') {
+            i++;
+            Node *c = node_create(tree_dump[i], 0);
+            stack_push(a, c);
 
-}*/
+        } else if (tree_dump[i] == 'I') {
+            Node *left;
+            Node *right;
+            stack_pop(a, &right);
+            stack_pop(a, &left);
+            Node *parent = node_join(left, right);
+            stack_push(a, parent);
+        } else {
+            printf("nae nae break\n");
+        }
+    }
+    if (stack_size(a) == 1) {
+        Node *take;
+        stack_pop(a, &take);
+        return take;
+    } else {
+        printf("what the heck\n");
+        Node *take2;
+        stack_pop(a, &take2);
+        return take2;
+    }
+}

@@ -29,9 +29,8 @@ int write_bytes(int outfile, uint8_t *buf, int nbytes) {
         return 0;
     }
     int crr_bytes = 0;
-    while (written_bytes <= nbytes)
-	 {
-        crr_bytes = write(outfile, buf + written_bytes, nbytes -  written_bytes);
+    while (written_bytes <= nbytes) {
+        crr_bytes = write(outfile, buf + written_bytes, nbytes - written_bytes);
 
         if (crr_bytes == 0) {
             break;
