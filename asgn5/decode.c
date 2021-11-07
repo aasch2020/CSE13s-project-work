@@ -62,13 +62,14 @@ int main(int argc, char **argv) {
     uint64_t numdec = 0;
     uint8_t bit = 0;
 
-    while (numdec < sizeinbyte) {
+    while (!(numdec == sizeinbyte)) {
         if (!((iters->left) || (iters->right))) {
+            numdec++;
             uint8_t prnlis[1];
             prnlis[0] = iters->symbol;
             write_bytes(output, prnlis, 1);
             iters = root;
-            numdec++;
+
         } else {
             read_bit(input, &bit);
             if (bit == 0) {
