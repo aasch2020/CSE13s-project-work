@@ -82,7 +82,7 @@ void delete_tree(Node **root) {
 }
 
 Node *rebuild_tree(uint16_t nbytes, uint8_t tree_dump[static nbytes]) {
-    Stack *a = stack_create(100000000);
+    Stack *a = stack_create(nbytes + 1);
     for (uint16_t i = 0; i < nbytes; i++) {
         if (tree_dump[i] == 'L') {
             i++;

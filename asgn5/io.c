@@ -76,7 +76,7 @@ void write_code(int outfile, Code *c) {
         }
         writeindex++;
         if (writeindex == BLOCK * 8) {
-            flush_codes(outfile);
+            write_bytes(outfile, writebuf, BLOCK);
             writeindex = 0;
         }
     }

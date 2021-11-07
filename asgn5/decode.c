@@ -73,8 +73,10 @@ int main(int argc, char **argv) {
             read_bit(input, &bit);
             if (bit == 0) {
                 iters = iters->left;
-            } else {
+            } else if (bit == 1) {
                 iters = iters->right;
+            } else {
+                printf("what the");
             }
         }
     }
