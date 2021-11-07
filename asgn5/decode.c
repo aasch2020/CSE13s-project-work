@@ -63,19 +63,16 @@ int main(int argc, char **argv) {
     Node *root = rebuild_tree(tree_size, treebuffs);
 
     Node *iters = root;
-    uint64_t numdec = 0;
     uint8_t bit = 0;
-    uint8_t prnlis[100] = { 0 };
-    uint64_t numprint = 0;
+
+    uint64_t numdec = 0;
     while (!(numdec == sizeinbyte)) {
         if (!((iters->left) || (iters->right))) {
+            uint8_t prnlis[1];
             numdec++;
-            numprint++;
-            prnlis[numprint] = iters->symbol;
-            if (numprint == (101)) {
-                write_bytes(output, prnlis, 100);
-                numprint = 0;
-            }
+            prnlis[0] = iters->symbol;
+            write_bytes(output, prnlis, 1);
+
             iters = root;
 
         } else {
