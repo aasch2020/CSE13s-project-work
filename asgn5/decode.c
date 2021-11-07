@@ -65,13 +65,17 @@ int main(int argc, char **argv) {
     Node *iters = root;
     uint64_t numdec = 0;
     uint8_t bit = 0;
-
+    uint8_t prnlis[BLOCK] = { 0 };
+    uint64_t numprint = 0;
     while (!(numdec == sizeinbyte)) {
         if (!((iters->left) || (iters->right))) {
             numdec++;
-            uint8_t prnlis[1];
-            prnlis[0] = iters->symbol;
-            write_bytes(output, prnlis, 1);
+            numprint++;
+            prnlis[numprint] = iters->symbol;
+            if (numprint == (BLOCK - 1)) {
+                write_bytes(output, prnlis, BLOCK);
+                numprint = 0;
+            }
             iters = root;
 
         } else {
