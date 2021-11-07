@@ -60,7 +60,7 @@ void dump_tree(int outfile, Node *root) {
         dump_tree(outfile, root->left);
         dump_tree(outfile, root->right);
 
-        if (((root->left == NULL) && (root->right == NULL))) /*!(root->symbol == '$'))*/ {
+        if (((root->left == NULL) && (root->right == NULL))) {
             uint8_t buf[2] = { 'L', root->symbol };
             write_bytes(outfile, buf, 2);
         } else {
@@ -75,7 +75,7 @@ void delete_tree(Node **root) {
         delete_tree(&((*root)->left));
         delete_tree(&((*root)->right));
 
-        if ((((*root)->left == NULL) && ((*root)->right == NULL))) /*!(root->symbol == '$'))*/ {
+        if ((((*root)->left == NULL) && ((*root)->right == NULL))) {
             node_delete(root);
         }
     }
@@ -97,7 +97,7 @@ Node *rebuild_tree(uint16_t nbytes, uint8_t tree_dump[static nbytes]) {
             Node *parent = node_join(left, right);
             stack_push(a, parent);
         } else {
-            printf("nae nae break\n");
+            printf("This shouldn't happen\n");
         }
     }
     if (stack_size(a) == 1) {
@@ -106,7 +106,6 @@ Node *rebuild_tree(uint16_t nbytes, uint8_t tree_dump[static nbytes]) {
         stack_delete(&a);
         return take;
     } else {
-        printf("what the heck\n");
         Node *take2;
         stack_pop(a, &take2);
         return take2;

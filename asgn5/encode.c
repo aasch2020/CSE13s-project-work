@@ -51,17 +51,14 @@ int main(int argc, char **argv) {
     hist[0]++;
     hist[255]++;
     Node *root = build_tree(hist);
-    //    node_print(root);
     Code ctable[ALPHABET] = { 0 };
     build_codes(root, ctable);
     uint16_t numchar = 0;
     for (int i = 0; i < 256; i++) {
         if (!code_empty(&ctable[i])) {
-            //        printf("the char is %d\n", i);
             numchar++;
         }
     }
-    //  numchar -=2;
     numchar = numchar * 3 - 1;
     Header head;
     head.magic = MAGIC;
@@ -71,31 +68,23 @@ int main(int argc, char **argv) {
     head.file_size = statsbuf.st_size;
 
     head.tree_size = numchar;
-    // printf("%u", head.tree_size);
-    // printf("perms %d\n", statsbuf.st_mode);
     uint8_t *bufprin = (uint8_t *) &head;
 
     write_bytes(output, bufprin, 16);
     dump_tree(output, root);
     lseek(input, 0, SEEK_SET);
     uint8_t arr2[BLOCK] = { 0 };
-    // printf("num bytes we readin %d\n", bytes_read);
     int bytes_read_code = BLOCK + 1;
     while (bytes_read_code > 0) {
         bytes_read_code = read_bytes(input, arr2, BLOCK);
         for (int i = 0; i < bytes_read_code; i++) {
-            //        printf("charr is %c\n", arr2[i]);
-            //      code_print(&ctable[arr2[i]]);
             write_code(output, &ctable[arr2[i]]);
         }
     }
     fchmod(output, head.permissions);
     flush_codes(output);
-    // write_bytes(output, arr2, cntr2)
     delete_tree(&root);
 
     close(input);
     close(output);
-
-    //  Node *root = build_tree(hist);
 }

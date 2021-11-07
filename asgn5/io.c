@@ -41,8 +41,8 @@ int write_bytes(int outfile, uint8_t *buf, int nbytes) {
     return written_bytes;
 }
 static uint8_t buffer[BLOCK];
-static int index = 0; //where in teh buffffffffff
-static int end = -1; //the last valid byte the last avalid thie byte
+static int index = 0;
+static int end = -1;
 bool read_bit(int infile, uint8_t *bit) {
 
     if (index == 0) {

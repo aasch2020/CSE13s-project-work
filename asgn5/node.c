@@ -39,19 +39,3 @@ void node_print(Node *n) {
     }
     printf("\n");
 }
-/*
-int main() {
-    printf("main\n");
-    struct Node *nodeone = node_create('a', 5);
-    node_print(nodeone);
-    struct Node *nodetwo = node_create('x', 12);
-    struct Node *nodethree = node_join(nodeone, nodetwo);
-    struct Node *nodefour = node_join(nodethree, nodetwo);
-
-    node_print(nodethree);
-    node_print(nodefour);
-    node_delete(&nodeone);
-    node_delete(&nodetwo);
-    node_delete(&nodethree);
-}
-*/
