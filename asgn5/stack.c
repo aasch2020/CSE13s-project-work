@@ -15,8 +15,8 @@ struct Stack {
 };
 
 //The below function creates the stack, and takes on integer for the capcacity of the stack
-//If also allocates memory as appropriate and returns a null ponter on failed allocation
-//This code provided in the assignment document by Professor Long. (2021 Professor Long)
+//It also allocates memory as appropriate and returns a null ponter on failed allocation
+//The allocated array is an array of node pointers as this stack stores nodes.
 Stack *stack_create(uint32_t capacity) {
     Stack *s = (Stack *) malloc(sizeof(Stack));
     if (s) {
@@ -33,7 +33,7 @@ Stack *stack_create(uint32_t capacity) {
 
 //This code takes a pointer to a pointer to a stack, and first frees the array of items in stack, then frees stack.
 //Then it sets the pointer to null perevent call after free.
-//This code provided in the assignment document by Professor Long. (2021 Professor Long)
+
 void stack_delete(Stack **s) {
     if (*s && (*s)->items) {
         free((*s)->items);
@@ -43,7 +43,7 @@ void stack_delete(Stack **s) {
     return;
 }
 
-//Thi function takes a pointer to a stack and returns if the stack is empty by checking if the top is 0.
+//This function takes a pointer to a stack and returns true if the stack is empty by checking if the top is 0.
 bool stack_empty(Stack *s) {
     if (s->top == 0) {
         return true;
@@ -52,7 +52,7 @@ bool stack_empty(Stack *s) {
     }
 }
 
-//This function takes a pointer to a stack a nd returns if the stack is full by checking if the top is eqaul to the capacity.
+//This function takes a pointer to a stack and returns true if the stack is full by checking if the top is equal to the capacity.
 bool stack_full(Stack *s) {
     if (s->top == s->capacity) {
         return true;
@@ -61,14 +61,14 @@ bool stack_full(Stack *s) {
     }
 }
 
-//This function returns the size of the stack, which is the top of the stack.
+//This function returns the size of the stack, which is the number of the top of the stack.
 uint32_t stack_size(Stack *s) {
     return s->top;
 }
 
-//This function takes the stack and an integer, and adds that integer to the top of the stack
+//This function takes the stack and a node, and adds that node to the top of the stack
 //It then increases the top by one to reflect that change.
-//It ensures the stack is not full before doing this.
+//It ensures the stack is not full before doing this, in which case false is returned.
 bool stack_push(Stack *s, Node *n) {
     if (stack_full(s)) {
         return false;
@@ -79,8 +79,8 @@ bool stack_push(Stack *s, Node *n) {
     }
 }
 
-//This function takes the stack and a pointer to an integer, and removes the top item from the stack if it is not empty.
-//The function returns a boolean for succeeded pop, and puts the popped value in the pointer x.
+//This function takes the stack and a pointer to an node, and removes the top item from the stack if it is not empty.
+//The function returns a boolean for succeeded pop which is false if the stack is empty, and puts the popped value in the pointer n.
 bool stack_pop(Stack *s, Node **n) {
     if (stack_empty(s)) {
         return false;
@@ -93,9 +93,7 @@ bool stack_pop(Stack *s, Node **n) {
     }
 }
 
-//This code is given in the assignment document by Professor Long (2021 Professor Long)
-//This function prints the contents of the stack to the given file outfile, and maps the integers in the stack
-//to the array of cities given.
+//This function takes a stack and prints all nodes in the stack
 void stack_print(Stack *s) {
     for (uint32_t i = 0; i < s->top; i++) {
         node_print(s->items[i]);
