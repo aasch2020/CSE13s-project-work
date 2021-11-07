@@ -62,7 +62,7 @@ int main(int argc, char **argv) {
     uint64_t numdec = 0;
     uint8_t bit = 0;
 
-    while (numdec <= sizeinbyte) {
+    while (numdec < sizeinbyte) {
         if (!((iters->left) || (iters->right))) {
             uint8_t prnlis[1];
             prnlis[0] = iters->symbol;

@@ -86,7 +86,7 @@ void flush_codes(int outfile) {
     if (writeindex > 0) {
         int indbytes = writeindex / 8;
         if ((writeindex % 8) != 0) {
-            writebuf[writeindex / 8] = (writebuf[writeindex / 8] & (~(255 << (writeindex % 8))));
+            writebuf[writeindex / 8] = (writebuf[writeindex / 8] & ~(255 << (writeindex % 8)));
             indbytes++;
         }
         write_bytes(outfile, writebuf, indbytes);
