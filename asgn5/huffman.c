@@ -103,6 +103,7 @@ Node *rebuild_tree(uint16_t nbytes, uint8_t tree_dump[static nbytes]) {
     if (stack_size(a) == 1) {
         Node *take;
         stack_pop(a, &take);
+        stack_delete(&a);
         return take;
     } else {
         printf("what the heck\n");

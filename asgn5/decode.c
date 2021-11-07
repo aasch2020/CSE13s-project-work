@@ -61,6 +61,7 @@ int main(int argc, char **argv) {
     Node *iters = root;
     uint64_t numdec = 0;
     uint8_t bit = 0;
+
     while (numdec < sizeinbyte) {
         if (!((iters->left) || (iters->right))) {
             uint8_t prnlis[1];
@@ -77,4 +78,8 @@ int main(int argc, char **argv) {
             }
         }
     }
+    free(treebuffs);
+    delete_tree(&root);
+    close(input);
+    close(output);
 }
