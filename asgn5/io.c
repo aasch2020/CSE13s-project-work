@@ -52,7 +52,7 @@ bool read_bit(int infile, uint8_t *bit) {
             end = num_bytes * 8;
         }
     }
-    if (index == end - 1) {
+    if (index == end) {
         return false;
     }
     *bit = ((buffer[index / 8] >> ((index % 8))) & 1);
