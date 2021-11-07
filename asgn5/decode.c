@@ -65,15 +65,15 @@ int main(int argc, char **argv) {
     Node *iters = root;
     uint64_t numdec = 0;
     uint8_t bit = 0;
-    uint8_t prnlis[BLOCK] = { 0 };
+    uint8_t prnlis[100] = { 0 };
     uint64_t numprint = 0;
     while (!(numdec == sizeinbyte)) {
         if (!((iters->left) || (iters->right))) {
             numdec++;
             numprint++;
             prnlis[numprint] = iters->symbol;
-            if (numprint == (BLOCK)) {
-                write_bytes(output, prnlis, BLOCK);
+            if (numprint == (100)) {
+                write_bytes(output, prnlis, 100);
                 numprint = 0;
             }
             iters = root;
