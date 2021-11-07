@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
+#include <sys/stat.h>
 #define OPTIONS "hvi:o:"
 int main(int argc, char **argv) {
     // The below code parses command line arguments,
@@ -28,25 +29,41 @@ int main(int argc, char **argv) {
             break;
         case 'v': stats = true; break;
         case 'i': input = open(optarg, O_RDONLY); break;
-        case 'o': output = open(optarg, O_WRONLY | O_CREAT, 00400 | 00200); break;
+        case 'o': output = open(optarg, O_WRONLY | O_CREAT | O_TRUNC, 00400 | 00200); break;
         }
     }
-
-    Code c = code_init();
-    code_push_bit(&c, 1);
-    code_push_bit(&c, 1);
-    code_push_bit(&c, 0);
-    code_push_bit(&c, 1);
-    Code b = code_init();
-    code_push_bit(&b, 1);
-    code_push_bit(&b, 1);
-    code_push_bit(&b, 1);
-    code_push_bit(&b, 0);
-    code_push_bit(&b, 1);
-
-    code_print(&c);
-    code_print(&b);
-    write_code(output, &c);
-    write_code(output, &b);
-    flush_codes(output);
+    //  Header head;
+    uint8_t buf[4] = { 0 };
+    read_bytes(input, buf, 4);
+    uint32_t magic = buf[0] | (buf[1] << 8) | (buf[2] << 16) | (buf[3] << 24);
+    write_bytes(output, buf, 4);
+    if (!(magic == MAGIC)) {
+        printf("bad file \n");
+        return 1;
+    }
+    uint8_t permissions[2] = { 0 };
+    read_bytes(input, permissions, 2);
+   write_bytes(output, permissions, 2);
+    uint16_t perms = permissions[0] | (permissions[1] << 8);
+    fchmod(output, perms);
+    uint8_t tree[2] = { 0 };
+    read_bytes(input, tree, 2);
+    write_bytes(output, tree, 2);
+    uint16_t tree_size = tree[0] | (tree[1] << 8);
+    printf("%d", tree_size);
+    uint8_t file_size[8] = { 0 };
+    uint32_t sizeinbyte = 0;
+    read_bytes(input, file_size, 8);
+    for (int i = 0; i < 8; i++) {
+        sizeinbyte |= (file_size[i] << (8 * i));
+    }
+    write_bytes(output, file_size, 8);
+     uint8_t *treebuffs = (uint8_t*)calloc(tree_size, sizeof(uint8_t));
+    //uint8_t treebuffs[100] = { 0} ;
+     read_bytes(input, treebuffs, tree_size);
+    
+      write_bytes(output, treebuffs, tree_size);
+   
+    //  uint32_t *pr = (uint32_t*) &buf;
+    // write_bytes(output, buf, 4);
 }

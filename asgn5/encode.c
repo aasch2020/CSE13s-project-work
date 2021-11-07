@@ -36,7 +36,7 @@ int main(int argc, char **argv) {
     uint64_t hist[ALPHABET] = { 0 };
     uint8_t arr[BLOCK];
     int bytes_read = BLOCK + 1;
-    while (bytes_read >= BLOCK) {
+    while (bytes_read > 0) {
         bytes_read = read_bytes(input, arr, BLOCK);
         for (int i = 0; i < bytes_read; i++) {
             hist[arr[i]]++;
@@ -63,8 +63,9 @@ int main(int argc, char **argv) {
     fstat(input, &statsbuf);
     head.permissions = statsbuf.st_mode;
     head.file_size = statsbuf.st_size;
-
+    
     head.tree_size = numchar;
+    printf("%u", head.tree_size);
     // printf("perms %d\n", statsbuf.st_mode);
     uint8_t *bufprin = (uint8_t *) &head;
 
@@ -74,7 +75,7 @@ int main(int argc, char **argv) {
     uint8_t arr2[BLOCK] = { 0 };
     // printf("num bytes we readin %d\n", bytes_read);
     int bytes_read_code = BLOCK + 1;
-    while (bytes_read_code >= BLOCK) {
+    while (bytes_read_code > 0) {
         bytes_read_code = read_bytes(input, arr2, BLOCK);
         for (int i = 0; i < bytes_read_code; i++) {
             //        printf("charr is %c\n", arr2[i]);
@@ -89,4 +90,6 @@ int main(int argc, char **argv) {
 
     close(input);
     close(output);
+
+  //  Node *root = build_tree(hist);
 }

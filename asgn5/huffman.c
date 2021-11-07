@@ -79,3 +79,8 @@ void delete_tree(Node **root) {
         }
     }
 }
+
+Node *rebuild_tree(uint16_t nbytes, uint8_t tree_dump[static nbytes]){
+	
+
+}
