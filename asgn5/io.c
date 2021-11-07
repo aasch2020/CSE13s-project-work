@@ -40,7 +40,7 @@ uint64_t bytes_written;
 int write_bytes(int outfile, uint8_t *buf, int nbytes) {
     int written_bytes = 0;
     if (nbytes == 0) {
-               return 0;
+        return 0;
     }
     int crr_bytes = 0;
     while (written_bytes <= nbytes) {
@@ -94,7 +94,7 @@ static uint8_t writebuf[BLOCK];
 static int writeindex = 0;
 
 //this function takes an output file and a code c, to write the code to the output file, and returns void.
-//This function steps through the given code, pushing each bit in the code to the buffer, it achieves this by 
+//This function steps through the given code, pushing each bit in the code to the buffer, it achieves this by
 //using bitwise operators to set the bit using bitwise shifts, and and or.
 //it then adds to the static index
 //If the buffer is full, it writes the buffer to the output file.
