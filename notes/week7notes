@@ -1,0 +1,125 @@
+Trees
+	A tree is a DAG of nodes
+	tree is nul or a node with two trees
+	EXACTLY ONE PATH BETWEEN NODES
+	What a node
+		Smalles entity in tree
+		contains some val
+		Bin tre eac node has 2 children
+		some dont track parent
+		k-ary tree, each node has up to k children a 2ary tree is a binary tree
+root the starting pt of tree if null then tree is empty
+parent node to subnode
+child of ndoe kid
+subtree
+	tree in tre
+leaf
+	no kids
+traversal
+	4 diferent ways go rhtough the tree
+		go all edges
+	Preorder
+		Step 1 print key if root
+		Then print left
+		Then right
+		From root all the way left, then right
+	inorder
+		Go left
+		Print self
+		Go right
+		GOES IN ORDER
+		BASICALLY SORTS IT
+	postorder
+		GO left
+		Go right
+		Print
+		print from leafs in
+	level order
+		Same as BFS
+		uses a queue
+Successor
+	The next node according to some above order
+	Predecessor, previous nodes in some order
+	Both are well defined 
+Preorder
+	IF a root
+	Pret the key
+	Then iter left
+	THen iter right
+	Not recursive, do it with stack
+In order
+	Go left 
+	print
+	Go right
+	Gives it to you in sorted order
+Preorder
+	Visit down to leftmost
+	print all leaf then parent
+		Go from left to right
+LEvel order
+	Visit a node and put it in queue, put both kids to queue
+	Visit the thing put kids in queue and so on
+	Until all things in queue
+	Then go through queue
+Binary search tree
+	Keys less than a node is in it's left subtreee
+	Keys greater than go in right subtree
+Making a binary search tree
+	make a tree
+	find minimum
+		Start from the root
+		Walk all the way to the left
+		leftmost leaf
+	Find max
+		Walk all the way to the right
+	time cmpl
+		Depends on the balance
+		Balanced tree, height of the left subtree diff by at most 1 from height of right
+		From a balancder tree Olog(n)
+		For imbalanved tree O(n)
+		Imbalanced tree can be a linked lest
+	Find height
+		How tall?
+		If there is a node, then its at least 1 high,
+			Then add to it the height of its two tallest children
+	Is balanced
+		Is height of left chiled - hiehgt of right more than one?
+			if not balances
+		If left and right are balanced then balanced
+		Both conditions need to be met
+	Finding a key
+		If the key is less than current
+			Then go to the left
+		If key is greater than current
+			Then go to the right
+		If neigheter, we found it so return the root
+Insterting a new key
+	Current node is null
+	Current node's key greater than key
+	Current node's key less key
+	Case 1 create new node as the root
+	Case 2 recursively insert tree in left subtree
+	Case 3 revursively insert key in right subtree
+
+If sorted it makes a linked list yuck
+If random things are used to make a tree, it is on average a balanced tree
+Removing a key
+	Follow DFS find the node containing the key
+	Three cases
+		Node to remoive no left child
+			Make a copy of the right child
+			Delete the node, replace it with right child
+		Node to remove no right child
+			Make a temp copy of left
+			Delete the node replace it with left
+		Node to remove 2 kids
+			Make a temporary node of the smllest child on the right
+			AKA the leftmost right child
+			Walkdown the left from the right child
+			This is the successor
+			Copy the successors value
+			remove the successor and replace
+		Node no kids
+			Up and delete the node lmao who care
+
+		
