@@ -121,5 +121,149 @@ Removing a key
 			remove the successor and replace
 		Node no kids
 			Up and delete the node lmao who care
+Scripting
+	Scripting lets the lazy be productive
+	Operates on higher level objects like files and processes
+	Software tools philsophy
+		Connect the output of one program to the input of another
+		This is program cmp like (F of g of h(x) from math
+	Smart programmers reuse code prgrms and component
+		Why rewrite when it already exists
+		stuff like awk
+from sh from zsh
+	sh was og unix shell, bourne shell after stehpen bourne
+	many diff shells lik csh tcsh bash 
+		called a shell because it wraps around unix/linux
+	you can make a shell
+BASH
+	bourne again sehll
+	replace ment to bounre
+	ommand line interpeter
+	interpreted language
+	allows users to either give commands to OS or batches as a script
+Terminal is not smart, terminal is just a UI
+	you can do no shel
+	terminal is just an interface
+Bash reads an input line by line
+	each line is an entire comand
+	split by whitespace
+	the first word on a line is the command to execute with the following words the args for the cmmaon
+	ex ls-a
+	ls is to list file
+	-a is to list all
+types of commands
+	Aliases only in interactive shells
+		ll is eactually a acro for ls - lh
+		each shell does aliases a bit diff
+	builtins
+		Bash provided commands like printf or echo or cd
+		cant be a funct
+	Functions
+		A sequence of commands that perfoms some task
+		takes args
+	executables
+		executable programs are specified and executed by file path
+		Or by respective names if you are in the path as the program
+	$PATH
+		list of directories where shell will look for programs to run
+		directories in path
+			bin: this is where base stuff is stored
+			usr/bin primary directory of executables
+		the current dir should not be invluded in your PATH for seurity
+			this is why program in current dir is just ./
+Write a script
+	#!/bin/bash
+	#! is the magic number for script
+	then interpret the script using bin/bash
+basic doftiles
+	there are two for bash
+	.bashrc
+	and .bash_profile
+	.bashrc is a script that is runu whenever bash is started interactively
+	.basj_pprofile is onyl executed at start of login aka when you login or open terminal
+PArams and vars
+	used to store data
+	a king of parameter
+	assign with =
+	can be strings ints or arrays
+	arrays need not be homogenous in bash
+Expansion
+	can expand parameters using the expansion operator $
+	kind of like dereferencing in c.
+	Variable expressing substitutes the variable wwit its value
+	
+Arithmetic
+	Enclosed in double parens
+	Resultof an expression can be expanded with $((expr))
+	They work insde the doubule parsn
+special params
+	bvariables are named params special params are non var params
+	&n- gives the nth argument passed tot he current script or function
+		Use curly braces if n has more than one digit
+	$# The number of positional parameters
+	$$ is the PID of current shell
+	$_ the last argument of the last executed command
+	$? exit status of last exec command
 
-		
+Functions
+	sequences of commands
+	can have multipl;e functions in one script
+	cand o if statements
+	prevents oissue of overwritng vars
+Arrays
+	Array=(no comman list of things)
+	You can use explicit indecies, this is array with gaps between indices there are sparse arrays
+	can get spcific indices get num of indices can do += to append two arrays
+	can expant the n-th index
+	can expand an array as a single string
+Globs and patterns
+	Globs
+		patterns used to match string
+		*- matches andy string including the null empty string
+			$ ls *.c matches anthing that ends with .c
+		? matches single char		
+		[chars] matches any character in chars
+		[a-z] and thing between a and z
+	Echo names of text files, JPEGS, PDFS
+		echo *.{txt,jpeg,pdf}
+Testing and conditional
+	&& 
+	||
+	!
+	equality is testing uing single equal
+	need double square bracket to logical statement
+	there are also if elif and else blocks
+		conditional blocks must end with fi
+	Tests are done with [[]]
+		can also ude [] but its old and less feature
+			use it if maybe in env without bash
+tests on integers
+	Need to interpret values of ints, there are -lt -le -eq -ne -ge -gt
+	Can also test ints in arithmetic contexts
+	between ((...))
+Loops
+	while loop condition is true
+	until loop, until loop condition is true
+	do and done instead of braces
+	for win word, loop for each word of words setting w as each word
+	for ((init; condl incr))
+		Loop starting at init 
+File redirection
+	stdin is standarad out
+	stdout is standard out
+	stderr is standarad error
+	these files desc can be redirected from or to files
+	use > to redirect files/output to other fiels/output
+Pipes
+	Connects the stdout of one process to stdin of another process
+	Pipis are denoted with the operator "|"
+	Pipis can be chained together creating a piplein
+	prgrms can be written such that they can be chained togehter to get interesting results
+		The whole philosophy behind software tools taht drive unix
+	Example pipeline list the IDs of user's porcesses limit to 10
+	ps aux grep $USER awk { '{print $2}' | head
+		what's awk?
+			text parser
+			splits file input into fields automatically
+			output can be processed further with other tools like sort
+
