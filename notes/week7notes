@@ -267,3 +267,128 @@ Pipes
 			splits file input into fields automatically
 			output can be processed further with other tools like sort
 
+Security and cryptography
+	plaintext->key ciphertext->key->plaintext
+	Does not change the data, render msg incoprehensible to all except intended recipient
+	REQ
+		Use a well known algo,
+		If you rely on a secret algo (German Enigma, Japanese Purple)
+		This meansthe key should be secret but algo be public
+		If you make a secret algo, the second someone finds one your algo is cracked
+	Algorithms are publicly known
+		Keys represent a shared secret
+		Everyone can know the ciphertext
+		Only people wtih keys know the plaintext
+
+Caesar Cipher
+	Replaces each letter with the letter three positions down, thus uses modular arithmetic
+	How to do in c?
+		String comes in, k is the int num of shift
+		Make a copy of the string, run thru the entire string, if alphabet and lower case, subtract a, add the k modulo 26 
+		else is upper case, the place - A = k
+
+Unbreakable codes?
+	There is such a thing,a one time pad
+		Uses a treuly random key as long as the message
+		XOR the message with the key a bit at a time
+	Code is unbreakable because key could be any str of bits
+	The message could be any msg given the appropriate key
+	Difficulty
+		Distributin gth key is as hard as distributing the message
+	Difficulty
+		generating truly random bits is near impossibile
+Modern encryption algos
+	DES data encryption standard
+		Uses 56 bit keys
+		Same key to encrypt and decrypts
+		Need to try on average 2^55 key per sec
+			But, special comupter can try millions of keys per second
+	Current algorithms AES use at least 128 bit keys
+		Adding one bits to the key makes it 2* as hard do guess
+		must try 2^127 keys
+		At 10^15 keys per secondm wed need 1000 billion to break the key
+		Usually modern encryption isn't brute forced
+ATtacking AES
+	Even if we have an ifnitely fast computer
+	There is a fundamental limit on the energy req to flip a bit
+	k = 1.38*10^-21
+	energy is E > k T ln 2 Joules
+	128 bit AES would need all the electric power of the USE for over a year
+	
+Simon
+	NSAE block ciphers
+	Simon is a balanced Feistel cipher with n bit word and lock lenth is 2n
+	As of 2018, no successful attack on full-round of a variant of simon is known
+	Does bit shift and and and xor to do this
+	key schedule, takes a key and breaks the key out into various things
+	Decrypted and go back wards fro the the thing
+		Enc and dec the same
+Symetric key cryptography is secret key cryptography
+	this is that same key, known by send and receive and noone else
+Public key
+	instead of shared secret keys, we have public key K, and private key Kr that are not the same
+	These keys are inverst of one another
+	Encrypt and decrypt are the same algo, so typically, the same either way
+	Public key cryptography is usually slow
+	usually for small amounts of data
+
+Diffie-Hellman key exchange
+	For exchanging keys over insecure channels
+	Two individuals agree ona public prime and some int g, such that g is a primitive roor mod p
+	Alice chooses private int a and computes A= g^a(modp)
+	Bob chooese pricate integer b and computer B= g^b(mod p)
+	They share A and B over insecure channel
+	Alice computes K = B^a(modp)=g^ab(modp)
+	Bob computes K = A^b(modp)= g^ba(modp)
+	ab=ba
+	Now k is the shared key
+	Lots of theoriticians
+	Authentication of Diffie hellman
+
+
+
+
+RSA
+	Mutual inverses of pub and priv key
+	THis means dec and enc the same if you go opposite ways	
+ATtacking RSA
+	Requires factoring n in order to find totient
+	Factoring of large coposites if very hard
+	Best knowsn algo is the generalized number fiels sieve, 
+
+PUblic key is comprised of two integeres of public omdulus and public exponenet
+	Choose tow large primes p and q let n = p * q
+	Compute the totient
+	Choose a random e such taht gcd
+	Private key is comprised of two integers n and d
+	d such that e*d = 1 mod(totient)
+	d by iteself is the private key, but n is req for decrypt so put them together
+keygen
+	code shown
+	
+
+Primality testing
+	How do know if number is prime?
+	We could try to factor it, that is root(n) 
+	Sieve of Eosthosenes, need O(n) space
+	probablistic test(can be wrong)
+	Fooled by Carmichael pesudoprime
+		it fools probablisitc test
+	We can use the AKS test
+		Too slow to be practical
+		The firset primality test in polynomial time
+	
+
+Witness lop of probablistic primality test
+
+Fibonacci in GMP
+GMP examples
+in the slides
+
+
+How to attack modern cryptography?
+	The end user usually the issue
+	RSA key extraction via low bandwidth Acoustic cryptanlysis
+	You just cheat lol
+	The weakest link is the end user
+		
