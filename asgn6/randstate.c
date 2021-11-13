@@ -11,8 +11,3 @@ void randstate_init(uint64_t seed) {
 void randstate_clear(void) {
     gmp_randclear(state);
 }
-int main() {
-    randstate_init(1);
-    int asd = gmp_urandomb_ui(state, 31);
-    printf("a is %d", asd);
-}

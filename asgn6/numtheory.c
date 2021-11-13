@@ -1,5 +1,5 @@
 #include "numtheory.h"
-
+#include "randstate.h"
 void gcd(mpz_t d, mpz_t a, mpz_t b) {
     mpz_t ac;
     mpz_t bc;
@@ -17,38 +17,34 @@ void gcd(mpz_t d, mpz_t a, mpz_t b) {
     return;
 }
 
-void mod_inverse(mpz_t i, mpz_t a, mpz_t n){
-	mpz_t r, rz, t, tz, q, rtemp, ttemp;
-	mpz_init_set(r, n);
-	mpz_init_set(rz, a);
-	mpz_init_set_ui(t, 0);
-	mpz_init_set_ui(tz, 1);
-	mpz_init_set_ui(q, 0);
-	mpz_init_set_ui(rtemp, 0);
-	mpz_init_set_ui(ttemp, 0);
-	while((mpz_cmp_ui(rz, 0) != 0)){
-		mpz_tdiv_q(q, r, rz);
-		mpz_set(rtemp, rz);
-		mpz_mul(rz, q, rz);
-		mpz_sub(rz, r, rz);
-		mpz_set(r, rtemp);
-		mpz_set(ttemp, tz);
-		mpz_mul(tz, q, tz);
-		mpz_sub(tz, t, tz);
-		mpz_set(t, ttemp);
-
-	}
-	if((mpz_cmp_ui(r, 1) > 0)){
-		mpz_set_ui(i, 0);
-		return;
-	}	
-	if((mpz_cmp_ui(t, 0) < 0)){
-		mpz_add(t, t, n);
-	}
-	mpz_set(i, t);
-
-
-
+void mod_inverse(mpz_t i, mpz_t a, mpz_t n) {
+    mpz_t r, rz, t, tz, q, rtemp, ttemp;
+    mpz_init_set(r, n);
+    mpz_init_set(rz, a);
+    mpz_init_set_ui(t, 0);
+    mpz_init_set_ui(tz, 1);
+    mpz_init_set_ui(q, 0);
+    mpz_init_set_ui(rtemp, 0);
+    mpz_init_set_ui(ttemp, 0);
+    while ((mpz_cmp_ui(rz, 0) != 0)) {
+        mpz_tdiv_q(q, r, rz);
+        mpz_set(rtemp, rz);
+        mpz_mul(rz, q, rz);
+        mpz_sub(rz, r, rz);
+        mpz_set(r, rtemp);
+        mpz_set(ttemp, tz);
+        mpz_mul(tz, q, tz);
+        mpz_sub(tz, t, tz);
+        mpz_set(t, ttemp);
+    }
+    if ((mpz_cmp_ui(r, 1) > 0)) {
+        mpz_set_ui(i, 0);
+        return;
+    }
+    if ((mpz_cmp_ui(t, 0) < 0)) {
+        mpz_add(t, t, n);
+    }
+    mpz_set(i, t);
 }
 
 void pow_mod(mpz_t out, mpz_t base, mpz_t exponent, mpz_t modulus) {
@@ -68,32 +64,45 @@ void pow_mod(mpz_t out, mpz_t base, mpz_t exponent, mpz_t modulus) {
     mpz_set(out, v);
     return;
 }
-/*
-bool is_prime(mpz_t n, uint64_t iters){
 
-
+bool is_prime(mpz_t n, uint64_t iters) {
+    mpz_t r, s, n1, nrand, a, y, j, pm2;
+    mpz_inits(a, y, j, NULL);
+    mpz_init_set_ui(pm2, 2);
+    mpz_init_set(n1, n);
+    mpz_init_set(nrand, n);
+    mpz_sub_ui(n1, n1, 1);
+    mpz_sub_ui(nrand, nrand, 3);
+    mpz_init_set(r, n);
+    mpz_sub_ui(r, r, 1);
+    mpz_init_set_ui(s, 0);
+    while (mpz_divisible_2exp_p(r, 1) == 0) {
+        mpz_tdiv_q_2exp(r, r, 1);
+        mpz_add_ui(s, s, 1);
+    }
+    for (uint64_t i = 0; i < iters; i++) {
+        mpz_urandomm(a, state, nrand);
+        mpz_add_ui(a, a, 2);
+        pow_mod(y, a, r, n);
+        if ((mpz_cmp_ui(y, 1) != 0) && (mpz_cmp(y, n1))) {
+            mpz_set_ui(j, 1);
+            while ((mpz_cmp(j, s) < 0) && (mpz_cmp(y, n1) != 0)) {
+                pow_mod(y, y, pm2, n);
+                if (mpz_cmp_ui(y, 1) == 0) {
+                    return false;
+                }
+                mpz_add_ui(j, j, 1);
+            }
+            if (mpz_cmp(y, n1) != 0) {
+                return false;
+            }
+        }
+    }
+    return true;
 }
-
+/*
 void make_prime(mpz_t p, uint64_t bits, uint64_t iters){
 
 }
 
 */
-
-int main() {
-    //	printf("main");
-    mpz_t a, d, b, c, f;
-    mpz_inits(a, d, b,c,f, NULL);
-    mpz_set_ui(a, 64);
-    mpz_set_ui(b, 24);
-    mpz_set_ui(c, 17);
-    gcd(d, a, b);
-    gmp_printf("The thing %Zd\n", d);
-    pow_mod(d, a, b, c);
-    gmp_printf("The thing pow %Zd\n", d);
-	mpz_set_ui(d, 9);
-	mpz_set_ui(c, 64);
-    mod_inverse(f, d, c);
-     gmp_printf("The thing modinv %Zd\n", f);
-
-}
