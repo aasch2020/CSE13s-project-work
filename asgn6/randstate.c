@@ -1,6 +1,4 @@
 #include "randstate.h"
-#include "stdio.h"
-#include <gmp.h>
 
 gmp_randstate_t state;
 void randstate_init(uint64_t seed) {

@@ -3,7 +3,7 @@ CFLAGS =  -Wall -Werror -Wpedantic -Wextra $(shell pkg-config --cflags gmp)
 
 LFLAGS = $(shell pkg-config --libs gmp)
 all: encrypt decrypt keygen
-encrypt:encrypt.o numtheory.o randstate.o
+encrypt: encrypt.o numtheory.o randstate.o
 	$(CC) -o encrypt encrypt.o numtheory.o randstate.o $(LFLAGS)
 keygen: numtheory.o randstate.o keygen.o
 	$(CC) -o keygen keygen.o numtheory.o randstate.o $(LFLAGS)
