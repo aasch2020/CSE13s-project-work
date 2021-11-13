@@ -7,6 +7,11 @@ numtheoryinc: numtheoryinc.o
 numtheoryinc.o: numtheoryinc.c
 	$(CC) $(CFLAGS) -c numtheoryinc.c
 
+numtheory: numtheory.o
+	$(CC) -o numtheory numtheory.o $(LFLAGS)
+numtheory.o: numtheory.c
+	$(CC) $(CFLAGS) -c numtheory.c
+
 randstate: randstate.o
 	$(CC) -o randstate randstate.o $(LFLAGS)
 randstate.o: randstate.c
