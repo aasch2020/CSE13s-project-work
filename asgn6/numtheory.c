@@ -71,6 +71,13 @@ void pow_mod(mpz_t out, mpz_t base, mpz_t exponent, mpz_t modulus) {
 }
 
 bool is_prime(mpz_t n, uint64_t iters) {
+    if ((mpz_cmp_ui(n, 3) == 0) || (mpz_cmp_ui(n, 2) == 0)) {
+        return true;
+    }
+    if (mpz_cmp_ui(n, 1) == 0 || mpz_cmp_ui(n, 0) == 0) {
+        return false;
+    }
+
     mpz_t r, s, nz, nrand, a, y, j, pm2;
     mpz_inits(a, y, j, NULL);
     mpz_init_set_ui(pm2, 2);
@@ -82,10 +89,10 @@ bool is_prime(mpz_t n, uint64_t iters) {
     mpz_sub_ui(r, r, 1);
     mpz_init_set_ui(s, 0);
     while (mpz_divisible_2exp_p(r, 2) != 0) {
-
         mpz_tdiv_q_2exp(r, r, 1);
         mpz_add_ui(s, s, 1);
     }
+
     for (uint64_t i = 0; i < iters; i++) {
         mpz_urandomm(a, state, nrand);
         mpz_add_ui(a, a, 2);

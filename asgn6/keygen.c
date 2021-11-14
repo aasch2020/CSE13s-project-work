@@ -16,13 +16,13 @@ int main() {
     mpz_set_ui(c, 64);
     mod_inverse(f, d, c);
     gmp_printf("The thing modinv %Zd\n", f);
-    mpz_init_set_ui(prm, 8);
-    printf("is prime %d\n", is_prime(prm, 25));
+    mpz_init_set_ui(prm, 0);
+    //  printf("is prime %d\n", is_prime(prm, 100));
     int x = 1;
     bool check = false;
     mpz_t ta, tb, tc, td, tf;
     mpz_inits(ta, tb, tc, td, tf, NULL);
-    for (int i = 0; i < 100000; i++) {
+    for (int i = 0; i < 1000; i++) {
         mpz_urandomb(ta, state, 150);
         mpz_set_ui(tb, 2);
         mpz_urandomb(tc, state, 150);
@@ -34,13 +34,13 @@ int main() {
         check = is_prime(prm, 150);
         x = mpz_probab_prime_p(prm, 150);
         if ((x != 0) != (check != 0)) {
-            printf("error at %d\n", i + 8);
+            printf("error at %d\n", i);
             printf("check is %d\n", check);
         }
         mpz_add_ui(prm, prm, 1);
     }
-
-    is_prime(prm, 25);
+    //  mpz_set(prm, 1);
+    //  is_prime(prm, 25);
     randstate_clear();
     mpz_clears(a, b, c, d, f, prm, NULL);
 }
