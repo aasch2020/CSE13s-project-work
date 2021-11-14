@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-void gcd(int a, int b, int *c) {
+/*void gcd(int a, int b, int *c) {
     int temp = 0;
     while (b != 0) {
         temp = b;
@@ -77,4 +77,4 @@ int main() {
     mod_inverse(&i, 9, 52);
     printf("mod inv is %d\n", i);
     is_prime(13, 15);
-}
+}*/
