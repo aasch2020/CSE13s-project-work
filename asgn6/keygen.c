@@ -56,9 +56,10 @@ int main() {
     FILE *file;
     file = fopen("outs.txt", "r");
     FILE *filel;
-    filel = fopen("out1.txt", "w+");
-    char as[] = "asdf";
+    filel = fopen("out1.txt", "w");
+    // char as[] = "asdf";
     // rsa_read_pub(n, e, a, as, file);
-    rsa_write_pub(n, e, a, as, filel);
+    // rsa_write_pub(n, e, a, as, filel);
+    rsa_encrypt_file(file, filel, n, e);
     mpz_clears(a, b, c, d, f, prm, NULL);
 }

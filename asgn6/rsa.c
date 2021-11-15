@@ -4,16 +4,18 @@
 #include <stdlib.h>
 #include <inttypes.h>
 void rsa_make_pub(mpz_t p, mpz_t q, mpz_t n, mpz_t e, uint64_t nbits, uint64_t iters) {
-    srandom(124);
+    srandom(112143334);
     uint64_t p_bit_cnt = ((random() % ((nbits / 2))) + (nbits / 4));
     uint64_t q_bit_cnt = nbits - p_bit_cnt;
-    //  printf("%"PRIu64", %"PRIu64"\n", p_bit_cnt, q_bit_cnt);
+    printf("%" PRIu64 ", %" PRIu64 "\n", p_bit_cnt, q_bit_cnt);
     make_prime(p, p_bit_cnt, iters);
     //  printf("here\n");
     make_prime(q, q_bit_cnt, iters);
+
     mpz_t totient;
     mpz_init(totient);
     mpz_mul(n, p, q);
+    //    printf("size of n %lu\n", mpz_sizeinbase(n, 2));
     mpz_sub_ui(p, p, 1);
     mpz_sub_ui(q, q, 1);
     mpz_mul(totient, p, q);
@@ -70,14 +72,60 @@ void rsa_read_priv(mpz_t n, mpz_t d, FILE *pvfile) {
     gmp_fscanf(pvfile, "%Zxd", n);
     gmp_fprintf(pvfile, "%Zxd", d);
 }
-void rsa_encrypt(mpz_t c, mpz_t m, mpz_t e, mpz_t n);
+void rsa_encrypt(mpz_t c, mpz_t m, mpz_t e, mpz_t n) {
+    pow_mod(c, m, e, n);
+}
 
-void rsa_encrypt_file(FILE *infile, FILE *outfile, mpz_t n, mpz_t e);
+void rsa_encrypt_file(FILE *infile, FILE *outfile, mpz_t n, mpz_t e) {
+    uint64_t blocksize = (mpz_sizeinbase(n, 2) - 1) / 8;
+    uint8_t *block = (uint8_t *) calloc(blocksize, sizeof(uint8_t));
+    block[0] = 0xFF;
+    uint64_t readcount;
+    bool all_read = false;
+    mpz_t impout, ciphertxt;
+    mpz_inits(impout, ciphertxt, NULL);
+    while (!all_read) {
+        readcount = fread(block + 1, 1, blocksize - 1, infile);
 
-void rsa_decrypt(mpz_t m, mpz_t c, mpz_t d, mpz_t n);
+        if (readcount == 0) {
+            all_read = true;
+        }
 
-void rsa_decrypt_file(FILE *infile, FILE *outfile, mpz_t n, mpz_t d);
+        mpz_import(impout, readcount + 1, 1, 1, 1, 0, block);
+        rsa_encrypt(ciphertxt, impout, e, n);
+        gmp_fprintf(outfile, "%Zxd\n", ciphertxt);
+    }
+}
 
-void rsa_sign(mpz_t s, mpz_t m, mpz_t d, mpz_t n);
+void rsa_decrypt(mpz_t m, mpz_t c, mpz_t d, mpz_t n) {
+    pow_mod(m, c, d, n);
+}
 
-bool rsa_verify(mpz_t m, mpz_t s, mpz_t e, mpz_t n);
+void rsa_decrypt_file(FILE *infile, FILE *outfile, mpz_t n, mpz_t d) {
+    uint64_t blocksize = (mpz_sizeinbase(n, 2) - 1) / 8;
+    uint8_t *block = (uint8_t *) calloc(blocksize, sizeof(uint8_t));
+    bool all_read = false;
+    uint64_t readcount;
+    mpz_t in, msg;
+    mpz_inits(in, msg, NULL);
+    while (!all_read) {
+        readcount = gmp_fscanf(infile, "%Zxd", in);
+        rsa_decrypt(msg, in, d, n);
+        mpz_export(block, NULL, 1, 1, 1, 0, msg);
+        fwrite(block + 1, 1, readcount - 1, outfile);
+    }
+}
+
+void rsa_sign(mpz_t s, mpz_t m, mpz_t d, mpz_t n) {
+    pow_mod(s, m, d, n);
+}
+
+bool rsa_verify(mpz_t m, mpz_t s, mpz_t e, mpz_t n) {
+    mpz_t t;
+    mpz_init(t);
+    pow_mod(t, s, e, n);
+    if (mpz_cmp(m, t) == 0) {
+        return true;
+    }
+    return false;
+}
