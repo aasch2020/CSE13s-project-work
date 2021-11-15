@@ -75,7 +75,7 @@ int main(int argc, char **argv) {
     rsa_make_priv(d, e, p, q);
     char *uname = getenv("USER");
     mpz_set_str(u, uname, 62);
-    rsa_sign(s, u, d, n);
+ //   rsa_sign(s, u, d, n);
 
     rsa_write_priv(n, d, privkey);
     rsa_write_pub(n, e, s, uname, pubkey);
