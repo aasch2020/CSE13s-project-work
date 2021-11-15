@@ -37,9 +37,7 @@ void rsa_make_pub(mpz_t p, mpz_t q, mpz_t n, mpz_t e, uint64_t nbits, uint64_t i
 }
 
 void rsa_write_pub(mpz_t n, mpz_t e, mpz_t s, char username[], FILE *pbfile) {
-    gmp_fprintf(pbfile, "%ZXd\n", n);
-    gmp_fprintf(pbfile, "%ZXd\n", e);
-    gmp_fprintf(pbfile, "%ZXd\n", s);
+    gmp_fprintf(pbfile, "%ZXd\n%Zxd\n%Zxd\n", n, e, s);
     fprintf(pbfile, "%s", username);
 }
 
