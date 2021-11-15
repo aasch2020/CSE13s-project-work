@@ -20,7 +20,7 @@ int main(int argc, char **argv) {
     FILE *privkey = fopen("rsa.priv", "w");
     bool verb = false;
     bool initgiv = false;
-    uint64_t seed;
+    uint64_t seed = 0;
     while ((opt = getopt(argc, argv, OPTIONS)) != -1) {
         switch (opt) {
         case 'h':
@@ -77,4 +77,8 @@ int main(int argc, char **argv) {
         gmp_printf("e (%lu bits) = %Zd\n", mpz_sizeinbase(e, 2), e);
         gmp_printf("d (%lu bits) = %Zd\n", mpz_sizeinbase(d, 2), d);
     }
+    fclose(pubkey);
+    fclose(privkey);
+    mpz_clears(p, q, n, e, d, s, u, NULL);
+    randstate_clear();
 }
