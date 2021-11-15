@@ -25,7 +25,10 @@ int main(int argc, char **argv) {
         switch (opt) {
         case 'h':
             printf("help\n");
-            return 0;
+ fclose(pubkey);
+    fclose(privkey);
+
+            return -1;
             break;
         case 'v': verb = true; break;
         case 'b': bitcnt = strtoul(optarg, NULL, 10); break;
@@ -34,6 +37,10 @@ int main(int argc, char **argv) {
             pubkey = fopen(optarg, "w");
             if (!pubkey) {
                 printf("Failed to open public key\n");
+		 fclose(pubkey);
+    fclose(privkey);
+    return -1;
+
             }
             break;
         case 'd':
@@ -41,6 +48,9 @@ int main(int argc, char **argv) {
             if (!privkey) {
 
                 printf("Failed to open private key\n");
+ fclose(pubkey);
+    fclose(privkey);
+return -1;
             }
             break;
         case 's':
