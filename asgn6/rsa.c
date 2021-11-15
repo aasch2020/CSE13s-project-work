@@ -34,7 +34,7 @@ void rsa_make_pub(mpz_t p, mpz_t q, mpz_t n, mpz_t e, uint64_t nbits, uint64_t i
             exp_found = true;
         }
     }
-    mpz_clear(totient);
+    mpz_clears(g, totient, NULL);
 }
 
 void rsa_write_pub(mpz_t n, mpz_t e, mpz_t s, char username[], FILE *pbfile) {
@@ -94,6 +94,7 @@ void rsa_encrypt_file(FILE *infile, FILE *outfile, mpz_t n, mpz_t e) {
         rsa_encrypt(ciphertxt, impout, e, n);
         gmp_fprintf(outfile, "%Zxd\n", ciphertxt);
     }
+    mpz_clears(impout, ciphertxt, NULL);
 }
 
 void rsa_decrypt(mpz_t m, mpz_t c, mpz_t d, mpz_t n) {
@@ -113,6 +114,7 @@ void rsa_decrypt_file(FILE *infile, FILE *outfile, mpz_t n, mpz_t d) {
         mpz_export(block, NULL, 1, 1, 1, 0, msg);
         fwrite(block + 1, 1, readcount - 1, outfile);
     }
+    mpz_clears(in, msg, NULL);
 }
 
 void rsa_sign(mpz_t s, mpz_t m, mpz_t d, mpz_t n) {
@@ -124,7 +126,9 @@ bool rsa_verify(mpz_t m, mpz_t s, mpz_t e, mpz_t n) {
     mpz_init(t);
     pow_mod(t, s, e, n);
     if (mpz_cmp(m, t) == 0) {
+        mpz_clear(t);
         return true;
     }
+    mpz_clear(t);
     return false;
 }
