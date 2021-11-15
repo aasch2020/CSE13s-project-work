@@ -44,7 +44,7 @@ int main(int argc, char **argv) {
             }
             break;
         case 'd':
-	    fclose(privkey);
+            fclose(privkey);
             privkey = fopen(optarg, "w");
             if (!privkey) {
 
