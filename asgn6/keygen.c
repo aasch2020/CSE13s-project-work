@@ -74,8 +74,8 @@ int main(int argc, char **argv) {
     rsa_make_pub(p, q, n, e, bitcnt, iters);
     rsa_make_priv(d, e, p, q);
     char *uname = getenv("USER");
-  //  mpz_set_str(u, uname, 62);
-//    rsa_sign(s, u, d, n);
+    mpz_set_str(u, uname, 62);
+    rsa_sign(s, u, d, n);
 
     rsa_write_priv(n, d, privkey);
     rsa_write_pub(n, e, s, uname, pubkey);
@@ -88,6 +88,7 @@ int main(int argc, char **argv) {
         gmp_printf("e (%lu bits) = %Zd\n", mpz_sizeinbase(e, 2), e);
         gmp_printf("d (%lu bits) = %Zd\n", mpz_sizeinbase(d, 2), d);
     }
+    free(uname);
     fclose(pubkey);
     fclose(privkey);
     mpz_clears(p, q, n, e, d, s, u, NULL);
