@@ -1,0 +1,156 @@
+Processes
+Code data an stack
+	Always has its own address
+Program state
+	CPU registers, program counter is uccner location in code
+	Stack pointer
+Oly one process can be running in a core
+Programs exxeucutre cdoe
+Each instruction has an address
+And acces data each byte had an address
+We want to think our prgrm is the only thing exec on comupter, we are wrong
+And address space is the region of a computer's memory where a progrma executes, ideally is protected from other programs
+HOw not program touch other
+	The loaders could relocate the instruction by addressa base address
+	Registers that point to first and last byte of program's memory (base register)
+In an ideal world
+	Fast and large and non volatile memory
+	Real world has memory that i slarge, fast, or affordable pick 2/3
+Memory hierarchy
+	Faster memory more expensive
+	cache small amount of fast expensive mem
+		Cache(L1) on the cpu chip usually
+		L2 may be on or off chip
+		L3 cache, off chip, made of SRAM
+	Main memory, medium speed medium price (DRAM)
+	Disk
+		many gigs of slow cheap non volatile
+Can't execute a program on disk
+memory manager handles this
+Part of Mem manager
+	OS(with drivers)
+	Single process
+GOal, lay these out in memory
+
+FIXED PARTITON MULTIPLE PROGRAM
+	Memory is divided into fixed size of various sizes
+	Assign a process to a space when it's free
+	Mechanisms
+		Separate input queues for each partition, lets programs in one at a time
+		Singel input queue, better ability to optimize CPU usage
+MULTIProgrammed system performance
+	Programs arrive at a certain time
+	Lists amount of CPU needed per program
+	Measure how busy/idle the CPU is
+Sharing the CPU among processes
+
+Memory needs to things, relocation and protection
+
+The OS cannot be certain where a program is loaded in memory
+	Variables and procedures can't use absolute locations
+	Several ways to guarantee this(relocation)
+The OS must keep processes memory separate
+	Protect a process from other proccesses reading or modifying it's own memory
+	Protext a process from modifying it's own program code
+Base and limit registeres
+	Special CPU registers base and limit
+	Access to registeres limited by system node
+	Address generation
+	Physical address is location in actual mem
+	Logical address locations from process pov
+	Physical address = base + logical address
+	Logical = logical - base
+Allocating memory
+	Search through region list to find large enough space
+	Hole is place where no prgram
+	List of hole
+	How to choose hole?
+		First fit: first hole prgrm will fit
+		NExt fitL first suitale after previously allocated
+		Best fit: tightest fit
+		Worst fir: biggest possible
+Freeing memory
+	Allocation struvts must be updated when memory is freed
+	easy with bitmaps, just set appropriate bits in the bitsmap
+	LL, modify adjacent elements as needed
+	Merge adjacent free regions into a single region
+	May involve mergint two regions with the just freed area
+Buddy allocation
+	Allocate memory in poewres of two
+	Split larger chunks to make two smaller chuks
+	When chunk is freed, see if it can be combined with its buddy to rebuild a larger chunk
+		This is recursive
+Virtual memory
+	Basic idea, OS hand out more memory that exists on the system
+	Keep recently used stuff in phsical memory
+	Move less revently used stuff to disk
+	Keep all of this hidden from processs
+	Especially helpful in multiprogrammed systems
+	disk memory is SLOOOW
+Use virtual memory even when we never got to disk
+Vitusal addresses
+	Programs uses virtual addresses that are local to the provess
+	Hardware translates virtual address to physical address
+Translation done by memory managemen unit
+	On same chip as CPU
+	Only physical adddresses leave the CPU/MMU chip
+Physical memory indexed by physical addresses
+Paging and page tables
+	Virtual addresses mapped to physical addresses
+	Units of mappin are called  apage
+	all addresses in the same virtual page are in the same physical page
+	Page tabl eentry contains translation for single page
+Table translates virtual page number to physical page number
+	Not all virtual mem has physical page
+	Not every physcial page need be used
+EX
+	64 kb virtual mem
+	16 KB physical mem
+What's in the page entry table?
+	Each entry in the page table contains
+	VAlid bit, set if this logical page nuber has a corresponding physical fream
+	{age frame number, page in physical mem
+	referenced bit, set if data on page has been accessed
+	Dirty(modified) bit: set if data on the page has been modified
+	Protection info
+Address translation architecture
+	CPU gets virtual page number, goes to page table to see which virtual page
+	Add the offset to the page frame num
+	Then go to physical memory
+
+Processes model
+	Code that lives in an address space
+	Each address space is a separate zone
+	only one process can be active an an instant (per core)
+		An instant can be very short
+		run eaech in bursts quickly
+When processies created?
+	When we turn on comupter
+		System initialization
+	Creat with system call
+		Use is create a new process
+		Already running processes like user programs system daemons
+When process end?
+	Voluntary
+	Normal exit/error exit
+	involutary
+		Fatal error, killed by other process
+PRocess heirarchies
+	Parent makes a child process
+	Forms a hierarchy
+		UNIX calls this a process group
+		If a process terminiates its children are inherited by parent
+Process states
+	Created
+	ready to run
+	Running
+	Waiting (memory)
+	Exit
+Transitions between states
+	Process enter ready queue
+	Schedule piskc processes
+	Schedule picks a different process
+	Process waits for an event such as I/)
+	event occurs
+	Process exits/(ended by other processs)
+
