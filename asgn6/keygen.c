@@ -4,7 +4,7 @@
 int main() {
     //	printf("main");
     randstate_init(11239);
-    
+
     mpz_t a, d, b, c, f, prm;
     mpz_inits(a, d, b, c, f, prm, NULL);
     mpz_set_ui(a, 64);
@@ -46,19 +46,19 @@ int main() {
     // randstate_clear();
     mpz_t prime;
     mpz_init(prime);
-   for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 10; i++) {
         make_prime(prime, 100, 150);
         gmp_printf("%Zd is a prime\n", prime);
     }
     mpz_t p, q, n, e;
     mpz_inits(p, q, n, e, NULL);
-  // rsa_make_pub(p, q, n, e, 100, 100);
+    rsa_make_pub(p, q, n, e, 100, 100);
     FILE *file;
     file = fopen("outs.txt", "r");
-   FILE *filel;
+    FILE *filel;
     filel = fopen("out1.txt", "w+");
     char as[] = "asdf";
-  rsa_read_pub(n, e, a, as, file);
-   rsa_write_pub(n, e, a, as, filel);
+    // rsa_read_pub(n, e, a, as, file);
+    rsa_write_pub(n, e, a, as, filel);
     mpz_clears(a, b, c, d, f, prm, NULL);
 }
