@@ -74,10 +74,11 @@ int main(int argc, char **argv) {
     rsa_make_pub(p, q, n, e, bitcnt, iters);
     rsa_make_priv(d, e, p, q);
     char *uname = getenv("USER");
-    mpz_set_str(u, uname, 62);
-    //   mpz_set_ui(u, 12132);
-    rsa_sign(s, u, d, n);
-
+    if (uname) {
+        mpz_set_str(u, uname, 62);
+        //   mpz_set_ui(u, 12132);
+        rsa_sign(s, u, d, n);
+    }
     rsa_write_priv(n, d, privkey);
     rsa_write_pub(n, e, s, uname, pubkey);
     if (verb) {
