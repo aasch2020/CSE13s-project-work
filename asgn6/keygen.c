@@ -34,6 +34,7 @@ int main(int argc, char **argv) {
         case 'b': bitcnt = strtoul(optarg, NULL, 10); break;
         case 'i': iters = strtoul(optarg, NULL, 10); break;
         case 'n':
+            fclose(pubkey);
             pubkey = fopen(optarg, "w");
             if (!pubkey) {
                 printf("Failed to open public key\n");
@@ -43,6 +44,7 @@ int main(int argc, char **argv) {
             }
             break;
         case 'd':
+	    fclose(privkey);
             privkey = fopen(optarg, "w");
             if (!privkey) {
 
