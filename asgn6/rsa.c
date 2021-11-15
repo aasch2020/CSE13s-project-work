@@ -15,7 +15,7 @@ void rsa_make_pub(mpz_t p, mpz_t q, mpz_t n, mpz_t e, uint64_t nbits, uint64_t i
 
     uint64_t p_bit_cnt = ((random() % ((nbits / 2))) + (nbits / 4));
     uint64_t q_bit_cnt = nbits - p_bit_cnt;
-    printf("%" PRIu64 ", %" PRIu64 "\n", p_bit_cnt, q_bit_cnt);
+   // printf("%" PRIu64 ", %" PRIu64 "\n", p_bit_cnt, q_bit_cnt);
     make_prime(p, p_bit_cnt, iters);
     //  printf("here\n");
     make_prime(q, q_bit_cnt, iters);
