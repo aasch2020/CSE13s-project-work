@@ -8,7 +8,7 @@
 #include <time.h>
 #include <sys/stat.h>
 #define OPTIONS "hvb:i:n:d:s:"
-
+#include <string.h>
 int main(int argc, char **argv) {
     // The below code parses command line arguments,
     // It prints the appropriate help message if the h input is given
