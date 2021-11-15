@@ -1,10 +1,11 @@
 #include "rsa.h"
 #include "numtheory.h"
 #include "randstate.h"
+#include "time.h"
 #include <stdlib.h>
 #include <inttypes.h>
 void rsa_make_pub(mpz_t p, mpz_t q, mpz_t n, mpz_t e, uint64_t nbits, uint64_t iters) {
-    srandom(112143334);
+    srandom(time(NULL));
     uint64_t p_bit_cnt = ((random() % ((nbits / 2))) + (nbits / 4));
     uint64_t q_bit_cnt = nbits - p_bit_cnt;
     printf("%" PRIu64 ", %" PRIu64 "\n", p_bit_cnt, q_bit_cnt);
