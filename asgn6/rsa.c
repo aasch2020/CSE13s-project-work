@@ -42,9 +42,9 @@ void rsa_write_pub(mpz_t n, mpz_t e, mpz_t s, char username[], FILE *pbfile) {
 }
 
 void rsa_read_pub(mpz_t n, mpz_t e, mpz_t s, char username[], FILE *pbfile) {
-    gmp_fscanf(pbfile, "%Zxd", n);
-    gmp_fscanf(pbfile, "%Zxd", e);
-    gmp_fscanf(pbfile, "%Zxd", s);
+    gmp_fscanf(pbfile, "%Zx", n);
+    gmp_fscanf(pbfile, "%Zx", e);
+    gmp_fscanf(pbfile, "%Zx", s);
     fscanf(pbfile, "%s", username);
 }
 
@@ -62,13 +62,13 @@ void rsa_make_priv(mpz_t d, mpz_t e, mpz_t p, mpz_t q) {
 }
 
 void rsa_write_priv(mpz_t n, mpz_t d, FILE *pvfile) {
-    gmp_fprintf(pvfile, "%Zxd\n", n);
-    gmp_fprintf(pvfile, "%Zxd\n", d);
+    gmp_fprintf(pvfile, "%Zx\n", n);
+    gmp_fprintf(pvfile, "%Zx\n", d);
 }
 
 void rsa_read_priv(mpz_t n, mpz_t d, FILE *pvfile) {
-    gmp_fscanf(pvfile, "%Zxd", n);
-    gmp_fprintf(pvfile, "%Zxd", d);
+    gmp_fscanf(pvfile, "%Zx", n);
+    gmp_fprintf(pvfile, "%Zx", d);
 }
 void rsa_encrypt(mpz_t c, mpz_t m, mpz_t e, mpz_t n) {
     pow_mod(c, m, e, n);
