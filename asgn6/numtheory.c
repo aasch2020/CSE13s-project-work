@@ -13,6 +13,7 @@ void gcd(mpz_t d, mpz_t a, mpz_t b) {
         mpz_set(ac, temp);
     }
 
+
     mpz_set(d, ac);
     mpz_clears(ac, bc, temp, NULL);
     return;
@@ -118,10 +119,12 @@ bool is_prime(mpz_t n, uint64_t iters) {
 }
 
 void make_prime(mpz_t p, uint64_t bits, uint64_t iters) {
+ //   printf("making prime");
     mpz_t generated;
     mpz_init(generated);
     bool primefound = false;
-    while (!primefound) {
+    while (!primefound){
+//	printf("stuck here");
         mpz_rrandomb(generated, state, bits);
         primefound = is_prime(generated, iters);
     }

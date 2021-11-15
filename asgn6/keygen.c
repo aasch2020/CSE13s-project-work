@@ -1,8 +1,10 @@
 #include "randstate.h"
 #include "numtheory.h"
+#include "rsa.h"
 int main() {
     //	printf("main");
-    randstate_init(1123984);
+    randstate_init(11239);
+    
     mpz_t a, d, b, c, f, prm;
     mpz_inits(a, d, b, c, f, prm, NULL);
     mpz_set_ui(a, 64);
@@ -22,7 +24,7 @@ int main() {
     bool check = false;
     mpz_t ta, tb, tc, td, tf;
     mpz_inits(ta, tb, tc, td, tf, NULL);
-    for (int i = 0; i < 1000; i++) {
+    for (int i = 0; i < 100; i++) {
         mpz_urandomb(ta, state, 150);
         mpz_set_ui(tb, 2);
         mpz_urandomb(tc, state, 150);
@@ -41,6 +43,22 @@ int main() {
     }
     //  mpz_set(prm, 1);
     //  is_prime(prm, 25);
-    randstate_clear();
+    // randstate_clear();
+    mpz_t prime;
+    mpz_init(prime);
+   for (int i = 0; i < 10; i++) {
+        make_prime(prime, 100, 150);
+        gmp_printf("%Zd is a prime\n", prime);
+    }
+    mpz_t p, q, n, e;
+    mpz_inits(p, q, n, e, NULL);
+  // rsa_make_pub(p, q, n, e, 100, 100);
+    FILE *file;
+    file = fopen("outs.txt", "r");
+   FILE *filel;
+    filel = fopen("out1.txt", "w+");
+    char as[] = "asdf";
+  rsa_read_pub(n, e, a, as, file);
+   rsa_write_pub(n, e, a, as, filel);
     mpz_clears(a, b, c, d, f, prm, NULL);
 }
