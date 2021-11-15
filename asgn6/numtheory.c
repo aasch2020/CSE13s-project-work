@@ -66,7 +66,7 @@ void pow_mod(mpz_t out, mpz_t base, mpz_t exponent, mpz_t modulus) {
         mpz_tdiv_q_2exp(exp, exp, 1);
     }
     mpz_set(out, v);
-    mpz_clears(v, p,exp ,NULL);
+    mpz_clears(v, p, exp, NULL);
     return;
 }
 

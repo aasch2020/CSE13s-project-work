@@ -25,8 +25,8 @@ int main(int argc, char **argv) {
         switch (opt) {
         case 'h':
             printf("help\n");
- fclose(pubkey);
-    fclose(privkey);
+            fclose(pubkey);
+            fclose(privkey);
 
             return -1;
             break;
@@ -37,10 +37,9 @@ int main(int argc, char **argv) {
             pubkey = fopen(optarg, "w");
             if (!pubkey) {
                 printf("Failed to open public key\n");
-		 fclose(pubkey);
-    fclose(privkey);
-    return -1;
-
+                fclose(pubkey);
+                fclose(privkey);
+                return -1;
             }
             break;
         case 'd':
@@ -48,9 +47,9 @@ int main(int argc, char **argv) {
             if (!privkey) {
 
                 printf("Failed to open private key\n");
- fclose(pubkey);
-    fclose(privkey);
-return -1;
+                fclose(pubkey);
+                fclose(privkey);
+                return -1;
             }
             break;
         case 's':

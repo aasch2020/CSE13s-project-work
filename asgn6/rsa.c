@@ -94,6 +94,7 @@ void rsa_encrypt_file(FILE *infile, FILE *outfile, mpz_t n, mpz_t e) {
         rsa_encrypt(ciphertxt, impout, e, n);
         gmp_fprintf(outfile, "%Zxd\n", ciphertxt);
     }
+    free(block);
     mpz_clears(impout, ciphertxt, NULL);
 }
 
@@ -114,6 +115,7 @@ void rsa_decrypt_file(FILE *infile, FILE *outfile, mpz_t n, mpz_t d) {
         mpz_export(block, NULL, 1, 1, 1, 0, msg);
         fwrite(block + 1, 1, readcount - 1, outfile);
     }
+    free(block);
     mpz_clears(in, msg, NULL);
 }
 
