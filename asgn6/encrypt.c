@@ -62,6 +62,12 @@ int main(int argc, char **argv) {
         return -1;
     }
     rsa_encrypt_file(input, output, n, e);
+    if(verb){
+ printf("user = %s\n", uname);
+        gmp_printf("s (%lu bits) = %Zd\n", mpz_sizeinbase(s, 2), s);
+        gmp_printf("n (%lu bits) = %Zd\n", mpz_sizeinbase(n, 2), n);
+        gmp_printf("e (%lu bits) = %Zd\n", mpz_sizeinbase(e, 2), e);
+            }
     fclose(pubkey);
     mpz_clears(n, e, s, user, NULL);
     if (isoutfile) {
