@@ -86,12 +86,19 @@ void rsa_encrypt_file(FILE *infile, FILE *outfile, mpz_t n, mpz_t e) {
     mpz_inits(impout, ciphertxt, NULL);
     while (!all_read) {
         readcount = fread(block + 1, 1, blocksize - 1, infile);
+	printf("%lu readcn \n", readcount);
+        for(uint64_t i = 1; i < readcount + 1; i++){
+		printf("%c\n", block[i]);
 
+	}
         if (readcount == 0) {
+            printf("eof\n");
             all_read = true;
         }
 
-        mpz_import(impout, readcount + 1, 1, 1, 1, 0, block);
+        mpz_import(impout, readcount, 1, 1, 1, 0, block);
+	 gmp_printf("%Zx\n", impout);
+
         rsa_encrypt(ciphertxt, impout, e, n);
         gmp_fprintf(outfile, "%Zxd\n", ciphertxt);
     }

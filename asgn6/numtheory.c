@@ -121,6 +121,7 @@ void make_prime(mpz_t p, uint64_t bits, uint64_t iters) {
     //   printf("making prime");
     mpz_t generated, rangeflr;
     mpz_init_set_ui(rangeflr, 1);
+
     mpz_mul_2exp(rangeflr, rangeflr, bits);
     mpz_sub_ui(rangeflr, rangeflr, 1);
     mpz_init(generated);

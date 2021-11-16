@@ -40,7 +40,6 @@ int main(int argc, char **argv) {
             if (!pubkey) {
                 printf("Failed to open public key\n");
                 fclose(pubkey);
-
                 return -1;
             }
             break;
