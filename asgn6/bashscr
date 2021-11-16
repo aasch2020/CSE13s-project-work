@@ -3,7 +3,7 @@
 for i in {1..10000}
 do
 	echo $i
-	head -c $(($RANDOM % 2000)) /dev/urandom > tests
+	head -c $(($RANDOM % 100000)) /dev/urandom > tests
 	ls -alF tests
 	./keygen -v
         echo me	
@@ -18,7 +18,7 @@ do
 		echo bad encode
 		break
 	fi
-	sleep 5
+	sleep 1
 	echo me
 	./decrypt -i myenc -o mydec -v
 	echo res
@@ -31,7 +31,7 @@ do
 		echo bad decode
 		break
 	fi
-	sleep 5
+	sleep 1
 	DIFF2=$( diff mydec tests)
 	echo $DIFF2
 	echo tested front to back
@@ -40,13 +40,13 @@ do
 		echo bad test to decode
 		break
 	fi
-	sleep 5
+	sleep 1
 	echo $i
 	echo $i
 	echo $i
 	echo $i
 	echo $i
-	head -c $(($RANDOM % 2000)) /dev/urandom > rtests
+	head -c $(($RANDOM % 100000)) /dev/urandom > rtests
 	ls -alF rtests
 	./reskeygen -v
        echo me	
@@ -61,7 +61,7 @@ do
 		echo bad encode res keygen
 		break
 	fi
-	sleep 5
+	sleep 1
 	echo me
 	./decrypt -i rmyenc -o rmydec -v
 	echo res
@@ -74,7 +74,7 @@ do
 		echo bad decode res keygen
 		break
 	fi
-	sleep 5
+	sleep 1
 	DIFF2=$( diff rmydec rtests)
 	echo $DIFF2
 	echo tested resource front to back
@@ -83,7 +83,7 @@ do
 		echo bad test to decode res keygen
 		break
 	fi
-	sleep 5
+	sleep 1
 
 
 done
