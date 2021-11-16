@@ -100,7 +100,7 @@ void rsa_encrypt_file(FILE *infile, FILE *outfile, mpz_t n, mpz_t e) {
         rsa_encrypt(ciphertxt, impout, e, n);
         //  gmp_printf("%Zx\n", ciphertxt);
 
-        gmp_fprintf(outfile, "%Zx\n", ciphertxt);
+        gmp_fprintf(outfile, "%ZX\n", ciphertxt);
     }
     free(block);
     mpz_clears(impout, ciphertxt, NULL);
@@ -118,7 +118,7 @@ void rsa_decrypt_file(FILE *infile, FILE *outfile, mpz_t n, mpz_t d) {
     mpz_t in, msg;
     mpz_inits(in, msg, NULL);
     while (!all_read) {
-        readcount = gmp_fscanf(infile, "%Zx", in);
+        readcount = gmp_fscanf(infile, "%ZX", in);
         printf("read %lu\n", readcount);
         rsa_decrypt(msg, in, d, n);
         mpz_export(block, NULL, 1, 1, 1, 0, msg);
