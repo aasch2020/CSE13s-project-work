@@ -33,7 +33,7 @@ int main(int argc, char **argv) {
             break;
         case 'v': verb = true; break;
         case 'o': output = fopen(optarg, "w"); break;
-        case 'i': input = fopen(optarg, "w"); break;
+        case 'i': input = fopen(optarg, "r"); break;
         case 'n':
             fclose(pubkey);
             pubkey = fopen(optarg, "r");
