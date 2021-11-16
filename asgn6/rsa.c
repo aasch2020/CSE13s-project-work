@@ -100,7 +100,7 @@ void rsa_encrypt_file(FILE *infile, FILE *outfile, mpz_t n, mpz_t e) {
         rsa_encrypt(ciphertxt, impout, e, n);
         //  gmp_printf("%Zx\n", ciphertxt);
 
-        gmp_fprintf(outfile, "%ZX\n", ciphertxt);
+        gmp_fprintf(outfile, "%Zx\n", ciphertxt);
     }
     free(block);
     mpz_clears(impout, ciphertxt, NULL);
@@ -114,19 +114,25 @@ void rsa_decrypt_file(FILE *infile, FILE *outfile, mpz_t n, mpz_t d) {
     uint64_t blocksize = (mpz_sizeinbase(n, 2) - 1) / 8;
     uint8_t *block = (uint8_t *) calloc(blocksize, sizeof(uint8_t));
     bool all_read = false;
-    uint64_t readcount;
+    int32_t readcount;
+    uint64_t writecount;
     mpz_t in, msg;
     mpz_inits(in, msg, NULL);
     while (!all_read) {
-        readcount = gmp_fscanf(infile, "%ZX", in);
-        printf("read %lu\n", readcount);
-        rsa_decrypt(msg, in, d, n);
-        mpz_export(block, NULL, 1, 1, 1, 0, msg);
-        fwrite(block + 1, 1, readcount - 1, outfile);
-        if (readcount == 0) {
+        readcount = gmp_fscanf(infile, "%Zx", in);
+        if (readcount == -1) {
 
             break;
         }
+        // fprintf(outfile, "read %d\n", readcount);
+        // mpz_import(in, readcount - 1, 1, 1, 1, 0, block);
+
+        //	gmp_printf("hexin %Zx\n", in);
+        rsa_decrypt(msg, in, d, n);
+        writecount = mpz_sizeinbase(msg, 8);
+        mpz_export(block, &writecount, 1, 1, 1, 0, msg);
+
+        fwrite(block + 1, 1, writecount - 1, outfile);
     }
     free(block);
     mpz_clears(in, msg, NULL);
