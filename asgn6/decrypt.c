@@ -9,7 +9,7 @@
 #include <sys/stat.h>
 #define OPTIONS "hvi:n:o:"
 
-int main(int argc, char **argv) {
+/*int main(int argc, char **argv) {
     // The below code parses command line arguments,
     // It prints the appropriate help message if the h input is given
     // It also sets the input and output files if they are given, and errors if the infile is invalid.
@@ -27,7 +27,7 @@ int main(int argc, char **argv) {
             fclose(pubkey);
             fclose(privkey);
 
-            return -1;
+            return 0;
             break;
         case 'v': verb = true; break;
         case 'b': bitcnt = strtoul(optarg, NULL, 10); break;
@@ -59,4 +59,5 @@ int main(int argc, char **argv) {
             break;
         }
     }
-}
+
+}*/

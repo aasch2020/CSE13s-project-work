@@ -28,7 +28,7 @@ int main(int argc, char **argv) {
             fclose(pubkey);
             fclose(privkey);
 
-            return -1;
+            return 0;
             break;
         case 'v': verb = true; break;
         case 'b': bitcnt = strtoul(optarg, NULL, 10); break;
@@ -95,4 +95,5 @@ int main(int argc, char **argv) {
     fclose(privkey);
     mpz_clears(p, q, n, e, d, s, u, NULL);
     randstate_clear();
+    return 0;
 }

@@ -6,12 +6,6 @@
 #include <inttypes.h>
 void rsa_make_pub(mpz_t p, mpz_t q, mpz_t n, mpz_t e, uint64_t nbits, uint64_t iters) {
     srandom(time(NULL));
-    if (nbits == 2) {
-        nbits += 2;
-    }
-    if (nbits == 3) {
-        nbits++;
-    }
 
     uint64_t p_bit_cnt = ((random() % ((nbits / 2))) + (nbits / 4));
     uint64_t q_bit_cnt = nbits - p_bit_cnt;
