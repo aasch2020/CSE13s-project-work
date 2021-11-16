@@ -18,12 +18,13 @@ int main(int argc, char **argv) {
 
     int opt = 0;
 
-    FILE *pubkey = fopen("rsa.pub", "r");
+    FILE *pubkey;
     FILE *input = stdin;
     FILE *output = stdout;
     bool verb = false;
     bool isinfile = false;
     bool isoutfile = false;
+    bool ispubkey = false;
     while ((opt = getopt(argc, argv, OPTIONS)) != -1) {
         switch (opt) {
         case 'h':
@@ -42,8 +43,8 @@ int main(int argc, char **argv) {
             isinfile = true;
             break;
         case 'n':
-            fclose(pubkey);
             pubkey = fopen(optarg, "r+");
+            ispubkey = true;
             if (!pubkey) {
                 printf("Failed to open public key\n");
                 fclose(pubkey);
@@ -51,6 +52,9 @@ int main(int argc, char **argv) {
             }
             break;
         }
+    }
+    if (!ispubkey) {
+        pubkey = fopen("rsa.pub", "r+");
     }
     mpz_t n, e, s, user;
     mpz_inits(n, e, s, user, NULL);
