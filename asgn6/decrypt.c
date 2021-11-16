@@ -53,5 +53,18 @@ int main(int argc, char **argv) {
     mpz_t n, d;
     mpz_inits(n, d, NULL);
     rsa_read_priv(n, d, privkey);
+    if (verb) {
+        gmp_printf("n (%lu bits) = %Zd\n", mpz_sizeinbase(n, 2), n);
+        gmp_printf("d (%lu bits) = %Zd\n", mpz_sizeinbase(d, 2), d);
+    }
+
     rsa_decrypt_file(input, output, n, d);
+    fclose(privkey);
+    mpz_clears(n, d, NULL);
+    if (isoutfile) {
+        fclose(output);
+    }
+    if (isinfile) {
+        fclose(input);
+    }
 }

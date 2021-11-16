@@ -1,0 +1,89 @@
+#!/bin/bash
+
+for i in {1..10000}
+do
+	echo $i
+	head -c $(($RANDOM % 2000)) /dev/urandom > tests
+	ls -alF tests
+	./keygen -v
+        echo me	
+	./encrypt -i tests -o myenc -v
+	echo res
+	./resencrypt -i tests -o resenc -v
+	DIFF=$( diff myenc resenc )
+	echo tested encs
+	echo $DIFF
+	if [ "$DIFF" != "" ]
+	then
+		echo bad encode
+		break
+	fi
+	sleep 5
+	echo me
+	./decrypt -i myenc -o mydec -v
+	echo res
+	./resdecrypt -i myenc -o resdec -v
+	DIFF1=$( diff mydec resdec )
+	echo tested decs
+	echo $DIFF1
+	if [ "$DIFF1" != "" ]
+	then
+		echo bad decode
+		break
+	fi
+	sleep 5
+	DIFF2=$( diff mydec tests)
+	echo $DIFF2
+	echo tested front to back
+	if [ "$DIFF2" != "" ]
+	then
+		echo bad test to decode
+		break
+	fi
+	sleep 5
+	echo $i
+	echo $i
+	echo $i
+	echo $i
+	echo $i
+	head -c $(($RANDOM % 2000)) /dev/urandom > rtests
+	ls -alF rtests
+	./reskeygen -v
+       echo me	
+	./encrypt -i rtests -o rmyenc -v
+	echo res
+	./resencrypt -i rtests -o rresenc -v
+	DIFF=$( diff rmyenc rresenc )
+	echo tested resource encs
+	echo $DIFF
+	if [ "$DIFF" != "" ]
+	then
+		echo bad encode res keygen
+		break
+	fi
+	sleep 5
+	echo me
+	./decrypt -i rmyenc -o rmydec -v
+	echo res
+	./resdecrypt -i rmyenc -o rresdec -v
+	DIFF1=$( diff rmydec rresdec )
+	echo tested resource decs
+	echo $DIFF1
+	if [ "$DIFF1" != "" ]
+	then
+		echo bad decode res keygen
+		break
+	fi
+	sleep 5
+	DIFF2=$( diff rmydec rtests)
+	echo $DIFF2
+	echo tested resource front to back
+	if [ "$DIFF2" != "" ]
+	then
+		echo bad test to decode res keygen
+		break
+	fi
+	sleep 5
+
+
+done
