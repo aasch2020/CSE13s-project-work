@@ -32,7 +32,7 @@ do
 		break
 	fi
 	sleep 1
-	DIFF2=$( diff mydec tests)
+	DIFF2=$( diff mydec tests )
 	echo $DIFF2
 	echo tested front to back
 	if [ "$DIFF2" != "" ]

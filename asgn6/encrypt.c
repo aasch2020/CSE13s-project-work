@@ -38,12 +38,12 @@ int main(int argc, char **argv) {
             isoutfile = true;
             break;
         case 'i':
-            input = fopen(optarg, "r");
+            input = fopen(optarg, "r+");
             isinfile = true;
             break;
         case 'n':
             fclose(pubkey);
-            pubkey = fopen(optarg, "r");
+            pubkey = fopen(optarg, "r+");
             if (!pubkey) {
                 printf("Failed to open public key\n");
                 fclose(pubkey);
