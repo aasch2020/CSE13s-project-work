@@ -79,7 +79,7 @@ void rsa_encrypt(mpz_t c, mpz_t m, mpz_t e, mpz_t n) {
 void rsa_encrypt_file(FILE *infile, FILE *outfile, mpz_t n, mpz_t e) {
     uint64_t blocksize = (mpz_sizeinbase(n, 2) - 1) / 8;
     //    printf("%lu blk \n", blocksize);
-    uint8_t *block = (uint8_t *) calloc(blocksize, sizeof(uint8_t));
+    uint8_t *block = (uint8_t *) calloc(blocksize + 1, sizeof(uint8_t));
     block[0] = 0xFF;
     uint64_t readcount;
     bool all_read = false;
@@ -112,7 +112,7 @@ void rsa_decrypt(mpz_t m, mpz_t c, mpz_t d, mpz_t n) {
 
 void rsa_decrypt_file(FILE *infile, FILE *outfile, mpz_t n, mpz_t d) {
     uint64_t blocksize = (mpz_sizeinbase(n, 2) - 1) / 8;
-    uint8_t *block = (uint8_t *) calloc(blocksize, sizeof(uint8_t));
+    uint8_t *block = (uint8_t *) calloc(blocksize + 1, sizeof(uint8_t));
     bool all_read = false;
     int32_t readcount;
     uint64_t writecount;

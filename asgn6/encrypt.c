@@ -58,7 +58,7 @@ int main(int argc, char **argv) {
     rsa_read_pub(n, e, s, uname, pubkey);
     mpz_set_str(user, uname, 62);
     if (verb) {
-         printf("user = %s\n", uname);
+        printf("user = %s\n", uname);
         gmp_printf("s (%lu bits) = %Zd\n", mpz_sizeinbase(s, 2), s);
         gmp_printf("n (%lu bits) = %Zd\n", mpz_sizeinbase(n, 2), n);
         gmp_printf("e (%lu bits) = %Zd\n", mpz_sizeinbase(e, 2), e);
