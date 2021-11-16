@@ -50,9 +50,9 @@ int main(int argc, char **argv) {
     char uname[1000] = { 0 };
     rsa_read_pub(n, e, s, uname, pubkey);
     mpz_set_str(user, uname, 62);
-    if (!rsa_verify(user, s, e, n)) {
-        printf("Could not verify signature with user, exiting");
+  //  if (!rsa_verify(user, s, e, n)) {
+  //      printf("Could not verify signature with user, exiting");
         return -1;
-    }
+  //  }
     rsa_encrypt_file(input, output, n, e);
 }
