@@ -78,6 +78,7 @@ void rsa_encrypt(mpz_t c, mpz_t m, mpz_t e, mpz_t n) {
 
 void rsa_encrypt_file(FILE *infile, FILE *outfile, mpz_t n, mpz_t e) {
     uint64_t blocksize = (mpz_sizeinbase(n, 2) - 1) / 8;
+    //    printf("%lu blk \n", blocksize);
     uint8_t *block = (uint8_t *) calloc(blocksize, sizeof(uint8_t));
     block[0] = 0xFF;
     uint64_t readcount;
@@ -86,21 +87,23 @@ void rsa_encrypt_file(FILE *infile, FILE *outfile, mpz_t n, mpz_t e) {
     mpz_inits(impout, ciphertxt, NULL);
     while (!all_read) {
         readcount = fread(block + 1, 1, blocksize - 1, infile);
-	printf("%lu readcn \n", readcount);
-        for(uint64_t i = 1; i < readcount + 1; i++){
-		printf("%c\n", block[i]);
-
-	}
+        //      printf("%lu readcn \n", readcount);
+        for (uint64_t i = 1; i < readcount + 1; i++) {
+            printf("%c\n", block[i]);
+        }
         if (readcount == 0) {
             printf("eof\n");
             all_read = true;
+            break;
         }
 
-        mpz_import(impout, readcount, 1, 1, 1, 0, block);
-	 gmp_printf("%Zx\n", impout);
+        mpz_import(impout, readcount + 1, 1, 1, 1, 0, block);
+        //    gmp_printf("%Zx\n", impout);
 
         rsa_encrypt(ciphertxt, impout, e, n);
-        gmp_fprintf(outfile, "%Zxd\n", ciphertxt);
+        //  gmp_printf("%Zx\n", ciphertxt);
+
+        gmp_fprintf(outfile, "%Zx\n", ciphertxt);
     }
     free(block);
     mpz_clears(impout, ciphertxt, NULL);
