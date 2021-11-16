@@ -16,17 +16,17 @@ int main(int argc, char **argv) {
 
     int opt = 0;
 
-    FILE *privkey = fopen("rsa.priv", "r");
+    FILE *privkey;
     FILE *input = stdin;
     FILE *output = stdout;
     bool verb = false;
     bool isinfile = false;
     bool isoutfile = false;
+    bool isprivkey = false;
     while ((opt = getopt(argc, argv, OPTIONS)) != -1) {
         switch (opt) {
         case 'h':
             printf("help\n");
-            fclose(privkey);
 
             return 0;
             break;
@@ -40,8 +40,8 @@ int main(int argc, char **argv) {
             isinfile = true;
             break;
         case 'n':
-            fclose(privkey);
             privkey = fopen(optarg, "r");
+            isprivkey = true;
             if (!privkey) {
                 printf("Failed to open private key\n");
                 fclose(privkey);
@@ -50,6 +50,10 @@ int main(int argc, char **argv) {
             break;
         }
     }
+    if (!isprivkey) {
+        privkey = fopen("rsa.priv", "r");
+    }
+
     mpz_t n, d;
     mpz_inits(n, d, NULL);
     rsa_read_priv(n, d, privkey);
