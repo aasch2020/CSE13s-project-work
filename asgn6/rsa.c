@@ -86,7 +86,7 @@ void rsa_encrypt_file(FILE *infile, FILE *outfile, mpz_t n, mpz_t e) {
     mpz_t impout, ciphertxt;
     mpz_inits(impout, ciphertxt, NULL);
     while (!all_read) {
-        readcount = fread(block + 1, 1, blocksize, infile);
+        readcount = fread(block + 1, 1, blocksize - 1, infile);
         //      printf("%lu readcn \n", readcount);
         if (readcount == 0) {
             //     printf("eof\n");
