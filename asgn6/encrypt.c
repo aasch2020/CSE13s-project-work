@@ -22,7 +22,8 @@ int main(int argc, char **argv) {
     FILE *input = stdin;
     FILE *output = stdout;
     bool verb = false;
-
+    bool isinfile = false;
+    bool isoutfile = false;
     while ((opt = getopt(argc, argv, OPTIONS)) != -1) {
         switch (opt) {
         case 'h':
@@ -32,8 +33,14 @@ int main(int argc, char **argv) {
             return 0;
             break;
         case 'v': verb = true; break;
-        case 'o': output = fopen(optarg, "w"); break;
-        case 'i': input = fopen(optarg, "r"); break;
+        case 'o':
+            output = fopen(optarg, "w");
+            isoutfile = true;
+            break;
+        case 'i':
+            input = fopen(optarg, "r");
+            isinfile = true;
+            break;
         case 'n':
             fclose(pubkey);
             pubkey = fopen(optarg, "r");
@@ -50,9 +57,17 @@ int main(int argc, char **argv) {
     char uname[1000] = { 0 };
     rsa_read_pub(n, e, s, uname, pubkey);
     mpz_set_str(user, uname, 62);
-    //  if (!rsa_verify(user, s, e, n)) {
-    //      printf("Could not verify signature with user, exiting");
-    //    return -1;
-    //  }
+    if (!rsa_verify(user, s, e, n)) {
+        printf("Could not verify signature with user, exiting");
+        return -1;
+    }
     rsa_encrypt_file(input, output, n, e);
+    fclose(pubkey);
+    mpz_clears(n, e, s, user, NULL);
+    if (isoutfile) {
+        fclose(output);
+    }
+    if (isinfile) {
+        fclose(input);
+    }
 }
