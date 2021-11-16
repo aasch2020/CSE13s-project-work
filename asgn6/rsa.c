@@ -118,10 +118,15 @@ void rsa_decrypt_file(FILE *infile, FILE *outfile, mpz_t n, mpz_t d) {
     mpz_t in, msg;
     mpz_inits(in, msg, NULL);
     while (!all_read) {
-        readcount = gmp_fscanf(infile, "%Zxd", in);
+        readcount = gmp_fscanf(infile, "%Zx", in);
+        printf("read %lu\n", readcount);
         rsa_decrypt(msg, in, d, n);
         mpz_export(block, NULL, 1, 1, 1, 0, msg);
         fwrite(block + 1, 1, readcount - 1, outfile);
+        if (readcount == 0) {
+
+            break;
+        }
     }
     free(block);
     mpz_clears(in, msg, NULL);

@@ -9,58 +9,49 @@
 #include <sys/stat.h>
 #define OPTIONS "hvi:n:o:"
 
-/*int main(int argc, char **argv) {
+int main(int argc, char **argv) {
     // The below code parses command line arguments,
     // It prints the appropriate help message if the h input is given
     // It also sets the input and output files if they are given, and errors if the infile is invalid.
 
     int opt = 0;
 
-    FILE *pubkey = fopen("rsa.pub", "w");
+    FILE *privkey = fopen("rsa.priv", "r");
+    FILE *input = stdin;
+    FILE *output = stdout;
     bool verb = false;
-    bool initgiv = false;
-    uint64_t seed = 0;
+    bool isinfile = false;
+    bool isoutfile = false;
     while ((opt = getopt(argc, argv, OPTIONS)) != -1) {
         switch (opt) {
         case 'h':
             printf("help\n");
-            fclose(pubkey);
             fclose(privkey);
 
             return 0;
             break;
         case 'v': verb = true; break;
-        case 'b': bitcnt = strtoul(optarg, NULL, 10); break;
-        case 'i': iters = strtoul(optarg, NULL, 10); break;
+        case 'o':
+            output = fopen(optarg, "w");
+            isoutfile = true;
+            break;
+        case 'i':
+            input = fopen(optarg, "r");
+            isinfile = true;
+            break;
         case 'n':
-            fclose(pubkey);
-            pubkey = fopen(optarg, "w");
-            if (!pubkey) {
-                printf("Failed to open public key\n");
-                fclose(pubkey);
-                fclose(privkey);
-                return -1;
-            }
-            break;
-        case 'd':
             fclose(privkey);
-            privkey = fopen(optarg, "w");
+            privkey = fopen(optarg, "r");
             if (!privkey) {
-
                 printf("Failed to open private key\n");
-                fclose(pubkey);
                 fclose(privkey);
                 return -1;
             }
-            break;
-        case 's':
-            initgiv = true;
-            seed = strtoul(optarg, NULL, 10);
             break;
         }
     }
-
-}*/
-int main() {
-    printf("placeholder");
+    mpz_t n, d;
+    mpz_inits(n, d, NULL);
+    rsa_read_priv(n, d, privkey);
+    rsa_decrypt_file(input, output, n, d);
 }
