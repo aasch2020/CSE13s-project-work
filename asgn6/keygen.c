@@ -16,8 +16,10 @@ int main(int argc, char **argv) {
     int bitcnt = 256;
     int opt = 0;
     int iters = 50;
-    FILE *pubkey = fopen("rsa.pub", "w");
-    FILE *privkey = fopen("rsa.priv", "w");
+    FILE *pubkey;
+    bool ispubkey = false;
+    FILE *privkey;
+    bool isprivkey = false;
     bool verb = false;
     bool initgiv = false;
     uint64_t seed = 0;
@@ -25,32 +27,25 @@ int main(int argc, char **argv) {
         switch (opt) {
         case 'h':
             printf("help\n");
-            fclose(pubkey);
-            fclose(privkey);
-
             return 0;
             break;
         case 'v': verb = true; break;
         case 'b': bitcnt = strtoul(optarg, NULL, 10); break;
         case 'i': iters = strtoul(optarg, NULL, 10); break;
         case 'n':
-            fclose(pubkey);
+            ispubkey = true;
             pubkey = fopen(optarg, "w");
             if (!pubkey) {
                 printf("Failed to open public key\n");
-                fclose(pubkey);
-                fclose(privkey);
                 return -1;
             }
             break;
         case 'd':
-            fclose(privkey);
+            isprivkey = true;
             privkey = fopen(optarg, "w");
             if (!privkey) {
 
                 printf("Failed to open private key\n");
-                fclose(pubkey);
-                fclose(privkey);
                 return -1;
             }
             break;
@@ -60,7 +55,13 @@ int main(int argc, char **argv) {
             break;
         }
     }
+    if (!isprivkey) {
+        privkey = fopen("rsa.priv", "w");
+    }
+    if (!ispubkey) {
 
+        pubkey = fopen("rsa.pub", "w");
+    }
     if (!initgiv) {
         randstate_init(seed);
     } else {

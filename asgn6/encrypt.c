@@ -29,7 +29,6 @@ int main(int argc, char **argv) {
         switch (opt) {
         case 'h':
             printf("help\n");
-            fclose(pubkey);
 
             return 0;
             break;
@@ -39,11 +38,11 @@ int main(int argc, char **argv) {
             isoutfile = true;
             break;
         case 'i':
-            input = fopen(optarg, "r+");
+            input = fopen(optarg, "r");
             isinfile = true;
             break;
         case 'n':
-            pubkey = fopen(optarg, "r+");
+            pubkey = fopen(optarg, "r");
             ispubkey = true;
             if (!pubkey) {
                 printf("Failed to open public key\n");

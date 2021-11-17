@@ -91,17 +91,18 @@ void rsa_encrypt_file(FILE *infile, FILE *outfile, mpz_t n, mpz_t e) {
         if (readcount == 0) {
             //          printf("eof\n");
             all_read = true;
-            break;
+        } else {
+
+            mpz_import(impout, readcount + 1, 1, 1, 1, 0, block);
+            //       gmp_printf("%Zx\n", impout);
+
+            rsa_encrypt(ciphertxt, impout, e, n);
+            //     gmp_printf("%Zx\n", ciphertxt);
+
+            gmp_fprintf(outfile, "%Zx\n", ciphertxt);
         }
-
-        mpz_import(impout, readcount + 1, 1, 1, 1, 0, block);
-        //       gmp_printf("%Zx\n", impout);
-
-        rsa_encrypt(ciphertxt, impout, e, n);
-        //     gmp_printf("%Zx\n", ciphertxt);
-
-        gmp_fprintf(outfile, "%Zx\n", ciphertxt);
     }
+
     free(block);
     mpz_clears(impout, ciphertxt, NULL);
 }
@@ -120,20 +121,21 @@ void rsa_decrypt_file(FILE *infile, FILE *outfile, mpz_t n, mpz_t d) {
     mpz_inits(in, msg, NULL);
     while (!all_read) {
         readcount = gmp_fscanf(infile, "%Zx", in);
-        if (readcount == -1) {
+        if (readcount == EOF) {
+            all_read = true;
+        } else {
+            // fprintf(outfile, "read %d\n", readcount);
+            // mpz_import(in, readcount - 1, 1, 1, 1, 0, block);
+            //      gmp_printf("hexin %Zx\n", in);
+            rsa_decrypt(msg, in, d, n);
+            writecount = mpz_sizeinbase(msg, 8);
+            //	printf("amt to write %d writecount\n", writecount);
+            mpz_export(block, &writecount, 1, 1, 1, 0, msg);
 
-            break;
+            fwrite(block + 1, 1, writecount - 1, outfile);
         }
-        // fprintf(outfile, "read %d\n", readcount);
-        // mpz_import(in, readcount - 1, 1, 1, 1, 0, block);
-        //      gmp_printf("hexin %Zx\n", in);
-        rsa_decrypt(msg, in, d, n);
-        writecount = mpz_sizeinbase(msg, 8);
-        //	printf("amt to write %d writecount\n", writecount);
-        mpz_export(block, &writecount, 1, 1, 1, 0, msg);
-
-        fwrite(block + 1, 1, writecount - 1, outfile);
     }
+
     free(block);
     mpz_clears(in, msg, NULL);
 }
