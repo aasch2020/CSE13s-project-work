@@ -118,7 +118,6 @@ bool is_prime(mpz_t n, uint64_t iters) {
 }
 
 void make_prime(mpz_t p, uint64_t bits, uint64_t iters) {
-    //   printf("making prime");
     mpz_t generated, rangeflr;
     mpz_init_set_ui(rangeflr, 1);
 
@@ -127,7 +126,6 @@ void make_prime(mpz_t p, uint64_t bits, uint64_t iters) {
     mpz_init(generated);
     bool primefound = false;
     while (!primefound) {
-        //	printf("stuck here");
         mpz_urandomb(generated, state, bits);
         mpz_add(generated, generated, rangeflr);
         mpz_add_ui(generated, generated, 1);
