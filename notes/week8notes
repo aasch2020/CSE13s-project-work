@@ -153,4 +153,48 @@ Transitions between states
 	Process waits for an event such as I/)
 	event occurs
 	Process exits/(ended by other processs)
+Location of bug is hard to pinpoint
+	Use assert statements and print staements
+	Use fflush(0 to flush andy buffered data
+P	Play aoround with inputs and params
+
+ASSERt
+	Used to make sure that all of the assumptions that the coder elis on are true
+	Postconditions, condition that must be true after execution of some code
+	Assestorion checks can be turned off during compile time
+		#define NDEBUG
+		OR using DNDEBUG compiler flag
+	Asserts takes a boolean expression
+		If error error is printed program exist
+Print statements, print values of cars at runtime
+	Print string to indicate taht a certain section of code was run
+	Did we reach the code we expectd to reach?
+	Can also be done wtih debugger
+Running scan build	Make sure directory is clean then scan build
+	Fix anything issues
+	fale positive to occcuer
+	Can but report view using scan -view
+	Wokrs at compil;e time
+	Wplrs by overriding compiler
+infer
+	Fisrst capture the result of comiling
+	Then analyzie result comiling your program
+valgrind
+	Checks for invalid read and write
+static try to catch everything
+dynamic only atches things that occuer during runtime
+some bugs can only be caught by static analyzers
+lldb
+	higher performance
+	Set breakpoints in program
+	Setp through a progam line by line
+	At each breakpoint and step examine
+	Requires program to compile with debugging symbols
+	Not good for mem leaks
+compil;e with -g flag
+lldb program
+runt he progam with r and args
+gprof
+	Take comand line args make an outfile called gmon.out tha can be interpreted
+	tells you times for things as well
 
