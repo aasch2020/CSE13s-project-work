@@ -33,13 +33,13 @@ int main(int argc, char **argv) {
         case 'h':
             printf("help\n");
             if (isinfile) {
-                fclose(infile);
+                fclose(input);
             }
             if (ispubkey) {
                 fclose(pubkey);
             }
             if (isoutfile) {
-                fclose(outfile);
+                fclose(output);
             }
 
             return 0;
@@ -50,7 +50,7 @@ int main(int argc, char **argv) {
             if (!output) {
                 printf("Failed to open output\n");
                 if (isinfile) {
-                    fclose(infile);
+                    fclose(input);
                 }
                 if (ispubkey) {
                     fclose(pubkey);
@@ -64,10 +64,10 @@ int main(int argc, char **argv) {
             if (!input) {
                 printf("Failed to open input\n");
                 if (isoutfile) {
-                    fclose(outfile);
+                    fclose(output);
                 }
-                if (isinfile) {
-                    fclose(infile);
+                if (ispubkey) {
+                    fclose(pubkey);
                 }
 
                 return -1;
@@ -80,10 +80,10 @@ int main(int argc, char **argv) {
             if (!pubkey) {
                 printf("Failed to open public key\n");
                 if (isoutfile) {
-                    fclose(outfile);
+                    fclose(output);
                 }
-                if (ispubkey) {
-                    fclose(pubkey);
+                if (isinfile) {
+                    fclose(input);
                 }
 
                 return -1;
