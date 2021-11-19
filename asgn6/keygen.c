@@ -29,7 +29,16 @@ int main(int argc, char **argv) {
     while ((opt = getopt(argc, argv, OPTIONS)) != -1) {
         switch (opt) {
         case 'h':
-            printf("help\n");
+            printf("SYNOPSIS\n   Generates an RSA public/private key pair.\n\nUSAGE\n   ./keygen "
+                   "[-hv] [-b bits] -n pbfile -d pvfile\n\n");
+            printf("OPTIONS\n   -h              Display program help and usage.\n   -v             "
+                   " Display verbose program output.\n");
+            printf("   -b bits         Minimum bits needed for public key n (default: 256).\n");
+            printf(
+                "   -i confidence   Miller-Rabin iterations for testing primes (default: 50).\n");
+            printf("   -n pbfile       Public key file (default: rsa.pub).\n");
+            printf("   -d pvfile       Private key file (default: rsa.priv).\n");
+            printf("   -s seed         Random seed for testing\n");
             if (isprivkey) {
                 fclose(privkey);
             }

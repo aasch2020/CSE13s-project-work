@@ -29,7 +29,13 @@ int main(int argc, char **argv) {
     while ((opt = getopt(argc, argv, OPTIONS)) != -1) {
         switch (opt) {
         case 'h':
-            printf("help\n");
+            printf(
+                "SYNOPSIS\n   Decrypts data using RSA decryption.\n   Encrypted data is encrypted "
+                "by the encrypt program.\n\nUSAGE\n   ./decrypt [-hv] [-i infile] [-o outfile] -n "
+                "privkey\n\nOPTIONS\n   -h              Display program help and usage.\n   -v     "
+                "         Display verbose program output.\n   -i infile       Input file of data "
+                "to decrypt (default: stdin).\n   -o outfile      Output file for decrypted data "
+                "(default: stdout).\n   -n pvfile       Private key file (default: rsa.priv).\n");
             if (isoutfile) {
                 fclose(output);
             }
