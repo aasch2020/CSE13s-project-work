@@ -198,3 +198,197 @@ gprof
 	Take comand line args make an outfile called gmon.out tha can be interpreted
 	tells you times for things as well
 
+
+
+Problem, looking for things
+Searching
+	O(n) for linear earch in unsorted arwray
+	Binary earch is log(n) time on sorted list
+	Linked list look ups take O(n)
+
+Direct addresss table is a key value store where the key is used as an index to the value
+	Random acces array search in O(1)
+	Limitations
+		NEed prior knowledge of max key value
+		Wasted memeory space is significat dfif between total records and max size
+
+Hashing
+	The idea behing hashin gor scatter store is sued to scramble up parts of the key and use the info for searching
+	Improvement over Direct acess table
+		Uses a function that hashes a larger fixed key into a smaller number
+Hash tables
+	An unorded collection of key value pairs
+	Offeres efficient lookup insert and delete
+		Neither arrays not linked lists achieve this
+	A python dict is a linked list
+
+Hash fuctions
+	A function that hashes keys to generate indices for each value
+		For a hash table with m slots
+			h(key) -> index(0,m-1)
+	Characteristics of a good hash funcitons are determined byt data being hashed'
+		Uses all iput data
+		Computation is fast
+		Minimizes hash collisions
+			Uniformly generates data across entire set of possible hash vals
+			Generates very diff values for similar strings
+		Types of has functions
+			Division based
+			Multplication based
+			String valued keys
+
+Division based hash
+	Most simple is the remainder modulo method
+		Formula h(k) = K mod M
+			k is table 
+			M is key size
+String valued key
+	Sometimes you want to use string val keys
+	BAisc approachr
+		Take chars in a string valued key
+		Compute an integer using an approriate method
+		Integer modulo the table size
+	No addition or multiplications, sine we cant add or multiply as they commute
+ALso callled scatter storage
+
+Load factor
+	Number of sltos fillied out of total slots in a hash table
+		The probability of a has collision increases as the table gets full
+
+Birthday PAradox
+	Let's say you are in a room with just 23 people there is a 50/50 of 2 people having same birthday
+		Counting pairs with 23 people we have 23choose 2 pairs = 253 pairs
+		The chance of 2 people having a different birthday is 1- 1/365 = 0.997260
+		The probability of all 253 pairs having different birthdays is p = (364/365)^253 = 0.4995
+		There fore the rpobability that we find a pair with the same birthday is 1 - 0.4995 = 0.5005
+	If you change the number n, probability is 1 - (364/365)^(n*(n-1)/2)
+	This also applies to hash functions
+Hash collision
+	Occurs when two pieces of data have the same has value
+	Assume h(x) is a hash functoin
+		We have 2 keys k and kj such taht ki is not equal to kj
+		Collision is h(Ki) = h(Kj)
+	If keys big then we get hash collisions
+	Open Addressing allows elemetns to move from their preferred psoitions to other positions
+		Linear probing
+		Quadritic hashing
+		Double hashing
+
+Linear probing
+	Move sequentioally through hash table slots until you encouter the next empty slot
+	For a table of size SIZE if we want to store an element x with has index i at location t{i} and position si s already occupied
+		Try to store it in t[(i+1)%SIZE}
+		If that position is occupied, try +2 etx etx
+		Until we find an index such that t{index] = x or NULL
+		This could make it order n complexity, yuck
+Quadratic probing
+	Square the sequence of has value when decidein how faor to look for next slot, if initial probe fails
+	If we want to staore x in a spot and its occupied
+		t[i^2 mod SIZe]
+		if that doesnt work i+1 squared
+	Tp guarantee that it hits all spots
+		Hash table size must be a prime num
+		Hash table must never be more than half full
+Double hashing
+	Like linear and quadratic
+	Uses a hash function determine the location in table T, if it doesn't work, has it again
+
+All three metrhods rely in going through whole hash table in a bad way
+
+
+
+Chaining with linked list
+	Each slopt contains a link to a singly linke dlist
+	Loom up algorithm searches through the list to find matching key
+	Initially table slots contaion nulls, list is being created when value with certain hash is added for first time
+	Basically, if theres ssomething already in a hash slot, add that to the linked list, if theres not make the linked list
+	Expected time to find something is avg length of linked list
+	IF you just looked somethign up very likely to look it up again
+		When yo uaccess something in linked list, move it up the linked list
+	Can also do a tree instead of linked list
+		if randomly added to the tree, tree is likely to be balanced, which is log(n) to search instead of n for linked list
+Open addresssing vs chaining
+	open addressing is computationally intesne compared to chaining
+	Dynamic nature, in chaining has table is never fille dup as we can add more
+	Chaining is less sentistive for load factor and has funciton
+	Cache performanc
+		Chaining : bad as keys are stored using linke d list
+		Open addressing: good as everything stored in the same table
+	Space
+		Chaining uses extra space for links and parts of the hash table is never used
+		No links in open address and a slot can be used even if an iput isn;t mapped to it
+Hasc table ADT
+	Each has table tiem ahs a key and val
+	We can find the values of key
+	Insert new key value pairts
+	Remove keys
+	The ifnd inset and remove operations wil use linear probing
+
+Finding keys
+	Given a key pass back its value
+	Maintian a count, we need to knwo if weve gon thorugh the whoel table
+	Start searching from the key's has index linearly untl empty,
+		If looked at everything, stop
+If not allow for deletion, can stop looking at first hole
+	If you do allow deletion there can be wacky holes
+
+Inserting new keys
+	Insert a new key and its value
+	Mainting a count we need t oknow if weve gone thru whole table
+		Try inserting at the keys has index if not +1 and go
+	Removing keys
+		remove a key and pass back its value
+	Trey removing at the key's has index, if it doesn't match, try the next one.
+
+
+Bloom filter
+	A hash table for 0 and 1
+	A data structure designed to give you a probablistic answer whether an element is present in a set
+	Internally structured like a bit array
+	Two operations add and search/Query
+	Assume bloom filter on the right has k = 3 hash functions
+	Pass elements (x,y,z) through 3 has functions and set the corresponding bits in the blooom filter
+Proving someting is slow, probably is fast
+
+
+Why Bloom filteres
+	Fast and mem efficient
+	LCalled filters 
+		Used as a first pass to filter out segments of datasets that do not match a query
+	Related to hash tables
+		Can be used to efficiently check if a key exists in a has table
+False possitives from bloom filters
+	A false positive is related to load factor of has table
+	p = (1-e^(-KxN/m)^k
+	The more items per Bloom filter the higher the changes of having false positives
+	inccreasing hash functions increas bloom
+Other applications of has function cryptographic hash
+	m || h where the message is concat with the message's hash
+	Bob computes the has over th msh and compares the received hash and the calculated hash
+	If they are dfiferent, the msh ahs been altered
+	Digital Signature
+		Alice signs a msh with her priv key
+		Bob can verify Alice"s authorship with her public key
+		Done sign ientire message, sign the msh hash value
+
+
+Cryptographic has function
+	Ideal function guarantees the following
+		Deterministic
+			same msh = same hash
+		Quick to comupte
+		Infeasible to construct a msg that yield a given hash value
+		Infieasble to find two diff msh with the same hash val
+		AValanch efect
+			Small change should vastly change hash.
+Populat cryptograhpic has function
+	MD5 already broken
+	SHA1 already broken
+	SHA256
+	SHA512
+	SHA3
+Hash table is a struct that maps key val
+	O(1) access time on avg
+	Index into hash table calculated by a hash function
+Bloom fileters
+	Probablistic, no or maybe 
