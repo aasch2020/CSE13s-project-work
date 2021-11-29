@@ -1,0 +1,164 @@
+Multithreading
+	What is a process?
+		IT hass code datat and a stack and it's own address space
+	Program state
+		CPU registeres 
+		PRGRM counter
+		Stack pointer
+	Only one process can run on a single cpu core at any given time
+		Many core cpu cna support multiple process and threads
+	A process contains one por more threads
+		Threads wihtin a process run concurrently
+		Threads share memory space
+			Live in the same address space
+	Address space
+		Progams execute code
+		Has text data bss heap and stack
+			All of thse are technically just bytes, but want to make sure you don't run data or change data in text(code)
+		Programs access data each byte of data also has an address
+		We would like to think that our program is the only program executing on the computer
+			Which prompts the need for a level of abstraction by the OS
+		An address space is the region of a omputer's memory where the prorams executes
+			ideally protected from other programs
+		stack has local vars and stack frame which is program counter of prev function
+	More than one thread can execute the same code 
+		Basically two stack pointer
+		Two threads can read code/stack at once
+			Can have more than one program counter
+	Heap is global var so it can bne shared, data is also global cna be shared
+	Each thread gets it's own stack
+		how to know stacks are far enough apart? trust
+Why use thread
+	more fast
+	Faster to create or destroy
+	Allow a single app to do many things at once like a webserver
+		Can keep working during io wait
+		Each thread gets to issue its own ios
+		More ios ca be outstanding/pending
+	Context switching
+		Expensive between processes
+		Less expensive between threads
+	Sharing memory
+		Processes don't inherently share memory each program has its own address space
+			Need to use inter process communication to manage shared data
+		Threads share memory making it easier ot share data
+	Race condition, program break when 2 programs try to access same piece of data sorta at same time (no such thing as at the same time)
+BAsic posix thread api
+	included under <pthread.h>
+	For basic multithreading we will only really need two of the functions
+		pthread_create make a new thread
+		pthread_join wait for a thread to comlete
+
+
+	Creating a thread
+		The process starts with one thread of execution, the main thread
+		When thread created gets thread id
+		Main thread can make threads and those threads can make other threads
+		Threadas are siblinings, no sense of hierarchy
+			However main theread should end last
+		Thread has
+			Many properties copy later from slide
+	Context switching
+		Halting or pausing execution of a thread by OS to do another
+		Involves saving the statae of the process or thread into a private memory region so that the state can eb reloaded and execution resumed later
+		Analogy
+			you and friend read same book, set spot in the book, give to friend, they set spot in book, then back
+		The mor tha needs to be saved the more expensive the swithc
+		Excessive switching should be avoided
+	On creation each therad is given a function or a start routin eto execute
+		Funtion can take at most one arg
+		If you neeed to pass multiple args to the start routing, must make a struct that has those args
+	We need to join all threads at the end
+	Jopin a thread
+		to join a thread is wait for it to finish
+		Basic idea
+			Let threads perform some job in paralllel
+			Wait for it be done
+			Then join
+	Race conditions
+		If many threads access same global var, it blow up and die
+	Threads share memeory, diff thread can read write same memory
+		Problem, not guaranteed that read followed by write is atomic
+		Which means order matters
+		Also results in erroneous results
+	Criritcal regions
+		Use critical regions to provide mutal exclusion to fix race conditions
+			4 conditions must hold to provide mutual exculsion
+				No two processs may simultaneulsly be in critical regions
+				No assumptions about speed
+				No process running outside its cricitcal region may block another
+				A process may not wait forever to enter the critical region
+			A process doesnt need to be specifically an OS process
+Locking for mutual exclusion
+	The locking out of threads from critical regions is done usin ga mutex
+	main ops
+		pthread_mutex_lock
+		pthread_mutex_unlock
+	Idea
+		Have a mutex for a critical regoins
+		Before entering a critical region a thread must lock the mutex first
+		The thread unlocks the mutex after leaving the crit region
+Dead Locks
+	If you can lock things, have deadlock
+	Basicallly a cyclic dependency on some resources
+	Thing a need x from thing b
+	thing b neeeds y from process A
+	Neither process is willing to give up resoures
+Resources something a process uses
+	ex of resoruces
+		printer
+		semaphore/locks
+		memory with thread
+		tables in a adatabase
+	Two types of resources
+		Preenmptable resources can be taken a way from a process with no ill effects
+		Non preemptable resources causes ill effects if taken away
+	Using resouyrces
+		Need to requrest do someting and release
+		Cant use if initial req is denied
+			Then options
+				Stop and wait
+				ontinue without it using an alternate resourreces
+				Fail with error code
+			Some of thse options may be ablke to prevent deadlocks from occuring
+	Getting into a deadlock
+		A get x b get y c get z
+		a wants wy b want z c wants x
+			These are all circular, dead locks
+			Stuck unless some thread goes, eh I don't need it
+fix deadlock, ostritch algorithms
+	Simply pretends there isn't a problem
+	Reasonable if
+		Rarely deadlock
+		PReventing is costly
+	If many resources, this is reasonable
+Can make a deadlock detection algorithm with graphs
+Recover from deadlock
+	preemption
+		Take a resources form some other process
+	Rollback
+		CHeckpoint a process periodically
+		Use saved sate to restart process if deadlock
+		This may be a probelm if the process affects lots of external tings
+	Recovery through killin gprocesses
+		Crude but simple
+		Kill a process in the deadlock
+		try to choose a proces that an be rerun from the start
+
+Prevent deadlock
+	Simply ensure ons of the 4 conditions for deadlocm never occurs
+	Mutual exclusion
+		Spooling,works for devices
+		make a queue of stuff to do
+	hold and wait
+		request all resources before starting
+	no preemption
+		take stuff away from processes
+	circular wait
+		assign an order to resources and use a total order
+		ask for them in order
+
+Starvation
+	Give resources to a process based on prioroity
+	Some things that are postponed indefeinly that is starvation
+
