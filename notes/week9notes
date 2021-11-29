@@ -1,0 +1,88 @@
+Virtual memory
+	The OS hands out more memory than exists on the computer
+	Program uses virtual ddresses, hardware translates virtual ddress to physical
+	Translations done b yMMU
+	Physical memory indexed by physical
+Mappping logical to physical
+	Take the address from the CPU into two pieces, page number and page offset
+	Page number is the index into page table
+	ADdresss translation architecture
+		Translates the memory from page num to page table
+		Does protecton and allocation for you, and lets you run programs bigger than physical memory
+The procfess model
+	The scheduler decides which process to run when
+	Only one porcess active at any instant an instant is very short (onyl single core)
+When is a process created
+	System initialization
+	Execution of a process creation sys call
+	System calls can come from
+	User request for new process
+	anothe rprocess
+When provcessses end?
+	Voluntary
+		Normal exit
+		Error exit
+	Involuntary
+		Fatal aerror
+		Killled by another process
+Process Hierarchies
+	Child created by parent can create their own children
+	Make a hierarchy, UNIX calls this a process group
+	If a process terminiates, its children are inherited by terminating parnet process
+	Windows has multi process groups
+		Multiple processes grouped together
+		One process is the group leader
+	PArent responsoible for ending children
+	Zombie process, process not ended parent ended
+Process State
+	Process in one of 5 states
+		Created
+		ready
+		Running 
+		Blocked 
+		Exit
+	Transitions between states
+		Enters ready queue
+		scheduler picks this procfess
+		Scheduler picks a differen process
+		Process waits for event such as i/o
+		Event occurs
+		Process exits
+		Process ended by another process
+Process table entry
+	Process mangaement register program counter CPU status word stack pointer
+	File management, root dir working current dir file descriptors
+	Mem management
+
+What happens on a trap/interrupt?
+	Hardware saves program counter on stack or in a spceial register
+	Hardware loads new pc ID the interrupt
+	Assembly language routine saves registers
+	Assembly language routine saves registers
+	Assembly lang routine sets up stack
+	ASsembly lang calls c to run service routine
+	Service routing calls schedulre
+	Scheduelr selects a process to run next
+	Assembly lang routing load PC(program counter) and register for the selecter process
+Multiple threads in a process
+	Slides for monday
+	Idea is that a proess 
+	Each thread need an own stacka nd program counter
+	Singel app can do many thing at once
+	no separatee adress space
+	Overlap comuptation
+	Could be done without threads but its harder
+Thread implemented in software insside the process with fak syscalls
+Process and therad in linux
+	Suppport posix standard
+	Lius suppperot kernal level threads	
+		shared addres space and file dsc
+	Linux processes all have unique ID
+		Threads sharing address space are groupin tinto process groups
+		ID shared by the group is that of the leader
+	Each process has its own 8kb regions that stores
+		Kernel stack
+			Kernel has small stack about 4KB
+		Low level thread info
+	Other info stored in stack
+	
