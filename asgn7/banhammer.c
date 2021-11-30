@@ -43,4 +43,5 @@ int main() {
     //  node_print(bst_find(root, "av" ));
     //  node_print(bst_find(root, "xd"));
     bst_print(root);
+    bst_delete(&root);
 }

@@ -28,6 +28,16 @@ uint32_t bst_size(Node *root) {
     return 0;
 }
 
+void bst_delete(Node** root){
+	if(*root){
+		bst_delete(&((*root)->left));
+		bst_delete(&((*root)->right));
+		node_delete(root);
+		*root = NULL;
+	}
+
+
+}
 Node *bst_find(Node *root, char *oldspeak) {
     if (root) {
         if (strcmp(root->oldspeak, oldspeak) > 0) {
