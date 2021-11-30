@@ -21,4 +21,11 @@ int main() {
 
     bst_print(root);
     bst_delete(&root);
+    BloomFilter *bf = bf_create(30);
+
+    bf_insert(bf, "Zato");
+    bf_print(bf);
+    if (bf_probe(bf, "Zato")) {
+        printf("worky");
+    }
 }
