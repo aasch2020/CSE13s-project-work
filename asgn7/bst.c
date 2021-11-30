@@ -28,28 +28,27 @@ uint32_t bst_size(Node *root) {
     return 0;
 }
 
-void bst_delete(Node** root){
-	if(*root){
-		bst_delete(&((*root)->left));
-		bst_delete(&((*root)->right));
-		node_delete(root);
-		*root = NULL;
-	}
-
-
+void bst_delete(Node **root) {
+    if (*root) {
+        bst_delete(&((*root)->left));
+        bst_delete(&((*root)->right));
+        node_delete(root);
+        *root = NULL;
+    }
 }
 Node *bst_find(Node *root, char *oldspeak) {
     if (root) {
         if (strcmp(root->oldspeak, oldspeak) > 0) {
-            bst_find(root->left, oldspeak);
+            return bst_find(root->left, oldspeak);
         }
         if (strcmp(root->oldspeak, oldspeak) < 0) {
-            bst_find(root->right, oldspeak);
+            return bst_find(root->right, oldspeak);
         }
         if (strcmp(root->oldspeak, oldspeak) == 0) {
             return root;
         }
     }
+
     return root;
 }
 
