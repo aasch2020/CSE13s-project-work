@@ -4,6 +4,7 @@
 #include "bf.h"
 #include "speck.h"
 #include "bst.h"
+#include "ht.h"
 int main() {
     printf("main");
     char test[] = "newspeaks";
@@ -17,6 +18,11 @@ int main() {
     node_print(b);
     BitVector *bv = bv_create(8);
     bv_print(bv);
+    printf("a\n");
+    HashTable *ht = ht_create(9);
+    ht_print(ht);
+    printf("a\n");
+    printf("%d", (uint8_t) ht);
     bv_set_bit(bv, 0);
     bv_set_bit(bv, 6);
     bv_print(bv);
@@ -29,12 +35,12 @@ int main() {
     root = node_create("a", "b");
 
     bst_insert(root, "a", "xd");
-//    node_print(root);
-   bst_insert(root, "av", "Abba");
-    
+    //    node_print(root);
+    bst_insert(root, "av", "Abba");
+
     bst_insert(root, "am", "Abba");
     bst_insert(root, "xd", "z");
-  //  node_print(bst_find(root, "av" ));
-  //  node_print(bst_find(root, "xd"));
+    //  node_print(bst_find(root, "av" ));
+    //  node_print(bst_find(root, "xd"));
     bst_print(root);
 }
