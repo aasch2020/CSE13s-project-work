@@ -1,6 +1,7 @@
 #include "bst.h"
 #include <string.h>
 #include "node.h"
+#include <stdio.h>
 Node *bst_create(void){
 	return NULL;
 }
@@ -37,12 +38,14 @@ Node *bst_find(Node *root, char *oldspeak){
 	if(root){
 		if(strcmp(root->oldspeak, oldspeak) > 0){
 			bst_find(root->left, oldspeak);
-
-
 		}
 		if(strcmp(root->oldspeak, oldspeak) < 0){
 			bst_find(root->right, oldspeak);
 			
+		}
+		if(strcmp(root->oldspeak, oldspeak) == 0){
+			return root;
+
 		}
 
 
@@ -58,12 +61,13 @@ Node *bst_insert(Node *root, char *oldspeak, char *newspeak){
 	if(root){
 		 if(strcmp(root->oldspeak, oldspeak) > 0){
                         root->left = bst_insert(root->left, oldspeak, newspeak);
-
-
+			return root;
+			
                 }
                 if(strcmp(root->oldspeak, oldspeak) < 0){
                         root->right = bst_insert(root->right, oldspeak, newspeak);
-
+			return root;
+		
                 }
 		if(strcmp(root->oldspeak, oldspeak) == 0){
 			return root;
@@ -72,12 +76,9 @@ Node *bst_insert(Node *root, char *oldspeak, char *newspeak){
 	
 
 	}
-
+        	
 	return node_create(oldspeak, newspeak);
-
 	
-
-
 
 }
 

@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include "bf.h"
 #include "speck.h"
+#include "bst.h"
 int main() {
     printf("main");
     char test[] = "newspeaks";
@@ -24,4 +25,16 @@ int main() {
     node_delete(&a);
     node_delete(&b);
     bv_delete(&bv);
+    Node *root = bst_create();
+    root = node_create("a", "b");
+
+    bst_insert(root, "a", "xd");
+//    node_print(root);
+   bst_insert(root, "av", "Abba");
+    
+    bst_insert(root, "am", "Abba");
+    bst_insert(root, "xd", "z");
+  //  node_print(bst_find(root, "av" ));
+  //  node_print(bst_find(root, "xd"));
+    bst_print(root);
 }
