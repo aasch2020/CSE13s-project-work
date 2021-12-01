@@ -5,6 +5,7 @@
 #include "speck.h"
 #include "bst.h"
 #include "ht.h"
+#include "parser.h"
 #define WORD "([a-zA-Z_0]+(['-]|[a-z_0-9A-Z])+[a-z]+)|([a-zA-Z])"
 int main() {
 
