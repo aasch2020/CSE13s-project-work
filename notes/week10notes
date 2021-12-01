@@ -161,4 +161,288 @@ Prevent deadlock
 Starvation
 	Give resources to a process based on prioroity
 	Some things that are postponed indefeinly that is starvation
+Only secure computer is airgamped and not accessible
 
+What is security
+	Data  confidentiality
+	Data security
+	Service
+Types of intruderes
+	Casual prying by non techincal useres
+		Curiosity
+	Snoooping by insiders
+		Ofern motivated by curiosity or money
+	Determined to attempt to make money
+		May not even be an insider
+	Determined attempt to make mischief
+		Money typically not a goal
+		inconvenience otheres or prove a point
+	Commercial or military espionage
+		This is very big businness
+ACcidents
+	Acts of god
+		fire eathquake wars
+	Hardware or softwareerror
+		CPU malfunctionn
+		disk crash
+		Program bug
+	Human error
+		Data entry
+		Wrong tape mounted 
+		rm *.o
+Protection
+	Security is mostly about mechanism
+		How to enforce policy
+		Policies largely independent of mechanism
+	Protection is about spcifying policies
+		How to decide who acess what
+	Specifications must be 
+		Correct 
+		Efficient
+		Easy to use(or no one will use)
+protection domains
+	Three protection domains
+		Each lists objects with permitted operations
+	Domain can share objects and persm
+		Objects can have difff perms in diff domains
+		There need be no overlap between object perms in diff domains
+	how can the arangement be specified more formally
+Domain 1 
+	File 1 R
+	File 2 RW
+D2
+	File 3 R
+	File 3
+
+
+Protections matrix
+	Each domain hsa a row in the matrix
+	Each object has a column in th matrix
+	Entry of obj col has permissions
+	Who can modify it
+		What can they change?
+	How is this implemented effiiently
+Speify permitted operations on domains in the matrix
+	Domains may be able t omod themsslves
+	Domains can od other domains
+	Some domains transfers persmittted otheres not
+	This allows flexibility in spcifying domain perms
+		Retains ability ot restrict modifications of domain policy
+Repr the matrix
+	Need an efficient repr of protection matrix
+	Most entrries are empty
+	Compress the matrix
+		Associating perms with each object:access control list
+		Associating perms with eah domain: capabilities
+	how do, what are tradeoffs?
+
+
+Acewss conrtol list
+	Each object has a list
+	The list has
+		Protection domain
+			User name
+			group of users
+			other
+		Access rights
+			RW(X?)
+			others?
+	No enctryu for domain mean no rights
+	OS checks this
+	in the real world
+		Unic file system
+			Access list for each file has exactly three domain
+				RWX for owner of file
+				RWX for group of set user
+				RWX for other(all others)
+			Rightins include RWX read write execute
+			Users can be more than one group
+		AFC (unix.ic)
+			ACcess lists only apply to directories, directories inherit.
+Capabilities
+	Each process has a capability list
+	List had one entry per obj that the process can accesss
+	OBJ name, obj, perms
+	Objects not listed are not accessible
+	how are these secured?		
+		Kept in kernel
+		Crptographically secured
+			Righting include generic rights, and copy, remve destroy
+			Server has a secret check and usis it to verify
+Protecting the access matrix
+	OS maintains and makes sure it isnt modded or accessed in an unauthroized way
+	Access control list
+		Read or modify is a syscall
+		OS makes sure its allowed
+	Capability lists
+		Same as ACL
+		Can be given to processes and verified cryptographically later on
+		May be better for widely distributes systems where capabilites cant be centrally checked
+Reference monitor
+	Al  syscalls go thru the reference monitr for security checking
+	Processes can do whatever they want in the user space
+	OS keeps the security lists, so that you can't modify them with processes
+Formal model for secure systems
+	Limited set f primitive operations on access matrix
+		Crate/delete object
+		Create/delete domain
+		Insert/remove right
+	Primtives can be combined into protection commands
+		May not be combined arbitraqrily
+	OS can enfore policies but cant decide what polcies are appropriate
+	Is it possilbe to go from an authorizd matrix to an unathorized one?
+		In general, undecidable
+		May be provable for limited caes
+Theres many multilevel security models
+NSA rainbow books go thru these
+most os security is pretty ad hoc
+Covert channels
+	Circumvent security model by usin gsutle ways of passsing info
+	Cant directly send data against systems wishes
+	send data using side effects
+		Allocating resources
+		Using the CPU
+		Locking a file
+		Making small changes in legal data exchange
+	Very difficult to plug leaks in covert channels
+Covert channels using file locking
+	Exchange info that files are both accessible to a and b
+	A send info by locming file 0 to n-1
+
+Steganography
+	Hide info in other data
+	Put encrypted texts info in an image or something
+	Good bc images are big
+	Jsteg, does stegonoraphy
+
+Cryptography
+	Keep info from those who arent suposed to see it
+	Use a wel lknown algo to scramble data
+	Crackin code hard 
+Unbrekable codes
+	There is such thing as an unbreakable code with one time pad
+		truly rand key
+		Xor with msessage and key bit at a time
+	Unbreakable becase key could be anything
+		Without knowing key, msg can be anythign with corret num of bits
+	Difficulty, sidtributing kye is as hard a distrbuting msg
+	Difficuly, generating truly random bits
+Trly random bits
+	Random num gen arent really random
+	Nunber sequences lok randbom but are totally repeateable
+	Get random ness from outside world
+		Timing interval, key proesses networkk packets
+	Can use physically processes
+
+Public key crypto
+One way functions
+	FUnction that such for h(x) y = h(X)
+	Difficult t ofind collisions such that two values with same hash function
+		Weak collision resistance, given y hard to find x such that f(x) = y
+		Strong collisiton resistance, hard to find x such that  x2 = x such that f(x) = f(x2)
+	Ofretn similar to encryption algs
+		PRoduces fixed length output
+		Similar to XORing block of sciphertext
+	Common algs include
+		MD5
+		SHA-1
+		SHA-256
+Digital signing
+	Signature computed by
+		Applying one way hash function to original doc
+		Encrypt the results with senders pricate key
+	Receiver can very fy by
+		Applying one way has function to the document
+		Decrypting the signature using senderes public key
+		Comparing the two results, if sam eits unaltered
+
+PGP
+	Pub key encryption
+		Does key districbution
+		Allows messages to be sent encrypted to a person
+		allows person to send msg tyhat must have vome from her
+	Problem, pubkey encrypt is very slow
+	Solution use public key encryption to exchang ea shared key
+		Shared key is short
+		MSG encrypted wti shared key
+
+
+
+
+
+USEr auth
+hot does computer know wh you are?
+Use authentication to very
+	Something you know, have or are?
+
+Using passwords
+	Successful login lets the user in
+	If things dont go so well breakable
+
+Passwords
+	Have to be memorable and rememberatble
+	Shouldnt be stored in the clear
+		Passwrod fiel is often reatableby all sys useres
+		Password must be checked against entry in this file
+	Solution: use hadtag t hide real password
+		One-way function converting password to meaningless string of digits
+		Difficult to find another apssword that hashes to the same random looking string
+		Knowing the hashed value and hash function gives no clue to the original password
+Salting the passwords
+	Passwords can be guesssed, build a table of all dictionary words names etc
+		Table has each potetntial password in plai 
+
+one time passwords
+	Often useful to have passwods that cant be reused
+	User has a list of password to use
+	Each password is invalid after used once
+	Often implemented by one way has chain
+		Easy to calculate previous, hard to do next
+Authentication using physical obj
+	Magnetic card
+		Stores a passwrod encoded in the magnetic strip
+		Allows for longer harder to memorize passwords
+	Smart card
+		Card has a secret encoded on it but no texternally readable
+		Remove computer issues chalenege to the smart card
+		Smart card computes the response and proves I kno wthe secret
+2FA
+	Oauth
+
+
+Biometrix using biometrics
+	Using basic body properties to prove ID
+	Examples include
+	Fingerprints, voice, hand size, retina, iris, facial features
+
+Potential proble,s
+	Duplicatin the measurement
+	Stealing it from original ownerS?
+
+Coutermeasuers
+	limit login tries
+	Limited times you can login
+	A database of all logins
+	Simple login name/pass as trap
+		Security peresonel notifies when attacker bites
+		Variation: allow anyone to log in, but dont let intruders do anthing useful
+
+
+
+Attacks
+	inside attacks
+	Logic bomb
+		PRogram writes complex programs with flaws that lets them into computer
+		Embeds logic flaws that are trieggered if certain computers aren't met
+	Trap doors
+		Rtap dooe: user access privileges coded into program
+	Login spoof
+		No diff between real and fake login screen
+		Intruder sets up phony login walks away
+		Person puts thir password in
+	Buffer overflow
+	Format string attacks
+		Overwrite
+	return to libc attack
+	Set up a stack so taht strcpy is called to copy bytes to the data seg and run there
+	not cryptographic problem, but usualy user error
