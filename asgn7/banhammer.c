@@ -7,7 +7,7 @@
 #include "regex.h"
 #include "ht.h"
 #include "parser.h"
-#define WORD "([a-zA-Z_0-9]+(['-]|[a-z_0-9A-Z])[a-z]+)|([a-zA-Z0-9_]+)"
+#define WORD "([a-zA-Z0-9_]+(['-]|[a-z0-9A-Z_])[a-zA_Z0-9_]+)|([a-zA-Z0-9_]+)"
 int main() {
 
     Node *root = bst_create();
