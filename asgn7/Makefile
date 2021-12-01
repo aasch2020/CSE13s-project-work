@@ -3,8 +3,19 @@ CFLAGS =  -Wall -Werror -Wpedantic -Wextra
 
 
 all: banhammer
+
+
 banhammer: bv.o node.o banhammer.o bf.o speck.o bst.o ht.o
 	$(CC) $(CFLAGS) -o banhammer bv.o node.o banhammer.o bf.o speck.o bst.o ht.o
+
+exprs: exparser.o parser.o
+	$(CC) $(CLAGS) -o parsing parser.o exparser.o
+
+exparser.o: exparser.c
+	$(CC) $(CFLAGS) -c exparser.c
+
+parser.o: parser.c
+	$(CC) $(CFLAGS) -c parser.c
 bvtest: bv.o
 	$(CC) $(CFLAGS) -o bitvec bv.o
 bv.o: bv.c
