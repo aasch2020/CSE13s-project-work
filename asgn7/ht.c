@@ -5,6 +5,8 @@
 #include "ht.h"
 #include "node.h"
 #include "speck.h"
+
+uint64_t lookups = 0;
 struct HashTable {
     uint64_t salt[2];
     uint32_t size;
@@ -23,13 +25,16 @@ HashTable *ht_create(uint32_t size) {
 }
 
 void ht_delete(HashTable **ht) {
-    for (uint32_t i = 0; i < (*ht)->size; i++) {
-        if ((*ht)->trees[i]) {
-            bst_delete(&((*ht)->trees[i]));
+    if (ht) {
+        for (uint32_t i = 0; i < (*ht)->size; i++) {
+            if ((*ht)->trees[i]) {
+                bst_delete(&((*ht)->trees[i]));
+            }
         }
+        free((*ht)->trees);
+        free(*ht);
+        *ht = NULL;
     }
-    free(*ht);
-    *ht = NULL;
 }
 
 uint32_t ht_size(HashTable *ht) {
@@ -37,6 +42,7 @@ uint32_t ht_size(HashTable *ht) {
 }
 
 Node *ht_lookup(HashTable *ht, char *oldspeak) {
+    lookups++;
     if (ht->trees[(hash(ht->salt, oldspeak) % ht->size)]) {
         return bst_find((ht->trees[(hash(ht->salt, oldspeak) % ht->size)]), oldspeak);
     }
@@ -44,6 +50,7 @@ Node *ht_lookup(HashTable *ht, char *oldspeak) {
 }
 
 void ht_insert(HashTable *ht, char *oldspeak, char *newspeak) {
+    lookups++;
     if (ht->trees[(hash(ht->salt, oldspeak) % ht->size)]) {
         bst_insert((ht->trees[(hash(ht->salt, oldspeak) % ht->size)]), oldspeak, newspeak);
 

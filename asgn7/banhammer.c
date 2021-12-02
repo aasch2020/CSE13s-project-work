@@ -52,6 +52,11 @@ int main() {
     bool bad = false;
     char *word = NULL;
     Node *find = NULL;
+// double htcnt = ht_avg_bst_size(ht);
+
+// printf("avg bst size %f\n", htcnt);
+ //   printf("%Lf\n", ((long double)branches)/lookups);
+
     while ((word = next_word(stdin, &regex)) != NULL) {
         for (unsigned long i = 0; i < strlen(word); i++) {
             word[i] = tolower(word[i]);
@@ -88,9 +93,20 @@ int main() {
     if (bad & !old) {
         printf("%s", badspeak_message);
     }
+    double htcnt = ht_avg_bst_size(ht);
+    printf("avg bst size %f\n", htcnt);
     bst_print(broot);
     bst_print(oroot);
     clear_words();
+    printf("avg branch traversed%Lf\n", ((long double)branches)/lookups);
+    printf("Hast table lode%f\n", 100.0 * ht_count(ht)/ht_size(ht));
+    printf("bflode %f\n", 100.0 *bf_count(bf)/bf_size(bf));
+    bst_delete(&broot);
+    bst_delete(&oroot);
+    ht_delete(&ht);
+    fclose(newspeakfile);
+    fclose(badspeakfile);
+    bf_delete(&bf);
     regfree(&regex);
     return 0;
 }

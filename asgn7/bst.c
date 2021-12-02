@@ -5,11 +5,11 @@
 Node *bst_create(void) {
     return NULL;
 }
-
+uint64_t branches = 0;
 uint32_t bst_height(Node *root) {
     if (root) {
-        int l = bst_height(root->left);
-        int r = bst_height(root->right);
+        uint32_t l = bst_height(root->left);
+        uint32_t r = bst_height(root->right);
         if (l > r) {
             return 1 + l;
 
@@ -39,9 +39,11 @@ void bst_delete(Node **root) {
 Node *bst_find(Node *root, char *oldspeak) {
     if (root) {
         if (strcmp(root->oldspeak, oldspeak) > 0) {
+            branches++;
             return bst_find(root->left, oldspeak);
         }
         if (strcmp(root->oldspeak, oldspeak) < 0) {
+            branches++;
             return bst_find(root->right, oldspeak);
         }
         if (strcmp(root->oldspeak, oldspeak) == 0) {
@@ -55,10 +57,12 @@ Node *bst_find(Node *root, char *oldspeak) {
 Node *bst_insert(Node *root, char *oldspeak, char *newspeak) {
     if (root) {
         if (strcmp(root->oldspeak, oldspeak) > 0) {
+            branches++;
             root->left = bst_insert(root->left, oldspeak, newspeak);
             return root;
         }
         if (strcmp(root->oldspeak, oldspeak) < 0) {
+            branches++;
             root->right = bst_insert(root->right, oldspeak, newspeak);
             return root;
         }
