@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
+#include <unistd.h>
 #include <stdlib.h>
 #include "bf.h"
 #include "speck.h"
@@ -11,11 +12,32 @@
 #include "messages.h"
 #include "ht.h"
 #include "parser.h"
-#define WORD "(([a-zA-Z0-9_]+(['-]|[a-z0-9A-Z_])+[a-zA_Z0-9_]+)|([a-zA-Z0-9_]+))"
-int main() {
+#define WORD    "(([a-zA-Z0-9_]+(['-]|[a-z0-9A-Z_])+[a-zA_Z0-9_]+)|([a-zA-Z0-9_]+))"
+#define OPTIONS "hst:f:"
+int main(int argc, char **argv) {
+    int opt = 0;
+    bool stats = false;
+    int htsize = 65536;
+    int bfsize = 1048576;
+    while ((opt = getopt(argc, argv, OPTIONS)) != -1) {
+        switch (opt) {
+        case 'h':
+            printf("SYNOPSIS\n  A Huffman encoder.\n  Compresses a file using the Huffman coding "
+                   "algorithm.\n\n");
+            printf("USAGE\n  ./encode [-h] [-i infile] [-o outfile]\n\n");
+            printf("OPTIONS\n  -h             Program usage and help.\n  -v             Print "
+                   "compression statistics.\n  -i infile      Input file to compress.\n  -o "
+                   "outfile     Output of compressed data.\n");
+            return 0;
+            break;
+        case 's': stats = true; break;
+        case 't': htsize = strtoul(optarg, NULL, 10); break;
+        case 'f': bfsize = strtoul(optarg, NULL, 10); break;
+        }
+    }
 
-    BloomFilter *bf = bf_create(1000000);
-    HashTable *ht = ht_create(60000);
+    BloomFilter *bf = bf_create(bfsize);
+    HashTable *ht = ht_create(htsize);
     FILE *badspeakfile;
     badspeakfile = fopen("badspeak.txt", "r");
     char badspk[1024];
@@ -84,24 +106,30 @@ int main() {
             }
         }
     }
-    if (old & bad) {
-        printf("%s", mixspeak_message);
+    if (stats) {
+        printf("Average BST size: %f\n", ht_avg_bst_size(ht));
+        printf("Average BST height %f\n", ht_avg_bst_height(ht));
+
+        printf("Average branches traversed: %Lf\n", ((long double) branches) / lookups);
+        printf("Hash table load: %f%%\n", 100.0 * ht_count(ht) / ht_size(ht));
+        printf("Bloom filter load: %f%%\n", 100.0 * bf_count(bf) / bf_size(bf));
+
+    } else {
+
+        if (old & bad) {
+            printf("%s", mixspeak_message);
+        }
+        if (old & !bad) {
+            printf("%s", goodspeak_message);
+        }
+        if (bad & !old) {
+            printf("%s", badspeak_message);
+        }
+
+        bst_print(broot);
+        bst_print(oroot);
     }
-    if (old & !bad) {
-        printf("%s", goodspeak_message);
-    }
-    if (bad & !old) {
-        printf("%s", badspeak_message);
-    }
-    double htcnt = ht_avg_bst_size(ht);
-    printf("avg bst size %f\n", htcnt);
-    printf("avg bst hieght %f\n", ht_avg_bst_height(ht));
-    bst_print(broot);
-    bst_print(oroot);
     clear_words();
-    printf("avg branch traversed%Lf\n", ((long double) branches) / lookups);
-    printf("Hast table lode%f\n", 100.0 * ht_count(ht) / ht_size(ht));
-    printf("bflode %f\n", 100.0 * bf_count(bf) / bf_size(bf));
     bst_delete(&broot);
     bst_delete(&oroot);
     ht_delete(&ht);
