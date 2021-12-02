@@ -108,7 +108,7 @@ int main(int argc, char **argv) {
     }
     if (stats) {
         printf("Average BST size: %f\n", ht_avg_bst_size(ht));
-        printf("Average BST height %f\n", ht_avg_bst_height(ht));
+        printf("Average BST height: %f\n", ht_avg_bst_height(ht));
 
         printf("Average branches traversed: %Lf\n", ((long double) branches) / lookups);
         printf("Hash table load: %f%%\n", 100.0 * ht_count(ht) / ht_size(ht));
