@@ -22,10 +22,12 @@ int main(int argc, char **argv) {
     while ((opt = getopt(argc, argv, OPTIONS)) != -1) {
         switch (opt) {
         case 'h':
-            printf("SYNOPSIS\n  A word filtering program for the GPRSC.\n  Filters out and reports bad words parsed from stdin.\n\n");
+            printf("SYNOPSIS\n  A word filtering program for the GPRSC.\n  Filters out and reports "
+                   "bad words parsed from stdin.\n\n");
             printf("USAGE\n  ./banhammer [-hs] [-t size] [-f size]\n\n");
             printf("OPTIONS\n  -h           Program usage and help.\n  -s           Print "
-                   "program statistics.\n  -t size      Specify hash table size (default: 2^16).\n  -f "
+                   "program statistics.\n  -t size      Specify hash table size (default: 2^16).\n "
+                   " -f "
                    "size      Specify Bloom filter size (default: 2^20).\n");
             return 0;
             break;
