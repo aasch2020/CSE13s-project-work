@@ -47,6 +47,7 @@ Node *bst_find(Node *root, char *oldspeak) {
             return bst_find(root->right, oldspeak);
         }
         if (strcmp(root->oldspeak, oldspeak) == 0) {
+
             return root;
         }
     }
@@ -67,6 +68,7 @@ Node *bst_insert(Node *root, char *oldspeak, char *newspeak) {
             return root;
         }
         if (strcmp(root->oldspeak, oldspeak) == 0) {
+
             return root;
         }
     }

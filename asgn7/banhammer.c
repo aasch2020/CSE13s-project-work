@@ -12,7 +12,7 @@
 #include "messages.h"
 #include "ht.h"
 #include "parser.h"
-#define WORD    "(([a-zA-Z0-9_]+(['-]|[a-z0-9A-Z_])+[a-zA_Z0-9_]+)|([a-zA-Z0-9_]+))"
+#define WORD    "(([a-zA-Z0-9_]+(['-]|[a-z0-9A-Z_])+[a-zA_Z0-9_]+)+|([a-zA-Z0-9_]+))"
 #define OPTIONS "hst:f:"
 int main(int argc, char **argv) {
     int opt = 0;
@@ -54,15 +54,7 @@ int main(int argc, char **argv) {
         // printf("%s %s", oldspk, newspk);
         bf_insert(bf, oldspk);
         ht_insert(ht, oldspk, newspk);
-        if (!bf_probe(bf, oldspk)) {
-            printf("problem\n");
-        }
-        if (!ht_lookup(ht, oldspk)) {
-            printf("prbp\n");
-        }
     }
-    //    ht_print(ht);
-
     regex_t regex;
     if (regcomp(&regex, WORD, REG_EXTENDED)) {
         fprintf(stderr, "Failed to compile regex.\n");
