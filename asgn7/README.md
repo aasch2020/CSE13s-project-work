@@ -8,6 +8,7 @@ $ make
 ```
 ./banhammer -args
 ```
+```
 SYNOPSIS
   A word filtering program for the GPRSC.
   Filters out and reports bad words parsed from stdin.
