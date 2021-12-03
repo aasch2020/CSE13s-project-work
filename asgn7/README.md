@@ -22,6 +22,3 @@ OPTIONS
   -t size      Specify hash table size (default: 2^16).
   -f size      Specify Bloom filter size (default: 2^20).
 ```
-
-                                                                                                                                           1,1           Top
-
