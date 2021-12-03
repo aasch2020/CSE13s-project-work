@@ -8,10 +8,6 @@ all: banhammer
 banhammer: bv.o node.o banhammer.o bf.o speck.o bst.o ht.o parser.o
 	$(CC) $(CFLAGS) -o banhammer bv.o node.o banhammer.o bf.o speck.o bst.o ht.o parser.c
 
-expars: exparser.o parser.o
-	$(CC) $(CFLAGS) -o parser exparser.o parser.o
-exparser.o: exparser.c
-	$(CC) $(CFLAGS) -c exparser.c
 
 parser.o: parser.c
 	$(CC) $(CFLAGS) -c parser.c
