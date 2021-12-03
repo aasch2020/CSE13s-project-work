@@ -22,12 +22,11 @@ int main(int argc, char **argv) {
     while ((opt = getopt(argc, argv, OPTIONS)) != -1) {
         switch (opt) {
         case 'h':
-            printf("SYNOPSIS\n  A Huffman encoder.\n  Compresses a file using the Huffman coding "
-                   "algorithm.\n\n");
-            printf("USAGE\n  ./encode [-h] [-i infile] [-o outfile]\n\n");
-            printf("OPTIONS\n  -h             Program usage and help.\n  -v             Print "
-                   "compression statistics.\n  -i infile      Input file to compress.\n  -o "
-                   "outfile     Output of compressed data.\n");
+            printf("SYNOPSIS\n  A word filtering program for the GPRSC.\n  Filters out and reports bad words parsed from stdin.\n\n");
+            printf("USAGE\n  ./banhammer [-hs] [-t size] [-f size]\n\n");
+            printf("OPTIONS\n  -h           Program usage and help.\n  -s           Print "
+                   "program statistics.\n  -t size      Specify hash table size (default: 2^16).\n  -f "
+                   "size      Specify Bloom filter size (default: 2^20).\n");
             return 0;
             break;
         case 's': stats = true; break;

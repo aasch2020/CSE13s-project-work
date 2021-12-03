@@ -1,7 +1,8 @@
 #include "parser.h"
 #include <regex.h>
 #include <stdio.h>
-
+//This code supplied in the assignment document by Professor Long(Professor Long 2021).
+//This code not used in the implementation of the assignment, but used to debug the implementation of regex.
 #define WORD "([a-zA-Z_0]+(['-]|[a-z_0-9A-Z])+[a-z]+)|([a-zA-Z])"
 /*
 int main(void) {
