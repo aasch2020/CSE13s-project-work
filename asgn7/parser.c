@@ -5,7 +5,7 @@
 #include <string.h>
 
 #define BLOCK 4096
-
+//This parser included in the resources repository by Professor Long. (Professor Long(2021)
 static char *words[BLOCK] = { NULL }; // Stores a block of words maximum.
 
 //
