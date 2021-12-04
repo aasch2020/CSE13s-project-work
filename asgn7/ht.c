@@ -1,9 +1,9 @@
 #include "bv.h"
 #include "bst.h"
 #include "salts.h"
-#include "ht.h" //This code inspired by/adapted from the code shown in the BST lecture 18 (Professor Long 2021)
+#include "ht.h"
 #include "node.h"
-#include "speck.h"
+#include "speck.h" //The implementation of this hashing function, speck.c is provided in the resources repository by Professor Long (Professor Long 2021)
 //The above header files provided by Professor Long in the resources repository (Professor Long 2021).
 #include <stdlib.h>
 uint64_t lookups = 0;
