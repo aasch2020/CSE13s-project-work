@@ -1,5 +1,5 @@
 #include "salts.h"
-#include "speck.h"//The implementation of this hashing function, speck.c is provided in the resources repository by Professor Long (Professor Long 2021)
+#include "speck.h" //The implementation of this hashing function, speck.c is provided in the resources repository by Professor Long (Professor Long 2021)
 #include "bv.h"
 #include "bf.h"
 //The above header files provided in the resources repository by Professor Long (Professor Long 2021)
