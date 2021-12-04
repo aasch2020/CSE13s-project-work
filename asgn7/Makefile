@@ -11,8 +11,6 @@ banhammer: bv.o node.o banhammer.o bf.o speck.o bst.o ht.o parser.o
 
 parser.o: parser.c
 	$(CC) $(CFLAGS) -c parser.c
-bvtest: bv.o
-	$(CC) $(CFLAGS) -o bitvec bv.o
 bv.o: bv.c
 	$(CC) $(CFLAGS) -c bv.c 
 node.o: node.c
