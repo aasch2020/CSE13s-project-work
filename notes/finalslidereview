@@ -1,2 +1,324 @@
-a
-
+Lec 2
+	Curly brace is scope, local vars in scope
+Lec 3
+	0 always false, no int by default
+	= != ==
+	switch(opt)
+		case 1:
+	dont use goto
+	while
+	do while bottom test
+	for(;;) is inf loop
+Lec 4 functions
+	define once declare once
+	abstractions in parts of code
+	function returns a value, cant return an array
+	Cant start with a number or punctioation other than_
+	Parameters, C uses call by value, copy is passed
+	Can mimick call by ref using a pointer
+	funct prototypes let us call before declare
+	#include is a preporcesser directive and includes other c files in c file
+	#define, defines a macro for program and does text replace
+	Can do if statements in directives, #ifdef/#ifndef
+	#pragma once also works
+	extern, makes fuinctions or vars global
+		functions are extern by default
+		only declare outside of functiont
+	Static
+		Can be in or outside of function
+		Scope of file in which it is declared
+		Declared in the function if the variable needs to persist across function calls
+	recursion
+Lec 5 math
+	Computers cant represent any inf set of number
+	Base 8 base 16 base 36
+	char short int long long long
+	stdint.h
+	Arithmetic in finite field, can overflow
+	2sc, get additive inverse of m flip bits then add one
+	Floating point numbers
+		cant repr all reals
+		single precision, aightm 8 bits exponent, 23 bit sign
+		limits to floating point
+		MSB vs LSB for endianess
+	no such thing as real numbers
+		arith ops
+Lec 6 Num comp
+	Usualy best to use lib
+	trunctation errors exist
+lec 7 array and str
+	arrays are homogenous collection of elemtns
+	one dimentions or two or more etc
+	array start 0
+	contiguous part in memory
+	Matrices are 2d array
+	in mem matrix is 1 d
+	Matrix mult
+	arrays passed by reference
+	and is adr of
+	sizeof() works when  compilor can see how bit something is in  memory
+	array and pointer are related in many ways
+	two things adr same thing with pointer
+	find an item, return first index of the key if it exists
+	Ordering array
+		many diff ways
+	string is an array of char with end in /0
+	cant copy str
+	buffer overflow, make sure you dont overflow the buffer
+lec 8 pointers and dynamic mem
+		ptr is a var that holds a mem address
+		The var points to a location of an obj in memoery
+		not all points contain in address, can have null pointer
+		memory addresses
+			memory is stored in registers that can be accessed by address, every byte has unique adr
+		Pointers are point to adr they are assigned
+		& is adr of 
+		* is deref of pointer
+		pointers have adr too
+		ptr can return more than one vale from function, can pass actual value is difficcult
+		pass by ref dupese pointer to stack
+		Pointer arithmetic
+			Since pointers are just addresses, ui can increment and decrement
+			Can subtrat two pointer
+			Can add a thing to ptr
+		Array and pointer arithmetic
+			adding two pointers is ???
+	arrays can also be done as pointers,, where you add pointer
+	Strings	 are technicall arrays
+	pointer to pointeres to pointers to etc etc
+	function pointers
+		Points to executable code i memeory
+lec 9 sorting
+	puttin gthings into order order
+	total and partial ordering
+	sorting adds info and can merge lists and dupe detect quick
+	many types of sort
+	O(n^2) insertion bubble selection quick worst case
+	Shell is O(n^5/2)
+	merge quick and avg heap is O(nlogn)
+	Comparison of execution times
+	hea is a tree
+		max heap, all childs are less than parent
+lec 10
+	stacks and queues
+	Stakcs
+		LIFO
+	Queues
+		FIFO
+		can also be prio queue
+			highest prio dequeued first
+Lec 11 dynamic allocation
+	allocating memeory for vars on the heal during run time
+	Not like compiler time vallocation whicih s done by compiler
+	We want vars beyond current scope ore need more mem
+	Malloc calloc realloc and free affter use
+	Heap is big region of unmanaged anon mem, slower read write due to pointer, but globally access using pointer
+	valgr for mem leak GDB fo segfaul
+Lec 12 recursion
+	function defined in terms of itself
+	a function call requires a stack frame, so many times recursive function make more stack frame
+	Use recur for make stack clearer
+	Binary search in ordered lists
+	Recursion is natural for search
+Lec 13 Make
+	Makfile has laintext file that contains instructions for the make
+	Typically resides in the same dierctory as soruce code is named makefile
+	rule is a target with a set of dependecied and set of commands
+	target is the name of a rule run by make x
+	phony target is a trarget that does not make thing with its name
+	make cclean all debug
+	Can do vars in makefiles
+	x = y, contents of the vars assignements are stores as is var as vars refs as refs
+	make waits to expand var referencces until var is being used
+	internal assign := operator are simply expanded vars and behave like vars in c
+	?= occurs only if the var has no value yet
+	+= concatenation
+	dependency
+		target of filename, depends if it has been modified or not etc
+	topological ordering
+		Think of targets in a Makeifle as vertices an DAG is directed edge in graph
+	Whats a command
+		action ot be done
+	Auto vars, can do macro replacement
+	can do shell in make
+Lec 14 data comperssions
+	Takes a msg or seq of msg and communicates them to the reveiving terminal
+	All messages get noise from transmitter to receiver
+	Entropy, defined as the measure of uncertqainty for occurance of event
+	entropy is probability of getting a ceratin thinglog2(probability of a certain thing).
+	Huffman coding
+		takes a histogram, makes a pq of the things
+		makes a tree
+		make a code table
+		outputs code of symbols and tree instructions
+lec 15 bitvec and set
+	bit is 1 nible is 4 byte is 8 half word is 16 word is 32 long word is 64
+	Logical shift
+		Lshift left zeroes are shifted in on right
+		Lshift rihggt
+		ARithmetic Rshift is sign bit cloned front
+		High order nibble in a byte is most significan 4 bits
+		Set is a thing set of things
+			can union set, whi is two added
+			SEt difference, things in set a not in set b
+		Set coplement
+			thing not in a set
+		Seet can be repr as bits 1 is true 0 is false
+Lec 17 linked list
+	Each node has pointer to next node, nul at end
+	good thing
+		no fixed mem allocations
+		No need to shift after insert or delete
+		good for stack an queue
+	Disadvangatges
+		More memory useage for storing pointer
+		No random access
+		Reverse is hard in single linked
+	Ciruclar single link, last to first
+	Double link, F2b and b 2f.
+	Sentinel node, dummy node for head and tail
+	circular dbl link exitss too
+Lec 18 tree and BST
+	Tree is a type of DAG
+	one path between nodes
+	node have paren and child
+'	Root is first
+	Preorder travvy
+		go the thing, then left then right
+	Inorder
+		Left then thing then right
+	Postorder
+		left then right then thing
+	Lecel order, go by level use a queue
+	BST
+		ordered tree, less than is left more than is right
+Lec 19 files
+	files are named with extention does not matter in unic
+	File access, sequanetial or random acces
+	Creat delete open close read write
+	Files hav directories which are sequential
+	files are in various partitoins of disk
+Lec 20 cryptography
+	encrypt comething with cipher, only ppl with cupher can read
+	one time pad is umbreakable, XOR with random bits, key is the XOr
+	Distributing key is as hard as distr message
+	Modern encrypt take too long ot break
+	PUblic key crypto
+		Pricate key cant be shared, only they can decrypt, public key can encrypt
+			usuallky slow, for small data or for keys
+	Dfifie hellman key echange
+		echange keys by math
+	RSA
+		use power mmod
+Lec 22 debug
+	Bugs can be syntax, logicalm semantic'
+	Hard to find location of bugs, assert makes sure things all aer as wanted at a pint
+	prints statements can print event leading upt o bug
+	scan-build, static analyzer during compile time
+	valgrind, dynaic analysis during runtime
+	static compile time and try everything dunamic catches what occer during runtim
+	lldb, set breakpoints and debug
+Language translators
+	Input lang to output langouage
+	Language translaters go to binary
+	Comipler
+		Pre processors include acros and # directives does with source code
+		compiler Converts to assembly code in var steps
+		assmbler
+			One pass or two pass
+			makes it into output file or .o files
+			do binary
+		Linker
+			links the binaries into one executable
+	Loader
+		allocates and manages RAM
+	memery is ram
+		Has text, unint data, init data, heap, and stack
+Processes
+	Processes threads scheduling IPC
+	Progam state, only one thing per ore at once
+	Progeams exec ccode from instructiuons at addresses
+	many programs access, protect access space
+	L1 L2 L# on CPU
+	main mem is DRAM
+	Disk big slow mem
+	Fixed mem multi partitoin, each memory space a partition for memory for a program, do not inter fear with each other
+	multiprogramming
+		Needs capability to relocate memory
+		Keep the memroy separate
+	base an dlimit
+		Logical address, which is what the process sees, but physical address is sommewhere else, and thats where the program is actual running
+	Allocating memroy
+		Find large enough space for progam to run
+		free mem, merge adjacent free
+		Buddy alloc
+			Allocate mem in powers of two, good for obj of varied sizes
+		Virtual mem,give more mmemory than on system
+			Keep recently used stuff in RAM, less used move to disk, but hide form process
+			Give the program virtual addresses, and mem management unit translateds this to the physical address
+		Paging and page table
+			Unit of mapping is a page, page table entry translates a single page
+'			Page table entry, each entry i the page table contains a valid big, set if this logical page num has a corresponding physcial frame
+			Page frame number page in physical memory
+			Referenced bit, set if data on the page has been accesesd
+			Dirty modified bit, set if it has been omidifes
+	Process are crated by OS, execution or other process
+		end voluntary on normal or error, involuntary on fatal or killed by another process
+	Procecss states
+		created, reading, running, blocked, exit
+		Scheduler picks process and manages waiting if waiting for io or something
+	Multithread
+		Allows single app less wait do more at once
+		threads must function when used nulti at once, has to have aerror management
+Multithread
+	Process is a thing with code adata and state
+	A process contains one or more threads, threads run concurrently
+	Each thread makes its own thread in address sapce
+	Threads can have something waiting and still have program running in one program
+	threads ashare data
+	The proess has main thread, you can make other thread from here, main thread end last
+	context swap, pause exection of a thread for some reason to do another thread, save adnd reload data
+	Joining a thread, makes sure all threads done
+	Race condition
+		Threads share memory, we dont know read and write happen back to back per thread
+		Fix by?
+		Crit region for mutla exclustion
+			No two process in in one crit region
+			No assume speed
+			No process outside a critical region may block another
+			A process may not wait forever for crit region
+		DEADLOCK
+		A set of process deadlocked when everythin ng is waiting for a resources cyclically
+		Conditions for deadlock
+			Mutual exclusion, each resoures at most one process
+			Hold and wait, a process with resources and req more resourfes
+			No preemption, cant force take away process
+			Circular wait, must be chain of 2 or more proces where each is waiting for the next member
+		fix deadlock
+			step 1, pretent it doesnt exits just hope it doesnt
+			Recovery,
+				Preeption, take a resources from another process
+				Rollback, do checkpoints, restart process if in deadlock
+				Kill processes, kill one to undeadlock
+			Prevent deadlock
+				No mutual exclusion
+					Allow a program to spol things into a resource, thus cant alwasy claimm it
+				No hold and wait
+					A process needs to request pre use, problem if proecss need to get mid exec
+				No preemption
+					Can take away resources, ususally no work
+				No cicrular wait,
+					Order the resources numerically, cant get from high prio
+REGEx
+	Series of char for search pattern
+	matches chars and types of chars, can do greede match for one or more,
+	Finite automata
+		DFA
+			Also called finite state autommata, single transition per letter, do type 3 grammar
+			Rcoginze regex
+		NFA
+			Have many transitions per letter
+		{ush down automata
+			Stack type to grammar
+Scripting
+	Scipt commands and bash		
