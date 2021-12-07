@@ -1,0 +1,216 @@
+	#include is a preporcesser directive and includes other c files in c file
+	#define, defines a macro for program and does text replace
+	Can do if statements in directives, #ifdef/#ifndef
+	#pragma once also works
+	extern, makes fuinctions or vars global
+		functions are extern by default
+		only declare outside of functiont
+	Static
+		Can be in or outside of function
+		Scope of file in which it is declared
+		Declared in the function if the variable needs to persist across function calls
+lec 7 array and str
+	contiguous part in memory
+	Matrices are 2d array
+	in mem matrix is 1 d
+	Matrix mult
+	arrays passed by reference
+	and is adr of
+	sizeof() works when  compilor can see how bit something is in  memory
+	array and pointer are related in many ways
+	two things adr same thing with pointer
+	find an item, return first index of the key if it exists
+	Ordering array
+		many diff ways
+	string is an array of char with end in /0
+	cant copy str
+lec 8 pointers and dynamic mem
+		not all points contain in address, can have null pointer
+		memory addresses
+			memory is stored in registers that can be accessed by address, every byte has unique adr
+		Pointers are point to adr they are assigned
+		& is adr of 
+		* is deref of pointer
+		pointers have adr too
+		pass by ref dupese pointer to stack
+		Pointer arithmetic
+			Since pointers are just addresses, ui can increment and decrement
+			Can subtrat two pointer
+			Can add a thing to ptr
+		Array and pointer arithmetic
+			adding two pointers is ???
+	arrays can also be done as pointers,, where you add pointer
+	Strings	 are technicall arrays
+	function pointers
+		Points to executable code i memeory
+lec 9 sorting
+	sorting adds info and can merge lists and dupe detect quick
+	many types of sort
+	O(n^2) insertion bubble selection quick worst case
+	Shell is O(n^5/2)
+	merge quick and avg heap is O(nlogn)
+	Comparison of execution times
+	hea is a tree
+		max heap, all childs are less than parent
+Lec 11 dynamic allocation
+	allocating memeory for vars on the heal during run time
+	Not like compiler time vallocation whicih s done by compiler
+	We want vars beyond current scope ore need more mem
+	Heap is big region of unmanaged anon mem, slower read write due to pointer, but globally access using pointer
+Lec 13 Make
+	Makfile has laintext file that contains instructions for the make
+	rule is a target with a set of dependecied and set of commands
+	target is the name of a rule run by make x
+	phony target is a trarget that does not make thing with its name
+	Can do vars in makefiles
+	x = y, contents of the vars assignements are stores as is var as vars refs as refs
+	make waits to expand var referencces until var is being used
+	internal assign := operator are simply expanded vars and behave like vars in c
+	?= occurs only if the var has no value yet
+	+= concatenation
+	dependency
+		target of filename, depends if it has been modified or not etc
+	can do shell in make
+Lec 14 data comperssions
+	Takes a msg or seq of msg and communicates them to the reveiving terminal
+	All messages get noise from transmitter to receiver
+	Entropy, defined as the measure of uncertqainty for occurance of event
+	entropy is probability of getting a ceratin thinglog2(probability of a certain thing).
+lec 15 bitvec and set
+	bit is 1 nible is 4 byte is 8 half word is 16 word is 32 long word is 64
+	ARithmetic Rshift is sign bit cloned front
+	High order nibble in a byte is most significan 4 bits
+ec 17 linked list
+	Each node has pointer to next node, nul at end
+	good thing
+		no fixed mem allocations
+		No need to shift after insert or delete
+		good for stack an queue
+	Disadvangatges
+		More memory useage for storing pointer
+		No random access
+		Reverse is hard in single linked
+	Sentinel node, dummy node for head and tail
+Lec 18 tree and BST
+	Tree is a type of DAG
+	Preorder trav
+		go the thing, then left then right
+	Inorder
+		Left then thing then right
+	Postorder
+		left then right then thing
+	Lecel order, go by level use a queue
+	BST
+		ordered tree, less than is left more than is right
+Lec 19 files
+	files are named with extention does not matter in unic
+	File access, sequanetial or random acces
+	Creat delete open close read write
+	Files hav directories which are sequential
+	files are in various partitoins of disk
+Lec 20 cryptography
+	encrypt comething with cipher, only ppl with cipher can read
+	one time pad is umbreakable, XOR with random bits, key is the XOr
+	Distributing key is as hard as distr message
+	Modern encrypt take too long ot break
+	PUblic key crypto
+		Pricate key cant be shared, only they can decrypt, public key can encrypt
+			usuallky slow, for small data or for keys
+Lec 22 debug
+	Bugs can be syntax, logicalm semantic'
+	static compile time and try everything dynamic catches what occur during runtime
+	lldb, set breakpoints and debug
+Language translators
+	Input lang to output langouage
+	Language translaters go to binary
+	Comipler
+		Pre processors include acros and # directives does with source code
+		compiler Converts to assembly code in var steps
+		assmbler One pass or two pass makes it into output file or .o files do binary
+		Linker links the binaries into one executable
+		Loader allocates and manages RAM
+		memory is ram Has text, unint data, init data, heap, and stack
+Processes
+	Processes threads scheduling IPC
+	Progam state, only one thing per core at once
+	Progeams exec ccode from instructiuons at addresses
+	many programs access, protect access space
+	L1 L2 L# on CPU
+	main mem is DRAM
+	Disk big slow mem
+	Fixed mem multi partitoin, each memory space a partition for memory for a program, do not inter fear with each other
+	multiprogramming
+		Needs capability to relocate memory
+		Keep the memroy separate
+	base an dlimit
+		Logical address, which is what the process sees, but physical address is sommewhere else, and thats where the program is actual running
+	Allocating memroy
+		Find large enough space for progam to run
+		free mem, merge adjacent free
+		Buddy alloc
+			Allocate mem in powers of two, good for obj of varied sizes
+		Virtual mem,give more mmemory than on system
+			Keep recently used stuff in RAM, less used move to disk, but hide form process
+			Give the program virtual addresses, and mem management unit translateds this to the physical address
+		Paging and page table
+			Unit of mapping is a page, page table entry translates a single page
+'			Page table entry, each entry i the page table contains a valid big, set if this logical page num has a corresponding physcial frame
+			Page frame number page in physical memory
+			Referenced bit, set if data on the page has been accesesd
+			Dirty modified bit, set if it has been omidifes
+	Process are crated by OS, execution or other process
+		end voluntary on normal or error, involuntary on fatal or killed by another process
+	Procecss states 	created, reading, running, blocked, exit
+		Scheduler picks process and manages waiting if waiting for io or something
+ultithread
+	Process is a thing with code adata and state
+	A process contains one or more threads, threads run concurrently
+	Each thread makes its own thread in address sapce
+	Threads can have something waiting and still have program running in one program
+	threads share data
+	The proess has main thread, you can make other thread from here, main thread end last
+	context swap, pause exection of a thread for some reason to do another thread, save adnd reload data
+	Joining a thread, makes sure all threads done
+	Race condition
+		Threads share memory, we dont know read and write happen back to back per thread
+		Fix by?
+		Crit region for mutal exclustion
+			No two process in in one crit region
+			No assume speed
+			No process outside a critical region may block another
+			A process may not wait forever for crit region
+		DEADLOCK
+		A set of process deadlocked when everythin ng is waiting for a resources cyclically
+		Conditions for deadlock
+			Mutual exclusion, each resoures at most one process
+			Hold and wait, a process with resources and req more resourfes
+			No preemption, cant force take away process
+			Circular wait, must be chain of 2 or more proces where each is waiting for the next member
+		fix deadlock
+			step 1, pretend it doesnt exist, just hope it doesnt
+			Recovery,
+				Preeption, take a resources from another process
+				Rollback, do checkpoints, restart process if in deadlock
+				Kill processes, kill one to undeadlock
+			Prevent deadlock
+				No mutual exclusion
+					Allow a program to spol things into a resource, thus cant alwasy claimm it
+				No hold and wait
+					A process needs to request pre use, problem if proecss need to get mid exec
+				No preemption
+					Can take away resources, ususally no work
+				No cicrular wait,
+					Order the resources numerically, cant get from high prio
+REGEx
+	Series of char for search pattern
+	matches chars and types of chars, can do greede match for one or more,
+	Finite automata
+		DFA
+			Also called finite state autommata, single transition per letter, do type 3 grammar
+			Rcoginze regex
+		NFA
+			Have many transitions per letter
+		{ush down automata
+			Stack type to grammar
+		basically, goes thru matching until final state
+
